@@ -160,13 +160,13 @@ fun ChallengeCard(
                             text = challenge.title,
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
-                            color = if (challenge.completed) Color(0xFF00E676) else MaterialTheme.colorScheme.onSurface
+                            color = if (challenge.completed) Color(0xFF0D9488) else MaterialTheme.colorScheme.onSurface
                         )
                         if (challenge.completed) {
                             Icon(
                                 imageVector = Icons.Filled.CheckCircle,
                                 contentDescription = "Completed",
-                                tint = Color(0xFF00E676),
+                                tint = Color(0xFF0D9488),
                                 modifier = Modifier.size(16.dp)
                             )
                         }
@@ -184,7 +184,7 @@ fun ChallengeCard(
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Text(
-                        text = "${challenge.xpReward} XP",
+                        text = "${challenge.xpReward} Points",
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.Black,
                         color = MaterialTheme.colorScheme.primary,
@@ -204,7 +204,7 @@ fun ChallengeCard(
                         .fillMaxWidth()
                         .height(6.dp)
                         .clip(CircleShape),
-                    color = if (challenge.completed) Color(0xFF00E676) else MaterialTheme.colorScheme.primary,
+                    color = if (challenge.completed) Color(0xFF0D9488) else MaterialTheme.colorScheme.primary,
                     trackColor = MaterialTheme.colorScheme.secondary
                 )
 
@@ -369,7 +369,7 @@ fun LeaderboardEntryRow(competitor: LeaderboardEntry) {
                     modifier = Modifier.size(16.dp)
                 )
                 Text(
-                    text = "${competitor.totalXp} XP",
+                    text = "${competitor.totalXp} Points",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Black,
                     color = MaterialTheme.colorScheme.onSurface

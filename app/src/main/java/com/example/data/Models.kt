@@ -10,7 +10,8 @@ data class PracticeItem(
     val content: String,
     val difficulty: String, // "EASY", "MEDIUM", "HARD"
     val category: String, // "General", "Visual", "Science", "Focus", "Wisdom"
-    val isCustom: Boolean = false
+    val isCustom: Boolean = false,
+    val chapter: Int = 1
 )
 
 @Entity(tableName = "practice_logs")

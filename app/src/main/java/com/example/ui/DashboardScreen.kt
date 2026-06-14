@@ -5,9 +5,12 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -19,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
@@ -46,195 +50,407 @@ fun DashboardScreen(
 ) {
     var rangeFilter by remember { mutableStateOf("Weekly") } // "Weekly" or "Monthly"
 
-    LazyColumn(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .testTag("dashboard_screen")
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(top = 8.dp, bottom = 24.dp)
+            .padding(horizontal = 16.dp)
     ) {
-        // Welcome & Streak Banner
-        item {
-            StreakBanner(profile)
-        }
+        val isWide = maxWidth >= 600.dp
 
-        // Stats Summary Cards
-        item {
-            StatsSummaryRow(logs)
-        }
-
-        // Analytical Progress Graph
-        item {
-            Card(
+        if (isWide) {
+            Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .testTag("analytics_card"),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                ),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                    .fillMaxSize()
+                    .padding(top = 8.dp, bottom = 24.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+                // Left Column
                 Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Column {
-                            Text(
-                                text = "Performance Analytics",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = "Based on memory recognition scores",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                            )
-                        }
+                    StreakBanner(profile)
 
-                        // Filter Pills
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f))
-                                .padding(2.dp)
+                    // Analytical Progress Graph
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag("analytics_card"),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surface
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            listOf("Weekly", "Monthly").forEach { filter ->
-                                val selected = rangeFilter == filter
-                                Box(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(6.dp))
-                                        .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
-                                        .clickable { rangeFilter = filter }
-                                        .padding(horizontal = 10.dp, vertical = 4.dp),
-                                    contentAlignment = Alignment.Center
-                                ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
                                     Text(
-                                        text = filter,
-                                        style = MaterialTheme.typography.labelSmall,
+                                        text = "Accuracy Trend",
+                                        style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                    Text(
+                                        text = "Based on memory recognition scores",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                // Filter Pills
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                    modifier = Modifier
+                                        .width(IntrinsicSize.Max)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f))
+                                        .padding(2.dp)
+                                ) {
+                                    listOf("Weekly", "Monthly").forEach { filter ->
+                                        val selected = rangeFilter == filter
+                                        Box(
+                                            modifier = Modifier
+                                                .clip(RoundedCornerShape(6.dp))
+                                                .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
+                                                .clickable { rangeFilter = filter }
+                                                .padding(horizontal = 10.dp, vertical = 4.dp),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = filter,
+                                                style = MaterialTheme.typography.labelSmall,
+                                                fontWeight = FontWeight.Bold,
+                                                color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
+                                                maxLines = 1,
+                                                softWrap = false
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Render Custom Canvas Graph
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(180.dp)
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                val points = remember(logs, rangeFilter) {
+                                    getAnalyticsPoints(logs, rangeFilter)
+                                }
+
+                                if (points.isEmpty()) {
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Analytics,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(40.dp),
+                                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Practice more to generate metrics",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                        )
+                                    }
+                                } else {
+                                    AnalyticsGraph(
+                                        points = points,
+                                        colorScheme = MaterialTheme.colorScheme
                                     )
                                 }
                             }
                         }
                     }
+                }
 
-                    // Render Custom Canvas Graph
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(180.dp)
-                            .padding(vertical = 8.dp),
-                        contentAlignment = Alignment.Center
+                // Right Column
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    StatsSummaryRow(logs)
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        val points = remember(logs, rangeFilter) {
-                            getAnalyticsPoints(logs, rangeFilter)
+                        Text(
+                            text = "Recent Practices",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        if (logs.isNotEmpty()) {
+                            Text(
+                                text = "Last ${logs.size.coerceAtMost(5)} tries",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                            )
                         }
+                    }
 
-                        if (points.isEmpty()) {
+                    if (logs.isEmpty()) {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
+                            ),
+                            shape = RoundedCornerShape(16.dp)
+                        ) {
                             Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Analytics,
+                                    imageVector = Icons.Default.Info,
                                     contentDescription = null,
-                                    modifier = Modifier.size(40.dp),
-                                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
                                 )
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
                                 Text(
-                                    text = "Practice more to generate metrics",
+                                    text = "No practices recorded yet",
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                Text(
+                                    text = "Head to the Practice tab to begin speaking!",
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                                    textAlign = TextAlign.Center
                                 )
                             }
-                        } else {
-                            AnalyticsGraph(
-                                points = points,
-                                colorScheme = MaterialTheme.colorScheme
-                            )
+                        }
+                    } else {
+                        logs.take(5).forEach { log ->
+                            PracticeHistoryRow(log)
                         }
                     }
                 }
             }
-        }
-
-        // Daily Quick Action Practice Launcher
-        item {
-            PracticeLauncherCard(onClick = { viewModel.setTab("practice_list") })
-        }
-
-        // Recent Practices List
-        item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(top = 8.dp, bottom = 24.dp)
             ) {
-                Text(
-                    text = "Recent Practices",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
-                )
-                if (logs.isNotEmpty()) {
-                    Text(
-                        text = "Last ${logs.size.coerceAtMost(5)} tries",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-                    )
+                // Welcome & Streak Banner
+                item {
+                    StreakBanner(profile)
                 }
-            }
-        }
 
-        if (logs.isEmpty()) {
-            item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
-                    ),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Column(
+                // Analytical Progress Graph
+                item {
+                    Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(24.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
+                            .testTag("analytics_card"),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surface
+                        ),
+                        shape = RoundedCornerShape(20.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Info,
-                            contentDescription = null,
-                            modifier = Modifier.size(48.dp),
-                            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = "No practices recorded yet",
-                            fontWeight = FontWeight.Bold,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            text = "Head to the Practice tab to begin speaking!",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                            textAlign = TextAlign.Center
-                        )
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = "Accuracy Trend",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                    Text(
+                                        text = "Based on memory recognition scores",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                // Filter Pills
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                    modifier = Modifier
+                                        .width(IntrinsicSize.Max)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f))
+                                        .padding(2.dp)
+                                ) {
+                                    listOf("Weekly", "Monthly").forEach { filter ->
+                                        val selected = rangeFilter == filter
+                                        Box(
+                                            modifier = Modifier
+                                                .clip(RoundedCornerShape(6.dp))
+                                                .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent)
+                                                .clickable { rangeFilter = filter }
+                                                .padding(horizontal = 10.dp, vertical = 4.dp),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = filter,
+                                                style = MaterialTheme.typography.labelSmall,
+                                                fontWeight = FontWeight.Bold,
+                                                color = if (selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
+                                                maxLines = 1,
+                                                softWrap = false
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Render Custom Canvas Graph
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(180.dp)
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                val points = remember(logs, rangeFilter) {
+                                    getAnalyticsPoints(logs, rangeFilter)
+                                }
+
+                                if (points.isEmpty()) {
+                                    Column(
+                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                        verticalArrangement = Arrangement.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Analytics,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(40.dp),
+                                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
+                                        )
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Text(
+                                            text = "Practice more to generate metrics",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                        )
+                                    }
+                                } else {
+                                    AnalyticsGraph(
+                                        points = points,
+                                        colorScheme = MaterialTheme.colorScheme
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
-            }
-        } else {
-            items(logs.take(5)) { log ->
-                PracticeHistoryRow(log)
+
+                // Recent Practices List
+                item {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Recent Practices",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                        if (logs.isNotEmpty()) {
+                            Text(
+                                text = "Last ${logs.size.coerceAtMost(5)} tries",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                            )
+                        }
+                    }
+                }
+
+                if (logs.isEmpty()) {
+                    item {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
+                            ),
+                            shape = RoundedCornerShape(16.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(24.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Info,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(48.dp),
+                                    tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                    text = "No practices recorded yet",
+                                    fontWeight = FontWeight.Bold,
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                                Text(
+                                    text = "Head to the Practice tab to begin speaking!",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
+                    }
+                } else {
+                    items(logs.take(5)) { log ->
+                        PracticeHistoryRow(log)
+                    }
+                }
+
+                // Stats Summary Cards
+                item {
+                    StatsSummaryRow(logs)
+                }
             }
         }
     }
@@ -247,40 +463,27 @@ fun StreakBanner(profile: UserProfile) {
             .fillMaxWidth()
             .testTag("streak_banner"),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = MaterialTheme.colorScheme.surface
         ),
-        shape = RoundedCornerShape(24.dp)
+        shape = RoundedCornerShape(24.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            // Animated Fire Icon representing active streak
-            Box(
-                modifier = Modifier
-                    .size(56.dp)
-                    .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f)),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Star,
-                    contentDescription = "Streak",
-                    modifier = Modifier.size(32.dp),
-                    tint = Color(0xFFFF9100) // Beautiful Fire Orange
-                )
-            }
-
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "${profile.currentStreak} Day Practice Streak!",
-                    style = MaterialTheme.typography.titleLarge,
+                    text = "Welcome back, ${profile.username}!",
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = if (profile.currentStreak > 1) {
                         "Brilliant! Keep updating your memory synapses daily."
@@ -288,32 +491,114 @@ fun StreakBanner(profile: UserProfile) {
                         "Practice today to build your consecutive memory habit!"
                     },
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.85f)
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Surface(
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = "Points",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(14.dp)
+                        )
+                        Text(
+                            text = "${profile.totalXp} Points",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+            }
+            
+            Spacer(modifier = Modifier.width(8.dp))
+            
+            // Subtle glowing badge
+            MemoryStreakBadge(streakCount = profile.currentStreak)
+        }
+    }
+}
+
+@Composable
+fun MemoryStreakBadge(
+    streakCount: Int,
+    modifier: Modifier = Modifier
+) {
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val glowColor = primaryColor.copy(alpha = 0.28f)
+    
+    Box(
+        modifier = modifier
+            .padding(12.dp)
+            .drawBehind {
+                // Subtle primary brand glow effect using dual translucent overlay circles
+                drawCircle(
+                    color = glowColor,
+                    radius = size.minDimension * 0.72f,
+                    center = center
+                )
+                drawCircle(
+                    color = primaryColor.copy(alpha = 0.08f),
+                    radius = size.minDimension * 0.95f,
+                    center = center
                 )
             }
-
-            Surface(
-                color = Color.White.copy(alpha = 0.25f),
-                shape = CircleShape,
-            ) {
-                Row(
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Star,
-                        contentDescription = "XP",
-                        tint = Color(0xFFFFD600),
-                        modifier = Modifier.size(16.dp)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        MaterialTheme.colorScheme.surface,
+                        MaterialTheme.colorScheme.surfaceVariant
                     )
-                    Text(
-                        text = "${profile.totalXp} XP",
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = Color.White
+                ),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .border(
+                width = 1.5.dp,
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        primaryColor,
+                        MaterialTheme.colorScheme.tertiary
                     )
-                }
+                ),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(horizontal = 14.dp, vertical = 8.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Whatshot,
+                contentDescription = "Streak Flame",
+                tint = primaryColor,
+                modifier = Modifier.size(22.dp)
+            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = "$streakCount Days",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Black,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = "MEMORY STREAK",
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = primaryColor.copy(alpha = 0.8f),
+                    letterSpacing = 0.5.sp
+                )
             }
         }
     }
@@ -333,21 +618,21 @@ fun StatsSummaryRow(logs: List<PracticeLog>) {
             title = "Avg Accuracy",
             value = "$averageScore%",
             icon = Icons.Filled.TrendingUp,
-            color = Color(0xFF00E676),
+            color = Color(0xFF0D9488),
             modifier = Modifier.weight(1f)
         )
         StatCard(
             title = "Practiced",
             value = totalPracticed.toString(),
             icon = Icons.Filled.Mic,
-            color = Color(0xFF2196F3),
+            color = Color(0xFF0EA5E9),
             modifier = Modifier.weight(1f)
         )
         StatCard(
             title = "Mind Active",
             value = "${totalDurationMin}m",
             icon = Icons.Filled.Timer,
-            color = Color(0xFFAB47BC),
+            color = Color(0xFFF43F5E),
             modifier = Modifier.weight(1f)
         )
     }
@@ -538,7 +823,7 @@ fun PracticeLauncherCard(onClick: () -> Unit) {
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Launch Vocal Gym",
+                    text = "Begin Practice Session",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -577,9 +862,9 @@ fun PracticeHistoryRow(log: PracticeLog) {
         ) {
             // Difficulty color badge
             val (badgeColor, label) = when (log.accuracyScore) {
-                in 90..100 -> Pair(Color(0xFF00E676), "Perfect")
-                in 75..89 -> Pair(Color(0xFF2196F3), "Good")
-                else -> Pair(Color(0xFFFF9100), "Needs Practice")
+                in 90..100 -> Pair(Color(0xFF0D9488), "Perfect")
+                in 75..89 -> Pair(Color(0xFF0EA5E9), "Good")
+                else -> Pair(Color(0xFFF59E0B), "Review")
             }
 
             Box(
@@ -605,8 +890,14 @@ fun PracticeHistoryRow(log: PracticeLog) {
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+                val itemTypeNatural = when (log.itemType.uppercase()) {
+                    "WORD" -> "Word"
+                    "SENTENCE" -> "Sentence"
+                    "PARAGRAPH" -> "Paragraph"
+                    else -> log.itemType.lowercase().replaceFirstChar { it.uppercase() }
+                }
                 Text(
-                    text = "${log.itemType} · ${getFormattedTime(log.timestamp)}",
+                    text = "$itemTypeNatural · ${getFormattedTime(log.timestamp)}",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
                 )
@@ -621,7 +912,9 @@ fun PracticeHistoryRow(log: PracticeLog) {
                     color = badgeColor,
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    softWrap = false
                 )
             }
         }

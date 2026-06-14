@@ -24,6 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +37,17 @@ import com.example.data.PracticeItem
 import com.example.viewmodel.MemoryViewModel
 import com.example.viewmodel.PracticeResult
 import java.util.*
+
+data class ConfettiParticle(
+    val x: Float,
+    val y: Float,
+    val speed: Float,
+    val sway: Float,
+    val color: Color,
+    val size: Float,
+    val rotation: Float,
+    val rotationSpeed: Float
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,10 +61,65 @@ fun ActivePracticeScreen(
     val spokenText by viewModel.spokenText.collectAsState()
     val isRecording by viewModel.isRecording.collectAsState()
     val practiceResult by viewModel.practiceResult.collectAsState()
+    val wasRestored by viewModel.wasRestored.collectAsState()
 
-    var textHidden by remember { mutableStateOf(false) }
-    val startTimeMs = remember { System.currentTimeMillis() }
+    var textHidden by remember(item.id) { mutableStateOf(false) }
+    val startTimeMs = remember(item.id) { System.currentTimeMillis() }
     val scrollState = rememberScrollState()
+
+    var confettiParticles by remember(item.id) { mutableStateOf(emptyList<ConfettiParticle>()) }
+
+    LaunchedEffect(practiceResult) {
+        val res = practiceResult
+        if (res != null) {
+            if (res.accuracyScore >= 70) {
+                // Play success audio
+                SoundSynth.playSuccess()
+
+                // Initialize 55 confetti particles with random properties
+                val random = java.util.Random()
+                val colors = listOf(
+                    Color(0xFF13B4A2), // Xello Teal
+                    Color(0xFFFFD600), // Gold
+                    Color(0xFFFF4081), // Pink red
+                    Color(0xFF2979FF), // Bright Blue
+                    Color(0xFF00E676)  // Green
+                )
+
+                confettiParticles = List(55) {
+                    ConfettiParticle(
+                        x = random.nextFloat(),
+                        y = -50f - random.nextFloat() * 200f,
+                        speed = 4f + random.nextFloat() * 7f,
+                        sway = 0.5f + random.nextFloat() * 1.5f,
+                        color = colors[random.nextInt(colors.size)],
+                        size = 12f + random.nextFloat() * 16f,
+                        rotation = random.nextFloat() * 360f,
+                        rotationSpeed = (random.nextFloat() - 0.5f) * 8f
+                    )
+                }
+
+                // Smooth 60fps frame updates loop
+                val startMs = System.currentTimeMillis()
+                while (System.currentTimeMillis() - startMs < 4200 && confettiParticles.isNotEmpty()) {
+                    kotlinx.coroutines.delay(16)
+                    confettiParticles = confettiParticles.map { p ->
+                        p.copy(
+                            y = p.y + p.speed,
+                            x = (p.x + Math.sin(p.y.toDouble() / 40.0).toFloat() * 0.003f).coerceIn(0f, 1f),
+                            rotation = p.rotation + p.rotationSpeed
+                        )
+                    }
+                }
+                confettiParticles = emptyList()
+            } else {
+                // Play error/needs-practice audio
+                SoundSynth.playError()
+            }
+        } else {
+            confettiParticles = emptyList()
+        }
+    }
 
     // Activity launcher for Android native Speech Recognizer
     val speechRecognizerLauncher = rememberLauncherForActivityResult(
@@ -160,15 +229,8 @@ fun ActivePracticeScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(
-                    onClick = { viewModel.setTab("practice_list") },
-                    modifier = Modifier.testTag("back_to_list_btn")
-                ) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
-                }
-
                 Text(
-                    text = "Vocal Memory Lab",
+                    text = "Practice Session",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
@@ -180,16 +242,57 @@ fun ActivePracticeScreen(
                 ) {
                     Text(
                         text = when (item.type) {
-                            "WORD" -> "Vocabulary"
+                            "WORD" -> "Words"
                             "SENTENCE" -> "Sentences"
-                            "PARAGRAPH" -> "Complex Paragraphs"
+                            "PARAGRAPH" -> "Paragraphs"
                             else -> item.type
                         },
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
+                        maxLines = 1,
+                        softWrap = false
                     )
+                }
+            }
+
+            // Check if restored from an autosave
+            AnimatedVisibility(
+                visible = wasRestored,
+                enter = expandVertically() + fadeIn(),
+                exit = shrinkVertically() + fadeOut()
+            ) {
+                Surface(
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.History,
+                            contentDescription = "Restored",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = "Autosave Progress Loaded",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                            Text(
+                                text = "We restored your last in-progress speech transcription screen.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                            )
+                        }
+                    }
                 }
             }
 
@@ -320,28 +423,28 @@ fun ActivePracticeScreen(
                 )
             }
 
-            // Big record mechanism
+            // Big record mechanism (Tuned for maximum tactile accessibility and visual priority)
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 ),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                shape = RoundedCornerShape(24.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(20.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Record Button with Ripple Sim
+                    // Record Button with Multi-Ring Ripple Simulation for rich visual feedback
                     Box(
                         modifier = Modifier
-                            .size(110.dp)
+                            .size(136.dp)
                             .clip(CircleShape)
                             .background(
-                                if (isRecording) MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
-                                else MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                                if (isRecording) MaterialTheme.colorScheme.error.copy(alpha = 0.18f)
+                                else MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
                             )
                             .clickable {
                                 if (androidx.core.content.ContextCompat.checkSelfPermission(
@@ -357,44 +460,58 @@ fun ActivePracticeScreen(
                             .testTag("record_mic_btn"),
                         contentAlignment = Alignment.Center
                     ) {
+                        // Inner secondary outer-ring glow
                         Box(
                             modifier = Modifier
-                                .size(84.dp)
+                                .size(112.dp)
                                 .clip(CircleShape)
                                 .background(
-                                    if (isRecording) MaterialTheme.colorScheme.error
-                                    else MaterialTheme.colorScheme.primary
+                                    if (isRecording) MaterialTheme.colorScheme.error.copy(alpha = 0.35f)
+                                    else MaterialTheme.colorScheme.primary.copy(alpha = 0.22f)
                                 ),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(
-                                imageVector = if (isRecording) Icons.Default.KeyboardVoice else Icons.Default.Mic,
-                                contentDescription = "Speech recognition start",
-                                tint = Color.White,
-                                modifier = Modifier.size(40.dp)
-                            )
+                            // Core tactile button
+                            Box(
+                                modifier = Modifier
+                                    .size(88.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        if (isRecording) MaterialTheme.colorScheme.error
+                                        else MaterialTheme.colorScheme.primary
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = if (isRecording) Icons.Default.KeyboardVoice else Icons.Default.Mic,
+                                    contentDescription = "Speech recognition start",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(44.dp)
+                                )
+                            }
                         }
                     }
 
                     Text(
                         text = if (isRecording) "Listening..." else "Tap Mic to Speak",
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Black,
                         style = MaterialTheme.typography.titleMedium,
-                        color = if (isRecording) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
+                        letterSpacing = 0.5.sp,
+                        color = if (isRecording) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
                     )
 
                     // Text representation / Manual Editor
                     OutlinedTextField(
                         value = spokenText,
                         onValueChange = { viewModel.setSpokenText(it) },
-                        label = { Text("Spoken / Transcribed Text") },
+                        label = { Text("What You Spoke", fontWeight = FontWeight.Bold) },
                         placeholder = { Text("What you spoke appears here. You can edit this directly if needed...") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("vocal_editor_input"),
                         minLines = 2,
                         maxLines = 5,
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(14.dp)
                     )
 
                     // Scoring buttons
@@ -402,16 +519,21 @@ fun ActivePracticeScreen(
                         onClick = { viewModel.submitPractice(startTimeMs) },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(50.dp)
+                            .height(54.dp)
                             .testTag("submit_practice_btn"),
-                        enabled = spokenText.trim().isNotEmpty()
+                        enabled = spokenText.trim().isNotEmpty(),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
+                        shape = RoundedCornerShape(16.dp)
                     ) {
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Icon(imageVector = Icons.Default.Check, contentDescription = null)
-                            Text("Submit Recall Assessment", fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                            Icon(imageVector = Icons.Default.Check, contentDescription = null, modifier = Modifier.size(20.dp))
+                            Text("Submit Recall Assessment", fontWeight = FontWeight.Black, fontSize = 16.sp)
                         }
                     }
                 }
@@ -428,10 +550,30 @@ fun ActivePracticeScreen(
                     .clickable { /* Block clicks underlying background */ },
                 contentAlignment = Alignment.Center
             ) {
+                // Render custom lightweight celebratory confetti
+                if (confettiParticles.isNotEmpty()) {
+                    androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
+                        confettiParticles.forEach { p ->
+                            val px = p.x * size.width
+                            val py = p.y
+                            if (py in 0f..size.height) {
+                                rotate(p.rotation, pivot = Offset(px, py)) {
+                                    drawRect(
+                                        color = p.color,
+                                        topLeft = Offset(px - p.size / 2, py - p.size / 2),
+                                        size = Size(p.size, p.size)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
                 ResultReportCard(
                     result = result,
                     onDismiss = { viewModel.setTab("dashboard") },
-                    onRetry = { viewModel.startPractice(item) }
+                    onRetry = { viewModel.startPractice(item) },
+                    onStartNext = { viewModel.startNextExercise() }
                 )
             }
         }
@@ -442,7 +584,8 @@ fun ActivePracticeScreen(
 fun ResultReportCard(
     result: PracticeResult,
     onDismiss: () -> Unit,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    onStartNext: () -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -462,7 +605,7 @@ fun ResultReportCard(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Lab Report Analysis",
+                text = "Practice Results",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Black
             )
@@ -513,7 +656,7 @@ fun ResultReportCard(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "+${result.xpEarned} XP",
+                        text = "+${result.xpEarned} Points",
                         fontWeight = FontWeight.Black,
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.primary
@@ -542,54 +685,177 @@ fun ResultReportCard(
                 }
             }
 
+            // 🎙️ Speaking Performance Metrics
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.25f)
+                ),
+                shape = RoundedCornerShape(16.dp),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+            ) {
+                Column(
+                    modifier = Modifier.padding(14.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Mic,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Text(
+                                text = "Speaking Performance",
+                                style = MaterialTheme.typography.labelLarge,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
+                        val durationSeconds = result.durationMs / 1000.0
+                        Text(
+                            text = "${"%.1f".format(durationSeconds)}s duration",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                        )
+                    }
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text(
+                                text = "${result.wpm} WPM",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Black,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = "Speaking Rate",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                            )
+                        }
+
+                        // Verbal cadence classification
+                        val speedRating = when {
+                            result.wpm == 0 -> "Not detected"
+                            result.wpm < 110 -> "Measured & Steady"
+                            result.wpm in 110..150 -> "Optimal & Conversational"
+                            else -> "Fluent & Fast Cadence"
+                        }
+                        
+                        val speedColor = when {
+                            result.wpm == 0 -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f)
+                            result.wpm < 110 -> Color(0xFF2196F3)
+                            result.wpm in 110..150 -> Color(0xFF00E676)
+                            else -> Color(0xFFFF9100)
+                        }
+
+                        Surface(
+                            color = speedColor.copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(6.dp)
+                        ) {
+                            Text(
+                                text = speedRating,
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = speedColor,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+            }
+
             // Word Comparison Logs
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = "Text Comparison",
+                    text = "Word Comparison",
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
 
                 TextLayoutDetail(
-                    title = "Target Cue text:",
+                    title = "Expected phrase:",
                     content = result.originalText,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
                 )
 
                 TextLayoutDetail(
-                    title = "Your Spoken translation:",
+                    title = "Your spoken words:",
                     content = result.recognizedText,
                     color = MaterialTheme.colorScheme.primary
                 )
             }
 
-            // Interactive bottom actions
-            Row(
+            // Interactive bottom actions organized hierarchically
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                OutlinedButton(
-                    onClick = onRetry,
+                Button(
+                    onClick = onStartNext,
                     modifier = Modifier
-                        .weight(1f)
-                        .testTag("result_retry_btn")
+                        .fillMaxWidth()
+                        .testTag("result_next_btn"),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
-                    Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Retry Practice")
+                    Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Advance to Next Exercise", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 }
 
-                Button(
-                    onClick = onDismiss,
-                    modifier = Modifier
-                        .weight(1f)
-                        .testTag("result_dismiss_btn")
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("OK, Finish")
+                    OutlinedButton(
+                        onClick = onRetry,
+                        modifier = Modifier
+                            .weight(1f)
+                            .testTag("result_retry_btn"),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(imageVector = Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(14.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Retry", maxLines = 1, fontSize = 12.sp)
+                    }
+
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier
+                            .weight(1f)
+                            .testTag("result_dismiss_btn"),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                        ),
+                        shape = RoundedCornerShape(12.dp),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
+                    ) {
+                        Icon(imageVector = Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Finish", maxLines = 1, fontSize = 12.sp)
+                    }
                 }
             }
         }

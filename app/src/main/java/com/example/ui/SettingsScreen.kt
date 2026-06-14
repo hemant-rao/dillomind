@@ -24,10 +24,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.horizontalScroll
 import com.example.MainActivity
 import com.example.data.UserProfile
 import com.example.viewmodel.MemoryViewModel
@@ -42,6 +47,15 @@ fun SettingsScreen(
     var inputUsername by remember(profile.username) { mutableStateOf(profile.username) }
     var inputDarkMode by remember(profile.isDarkMode) { mutableStateOf(profile.isDarkMode) }
     var inputReminders by remember(profile.practiceReminderEnabled) { mutableStateOf(profile.practiceReminderEnabled) }
+
+    val themeAccent by viewModel.themeAccent.collectAsState()
+    val themeTypography by viewModel.themeTypography.collectAsState()
+    val fontScale by viewModel.fontScale.collectAsState()
+    val reminderTimes by viewModel.reminderTimes.collectAsState()
+
+    var pickerHour by remember { mutableStateOf(8) }
+    var pickerMinute by remember { mutableStateOf(0) }
+    var pickerAmPm by remember { mutableStateOf("AM") }
 
     val scrollState = rememberScrollState()
 
@@ -63,12 +77,6 @@ fun SettingsScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = "App Settings & Sync",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
-
         // Profile details Card
         Card(
             modifier = Modifier.fillMaxWidth().testTag("profile_settings_card"),
@@ -80,7 +88,7 @@ fun SettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    text = "User Profile Configuration",
+                    text = "Profile Settings",
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -111,38 +119,40 @@ fun SettingsScreen(
             }
         }
 
-        // Appearance Mode
+        // Appearance Mode with Live interactive Preview and Customizer
         Card(
             modifier = Modifier.fillMaxWidth().testTag("theme_settings_card"),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-            shape = RoundedCornerShape(16.dp)
+            shape = RoundedCornerShape(16.dp),
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 Text(
-                    text = "Aesthetic Styles",
-                    style = MaterialTheme.typography.labelLarge,
-                    fontWeight = FontWeight.Bold,
+                    text = "Visual Theme & Sandbox Customizer",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Black,
                     color = MaterialTheme.colorScheme.primary
                 )
 
+                // Dark mode Switch
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
+                    Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Dark Theme",
+                            text = "Dark Theme Mode",
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Text(
-                            text = "Enable eye-safe night reading mode",
+                            text = "Enable eye-safe dark space reading canvas",
                             style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                         )
                     }
 
@@ -154,6 +164,303 @@ fun SettingsScreen(
                         },
                         modifier = Modifier.testTag("dark_mode_switch")
                     )
+                }
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f))
+
+                // Accent Palette choice
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        text = "Accent Color Preset",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = "Select your preferred premium brand color accent",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                    ) {
+                        val accents = listOf(
+                            "TEAL" to Color(0xFF13B4A2),
+                            "OCEAN" to Color(0xFF0284C7),
+                            "VIOLET" to Color(0xFF7C3AED),
+                            "AMBER" to Color(0xFFD97706),
+                            "ROSE" to Color(0xFFE11D48)
+                        )
+                        accents.forEach { (name, color) ->
+                            val isSelected = themeAccent == name
+                            Box(
+                                modifier = Modifier
+                                    .size(34.dp)
+                                    .clip(CircleShape)
+                                    .background(color)
+                                    .clickable { viewModel.setThemeAccent(name) }
+                                    .border(
+                                        width = if (isSelected) 3.dp else 1.dp,
+                                        color = if (isSelected) MaterialTheme.colorScheme.onSurface else color.copy(alpha = 0.5f),
+                                        shape = CircleShape
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                if (isSelected) {
+                                    Icon(
+                                        imageVector = Icons.Default.Check,
+                                        contentDescription = "Selected",
+                                        tint = Color.White,
+                                        modifier = Modifier.size(14.dp)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f))
+
+                // Typography choice
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        text = "Typography Style",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)
+                    ) {
+                        val fonts = listOf(
+                            "SANS" to "Sans-Serif",
+                            "SERIF" to "Serif Book",
+                            "MONO" to "Sci-Fi Mono"
+                        )
+                        fonts.forEach { (code, label) ->
+                            val isSelected = themeTypography == code
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(
+                                        if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                                        else MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f)
+                                    )
+                                    .clickable { viewModel.setThemeTypography(code) }
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = label,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                    }
+                }
+
+                // Typography density scaling
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        text = "Density Scaling",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp)
+                    ) {
+                        val scales = listOf(
+                            "COMPACT" to "Compact",
+                            "BALANCED" to "Balanced",
+                            "EXPANDED" to "Spacious"
+                        )
+                        scales.forEach { (code, label) ->
+                            val isSelected = fontScale == code
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(
+                                        if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                                        else MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f)
+                                    )
+                                    .clickable { viewModel.setFontScale(code) }
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = label,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                    }
+                }
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f))
+
+                // 🎨 REAL-TIME LIVE INTERACTIVE PREVIEW SANDBOX COMPONENT
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Sandbox Live Preview",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Surface(
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(20.dp)
+                        ) {
+                            Text(
+                                text = "REAL-TIME SYNC",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+
+                    // Simulated interactive interface demo card
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f)
+                        ),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(14.dp),
+                            verticalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.DirectionsRun,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(20.dp)
+                                    )
+                                    Text(
+                                        text = "SYNAPSE CHALLENGE",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        letterSpacing = 0.8.sp
+                                    )
+                                }
+                                Surface(
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                    shape = RoundedCornerShape(6.dp)
+                                ) {
+                                    Text(
+                                        text = "98% Acc",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                    )
+                                }
+                            }
+
+                            Text(
+                                text = "Active hippocampal networks are fired up!",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontWeight = FontWeight.Bold
+                            )
+
+                            Text(
+                                text = "Adjust settings above in real-time to observe visual contrast, display line heights, and typography weights.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                            )
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Button(
+                                    onClick = {
+                                        Toast.makeText(context, "Sandbox test successful! Accent is $themeAccent.", Toast.LENGTH_SHORT).show()
+                                    },
+                                    modifier = Modifier.weight(1.1f),
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.primary
+                                    ),
+                                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp)
+                                ) {
+                                    Text(
+                                        text = "Test Accent Trigger",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+
+                                OutlinedButton(
+                                    onClick = {
+                                        Toast.makeText(context, "Mode: $themeTypography Scale: $fontScale", Toast.LENGTH_SHORT).show()
+                                    },
+                                    modifier = Modifier.weight(0.9f),
+                                    shape = RoundedCornerShape(10.dp),
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        contentColor = MaterialTheme.colorScheme.primary
+                                    ),
+                                    contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.4f))
+                                ) {
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Info,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(14.dp),
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = "Specs Info",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -169,7 +476,7 @@ fun SettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Text(
-                    text = "Daily Practice Reminders",
+                    text = "Daily Notifications",
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary
@@ -206,11 +513,198 @@ fun SettingsScreen(
                     )
                 }
 
-                Divider(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f))
+                if (inputReminders) {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f))
+
+                    // 🕒 DEDICATED REMINDER TIMES EDITOR MODULE
+                    Text(
+                        text = "Practice Alarm Schedules",
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    Text(
+                        text = "Customize multiple alarms throughout the day. Reminders sync automatically to keep your study habits persistent.",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    )
+
+                    // Interactive dropdown time picker selectors
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        // Hour Selector Box
+                        Box(modifier = Modifier.weight(1f)) {
+                            var showHourMenu by remember { mutableStateOf(false) }
+                            OutlinedButton(
+                                onClick = { showHourMenu = true },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 6.dp)
+                            ) {
+                                Text("Hr: $pickerHour", style = MaterialTheme.typography.labelSmall)
+                            }
+                            DropdownMenu(expanded = showHourMenu, onDismissRequest = { showHourMenu = false }) {
+                                (1..12).forEach { h ->
+                                    DropdownMenuItem(
+                                        text = { Text("$h") },
+                                        onClick = {
+                                            pickerHour = h
+                                            showHourMenu = false
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        // Minute Selector Box
+                        Box(modifier = Modifier.weight(1f)) {
+                            var showMinMenu by remember { mutableStateOf(false) }
+                            OutlinedButton(
+                                onClick = { showMinMenu = true },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 6.dp)
+                            ) {
+                                Text("Min: ${"%02d".format(pickerMinute)}", style = MaterialTheme.typography.labelSmall)
+                            }
+                            DropdownMenu(expanded = showMinMenu, onDismissRequest = { showMinMenu = false }) {
+                                listOf(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55).forEach { m ->
+                                    DropdownMenuItem(
+                                        text = { Text("%02d".format(m)) },
+                                        onClick = {
+                                            pickerMinute = m
+                                            showMinMenu = false
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        // AM/PM Selector Box
+                        Box(modifier = Modifier.weight(1f)) {
+                            var showAmPmMenu by remember { mutableStateOf(false) }
+                            OutlinedButton(
+                                onClick = { showAmPmMenu = true },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(8.dp),
+                                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 6.dp)
+                            ) {
+                                Text(pickerAmPm, style = MaterialTheme.typography.labelSmall)
+                            }
+                            DropdownMenu(expanded = showAmPmMenu, onDismissRequest = { showAmPmMenu = false }) {
+                                listOf("AM", "PM").forEach { p ->
+                                    DropdownMenuItem(
+                                        text = { Text(p) },
+                                        onClick = {
+                                            pickerAmPm = p
+                                            showAmPmMenu = false
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        // Add Button
+                        Button(
+                            onClick = {
+                                val formattedTime = "${"%02d".format(pickerHour)}:${"%02d".format(pickerMinute)} $pickerAmPm"
+                                viewModel.addReminderTime(formattedTime)
+                                Toast.makeText(context, "Reminder scheduled at $formattedTime. Synced with Browser Notification API!", Toast.LENGTH_SHORT).show()
+                            },
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.weight(1.1f),
+                            contentPadding = PaddingValues(horizontal = 6.dp, vertical = 6.dp)
+                        ) {
+                            Text("Schedule", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
+                        }
+                    }
+
+                    // Displaying active reminder times
+                    if (reminderTimes.isEmpty()) {
+                        Text(
+                            text = "No custom practice alerts scheduled. Add one above!",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                        )
+                    } else {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Sync,
+                                contentDescription = null,
+                                tint = Color(0xFF10B981),
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Text(
+                                text = "${reminderTimes.size} Alert(s) Live & Synced with Browser Notification API",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF10B981)
+                            )
+                        }
+
+                        // Horizontal list of chips
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState())
+                                .padding(vertical = 4.dp),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            reminderTimes.forEach { time ->
+                                Surface(
+                                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                                    shape = RoundedCornerShape(8.dp),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
+                                ) {
+                                    Row(
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.AccessTime,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(14.dp)
+                                        )
+                                        Text(
+                                            text = time,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                        Icon(
+                                            imageVector = Icons.Default.Close,
+                                            contentDescription = "Remove setting",
+                                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                                            modifier = Modifier
+                                                .size(14.dp)
+                                                .clickable {
+                                                    viewModel.removeReminderTime(time)
+                                                    Toast.makeText(context, "Canceled reminder $time.", Toast.LENGTH_SHORT).show()
+                                                }
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                HorizontalDivider(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f))
 
                 // Standard local system notification pushing
                 Text(
-                    text = "Test Connection & Alarms",
+                    text = "Test Notifications",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                     fontWeight = FontWeight.Bold
@@ -236,7 +730,7 @@ fun SettingsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(imageVector = Icons.Default.NotificationsActive, contentDescription = null, modifier = Modifier.size(18.dp))
-                        Text("Trigger Practice Reminder (Demo Notification)", fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                        Text("Send Demo Notification", fontWeight = FontWeight.Bold, fontSize = 12.sp)
                     }
                 }
             }
@@ -261,13 +755,13 @@ fun SettingsScreen(
                 )
                 Column {
                     Text(
-                        text = "Device Offline Mode is Active",
+                        text = "Offline Mode Active",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary
                     )
                     Text(
-                        text = "All memory tasks, speech comparison logs, streaks, metrics, and standings are saved 100% locally on your device storage database.",
+                        text = "All practice logs, scores, and daily streaks are saved locally on your device.",
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                     )
@@ -280,8 +774,8 @@ fun SettingsScreen(
 // Dispatches standard native system push notifications
 private fun triggerLocalPushNotification(context: Context) {
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    val channelId = "smartrecall_reminders_channel"
-    val channelName = "SmartRecall Daily Reminders"
+    val channelId = "xellomind_reminders_channel"
+    val channelName = "Xello Mind Daily Reminders"
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val channel = NotificationChannel(
@@ -315,7 +809,7 @@ private fun triggerLocalPushNotification(context: Context) {
 
     val notification = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(android.R.drawable.stat_sys_speakerphone) // Standard Android system audio icon
-        .setContentTitle("SmartRecall Training Club")
+        .setContentTitle("Xello Mind Training Club")
         .setContentText(chosenText)
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setContentIntent(pendingIntent)

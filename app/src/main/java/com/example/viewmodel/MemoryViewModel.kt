@@ -27,19 +27,108 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
     val leaderboard: StateFlow<List<LeaderboardEntry>> = repository.leaderboard
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
+    val unlockedChapters: StateFlow<Map<String, Int>> = combine(allLogs, allItems) { logs, items ->
+        val passingItemIds = logs.filter { it.accuracyScore >= 70 }.map { it.itemId }.toSet()
+        val result = mutableMapOf("EASY" to 1, "MEDIUM" to 1, "HARD" to 1)
+        
+        listOf("EASY", "MEDIUM", "HARD").forEach { diff ->
+            val itemsForDiff = items.filter { it.difficulty == diff }
+            var maxUnlocked = 1
+            for (ch in 1..10) {
+                val itemsInCh = itemsForDiff.filter { it.chapter == ch }
+                if (itemsInCh.isNotEmpty()) {
+                    val completedInCh = itemsInCh.count { it.id in passingItemIds }
+                    if (completedInCh >= 1) {
+                        maxUnlocked = maxOf(maxUnlocked, ch + 1)
+                    }
+                }
+            }
+            result[diff] = minOf(maxUnlocked, 10)
+        }
+        result
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), mapOf("EASY" to 1, "MEDIUM" to 1, "HARD" to 1))
+
     // Filter properties
-    private val _selectedDifficulty = MutableStateFlow("ALL")
+    private val _selectedDifficulty = MutableStateFlow("EASY")
     val selectedDifficulty: StateFlow<String> = _selectedDifficulty.asStateFlow()
 
     private val _selectedCategory = MutableStateFlow("ALL")
     val selectedCategory: StateFlow<String> = _selectedCategory.asStateFlow()
 
-    private val _selectedType = MutableStateFlow("WORD") // "WORD", "SENTENCE", "PARAGRAPH"
+    private val _selectedType = MutableStateFlow("PARAGRAPH") // "WORD", "SENTENCE", "PARAGRAPH"
     val selectedType: StateFlow<String> = _selectedType.asStateFlow()
+
+    // Dynamic Accent and Typography theme selections (applied app-wide in real-time)
+    private val _themeAccent = MutableStateFlow("TEAL")
+    val themeAccent: StateFlow<String> = _themeAccent.asStateFlow()
+
+    private val _themeTypography = MutableStateFlow("SANS")
+    val themeTypography: StateFlow<String> = _themeTypography.asStateFlow()
+
+    private val _fontScale = MutableStateFlow("BALANCED")
+    val fontScale: StateFlow<String> = _fontScale.asStateFlow()
+
+    private val _reminderTimes = MutableStateFlow<List<String>>(emptyList())
+    val reminderTimes: StateFlow<List<String>> = _reminderTimes.asStateFlow()
+
+    fun loadReminderTimes() {
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_reminders", android.content.Context.MODE_PRIVATE)
+        val listStr = prefs.getString("reminder_list", "08:00 AM|08:00 PM") ?: "08:00 AM|08:00 PM"
+        _reminderTimes.value = listStr.split("|").filter { it.isNotEmpty() }
+    }
+
+    fun addReminderTime(time: String) {
+        val updated = _reminderTimes.value.toMutableList()
+        if (!updated.contains(time)) {
+            updated.add(time)
+            saveReminderTimes(updated)
+        }
+    }
+
+    fun removeReminderTime(time: String) {
+        val updated = _reminderTimes.value.toMutableList()
+        if (updated.remove(time)) {
+            saveReminderTimes(updated)
+        }
+    }
+
+    private fun saveReminderTimes(times: List<String>) {
+        _reminderTimes.value = times
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_reminders", android.content.Context.MODE_PRIVATE)
+        prefs.edit().putString("reminder_list", times.joinToString("|")).apply()
+    }
+
+    fun setThemeAccent(accent: String) {
+        _themeAccent.value = accent
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_custom_theme", android.content.Context.MODE_PRIVATE)
+        prefs.edit().putString("theme_accent", accent).apply()
+    }
+
+    fun setThemeTypography(typography: String) {
+        _themeTypography.value = typography
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_custom_theme", android.content.Context.MODE_PRIVATE)
+        prefs.edit().putString("theme_typography", typography).apply()
+    }
+
+    fun setFontScale(scale: String) {
+        _fontScale.value = scale
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_custom_theme", android.content.Context.MODE_PRIVATE)
+        prefs.edit().putString("font_scale", scale).apply()
+    }
 
     // Current Navigation State
     private val _currentTab = MutableStateFlow("practice_list") // "dashboard", "practice_list", "active_practice", "leaderboard", "settings"
     val currentTab: StateFlow<String> = _currentTab.asStateFlow()
+
+    // Navigation History Stack
+    private val tabHistory = java.util.Stack<String>()
+
+    private val _canGoBack = MutableStateFlow(false)
+    val canGoBack: StateFlow<Boolean> = _canGoBack.asStateFlow()
+
+    private fun updateGoBackState() {
+        _canGoBack.value = !tabHistory.isEmpty()
+    }
 
     // Active Practice Session State
     private val _activeItem = MutableStateFlow<PracticeItem?>(null)
@@ -54,6 +143,13 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
     private val _isRecording = MutableStateFlow(false)
     val isRecording: StateFlow<Boolean> = _isRecording.asStateFlow()
 
+    // Autosave tracking states
+    private val _wasRestored = MutableStateFlow(false)
+    val wasRestored: StateFlow<Boolean> = _wasRestored.asStateFlow()
+
+    private val _hasAutosave = MutableStateFlow(false)
+    val hasAutosave: StateFlow<Boolean> = _hasAutosave.asStateFlow()
+
     // Challenges Status
     private val _challenges = MutableStateFlow<List<SocialChallenge>>(emptyList())
     val challenges: StateFlow<List<SocialChallenge>> = _challenges.asStateFlow()
@@ -62,18 +158,93 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             repository.checkAndPrepopulate()
             loadDailyChallenges()
+            checkAutosavedSession()
+
+            // Load saved theme customization settings
+            val prefs = getApplication<Application>().getSharedPreferences("xello_mind_custom_theme", android.content.Context.MODE_PRIVATE)
+            _themeAccent.value = prefs.getString("theme_accent", "TEAL") ?: "TEAL"
+            _themeTypography.value = prefs.getString("theme_typography", "SANS") ?: "SANS"
+            _fontScale.value = prefs.getString("font_scale", "BALANCED") ?: "BALANCED"
+
+            // Load saved reminder times
+            loadReminderTimes()
         }
     }
 
+    fun checkAutosavedSession() {
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_autosave", android.content.Context.MODE_PRIVATE)
+        val savedItemId = prefs.getInt("autosave_item_id", -1)
+        val savedText = prefs.getString("autosave_text", "") ?: ""
+        _hasAutosave.value = savedItemId != -1 && savedText.trim().isNotEmpty()
+    }
+
+    fun resumeAutosavedSession() {
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_autosave", android.content.Context.MODE_PRIVATE)
+        val savedItemId = prefs.getInt("autosave_item_id", -1)
+        val savedText = prefs.getString("autosave_text", "") ?: ""
+        if (savedItemId != -1 && savedText.trim().isNotEmpty()) {
+            val allItemsSnapshot = allItems.value
+            val item = allItemsSnapshot.find { it.id == savedItemId }
+            if (item != null) {
+                val oldTab = _currentTab.value
+                if (oldTab != "active_practice") {
+                    if (tabHistory.isEmpty() || tabHistory.peek() != oldTab) {
+                        tabHistory.push(oldTab)
+                    }
+                }
+                _activeItem.value = item
+                _spokenText.value = savedText
+                _practiceResult.value = null
+                _isRecording.value = false
+                _wasRestored.value = true
+                _currentTab.value = "active_practice"
+                updateGoBackState()
+            }
+        }
+    }
+
+    fun clearAutosavedSession() {
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_autosave", android.content.Context.MODE_PRIVATE)
+        prefs.edit().clear().apply()
+        _hasAutosave.value = false
+        _wasRestored.value = false
+    }
+
     fun setTab(tab: String) {
-        _currentTab.value = tab
+        setTab(tab, addToHistory = true)
+    }
+
+    fun setTab(tab: String, addToHistory: Boolean) {
+        val oldTab = _currentTab.value
+        if (oldTab != tab) {
+            if (addToHistory) {
+                if (tabHistory.isEmpty() || tabHistory.peek() != oldTab) {
+                    tabHistory.push(oldTab)
+                }
+            }
+            _currentTab.value = tab
+            updateGoBackState()
+        }
         if (tab != "active_practice") {
             // reset active practice when leaving
             _activeItem.value = null
             _spokenText.value = ""
             _practiceResult.value = null
             _isRecording.value = false
+            _wasRestored.value = false
+            checkAutosavedSession()
         }
+    }
+
+    fun navigateBack(): Boolean {
+        if (!tabHistory.isEmpty()) {
+            val prevTab = tabHistory.pop()
+            setTab(prevTab, addToHistory = false)
+            updateGoBackState()
+            return true
+        }
+        updateGoBackState()
+        return false
     }
 
     fun setTypeFilter(type: String) {
@@ -89,11 +260,31 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun startPractice(item: PracticeItem) {
+        val oldTab = _currentTab.value
+        if (oldTab != "active_practice") {
+            if (tabHistory.isEmpty() || tabHistory.peek() != oldTab) {
+                tabHistory.push(oldTab)
+            }
+        }
         _activeItem.value = item
-        _spokenText.value = ""
+        
+        // Auto-resume check for this specific card
+        val prefs = getApplication<Application>().getSharedPreferences("xello_mind_autosave", android.content.Context.MODE_PRIVATE)
+        val savedItemId = prefs.getInt("autosave_item_id", -1)
+        val savedText = prefs.getString("autosave_text", "") ?: ""
+        if (savedItemId == item.id && savedText.trim().isNotEmpty()) {
+            _spokenText.value = savedText
+            _wasRestored.value = true
+        } else {
+            _spokenText.value = ""
+            _wasRestored.value = false
+        }
+        
         _practiceResult.value = null
         _isRecording.value = false
         _currentTab.value = "active_practice"
+        updateGoBackState()
+        checkAutosavedSession()
     }
 
     fun addCustomItem(content: String, type: String, difficulty: String, category: String) {
@@ -114,6 +305,17 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
 
     fun setSpokenText(text: String) {
         _spokenText.value = text
+        
+        // Write to autosave preferences instantly
+        val item = _activeItem.value
+        if (item != null) {
+            val prefs = getApplication<Application>().getSharedPreferences("xello_mind_autosave", android.content.Context.MODE_PRIVATE)
+            prefs.edit()
+                .putInt("autosave_item_id", item.id)
+                .putString("autosave_text", text)
+                .apply()
+            _hasAutosave.value = text.trim().isNotEmpty()
+        }
     }
 
     // Levenshtein Text-matching Algorithm to compute memory accuracy score
@@ -126,6 +328,11 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
 
         val duration = System.currentTimeMillis() - startTimeMs
         val accuracy = calculateSimilarityPercentage(originalTxt, speakTxt)
+
+        // Calculate speaking rate: words per minute (WPM)
+        val wordCount = speakTxt.split(Regex("\\s+")).filter { it.isNotEmpty() }.size
+        val durationSecs = maxOf(duration, 1000L) / 1000.0
+        val wpmValue = ((wordCount / durationSecs) * 60).toInt()
 
         viewModelScope.launch {
             val (xpEarned, streakIncremented) = repository.savePracticeLog(
@@ -146,8 +353,11 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
                 xpEarned = xpEarned,
                 streakIncremented = streakIncremented,
                 originalText = originalTxt,
-                recognizedText = speakTxt
+                recognizedText = speakTxt,
+                wpm = wpmValue,
+                durationMs = duration
             )
+            clearAutosavedSession()
         }
     }
 
@@ -287,6 +497,31 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
         }
         _challenges.value = updated
     }
+
+    fun startNextExercise() {
+        val current = _activeItem.value ?: return
+        val items = allItems.value
+        
+        // Filter elements of identical difficulty level (e.g. EASY, MEDIUM, HARD)
+        val sameDiffItems = items.filter { it.difficulty == current.difficulty }
+        
+        val currentIndex = sameDiffItems.indexOfFirst { it.id == current.id }
+        if (currentIndex != -1 && currentIndex < sameDiffItems.lastIndex) {
+            val nextItem = sameDiffItems[currentIndex + 1]
+            startPractice(nextItem)
+        } else {
+            // Loop difficulty or advance to the next level
+            val nextDiff = when (current.difficulty.uppercase()) {
+                "EASY" -> "MEDIUM"
+                "MEDIUM" -> "HARD"
+                else -> "EASY"
+            }
+            val nextDiffItems = items.filter { it.difficulty == nextDiff }
+            if (nextDiffItems.isNotEmpty()) {
+                startPractice(nextDiffItems.first())
+            }
+        }
+    }
 }
 
 // Support Structs
@@ -295,7 +530,9 @@ data class PracticeResult(
     val xpEarned: Int,
     val streakIncremented: Boolean,
     val originalText: String,
-    val recognizedText: String
+    val recognizedText: String,
+    val wpm: Int = 0,
+    val durationMs: Long = 0L
 )
 
 data class SocialChallenge(

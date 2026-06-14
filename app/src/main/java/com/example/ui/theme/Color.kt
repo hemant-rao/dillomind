@@ -2,27 +2,21 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Deep Space Dark Theme
-val CosmicBlack = Color(0xFF0F111A)
-val CosmicDarkGray = Color(0xFF1E2130)
-val CosmicPrimary = Color(0xFF5D85FF)
-val CosmicSecondary = Color(0xFF2E334D)
-val CosmicAccent = Color(0xFF00E676)
-val CosmicAccentPurple = Color(0xFFD500F9)
-val CosmicOnPrimary = Color(0xFFFFFFFF)
+// Premium Slate & Teal Theme (based on HSL 172, 70%, 45% which is a rich premium Teal)
+val XelloTealPrimary = Color(0xFF13B4A2)    // Core theme Teal (HSL 172, 70%, 45%)
+val XelloTealDark = Color(0xFF0F8C7E)       // Deep teal for high contrast light mode
+val XelloTealHover = Color(0xFF109C8C)      // Subtle variant for active and hover states
+val XelloTealLight = Color(0xFFE2F9F6)      // Light teal surface accent tint
+val XelloTealGlow = Color(0xFF38E5D1)       // Glow teal highlight
 
-// Standard Light Theme
-val SolidLightBg = Color(0xFFF4F6FC)
-val SolidLightSurface = Color(0xFFFFFFFF)
-val SolidLightPrimary = Color(0xFF3D62D6)
-val SolidLightSecondary = Color(0xFFE8ECF8)
-val SolidLightText = Color(0xFF101424)
+// Premium Dark Slate Colors
+val XelloDarkBg = Color(0xFF080D16)         // Ultra-rich deep slate black background
+val XelloDarkSurface = Color(0xFF111E2F)    // Card surface with deep marine tone
+val XelloDarkSecondary = Color(0xFF1E293B)  // Slate secondary button / trim
+val XelloDarkText = Color(0xFFF8FAFC)       // Crisp off-white text
 
-// Standard Palette
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Premium Light Slate Colors
+val XelloLightBg = Color(0xFFF8FAFC)        // Clean ice Slate background
+val XelloLightSurface = Color(0xFFFFFFFF)   // Pure white surfaces
+val XelloLightSecondary = Color(0xFFE2E8F0) // Cool slate accents
+val XelloLightText = Color(0xFF0F172A)      // Deep charcoal/slate text for readability
