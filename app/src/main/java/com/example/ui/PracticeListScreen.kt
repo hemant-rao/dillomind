@@ -502,7 +502,7 @@ fun PracticeListScreen(
                                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                                         contentPadding = PaddingValues(horizontal = 2.dp)
                                     ) {
-                                        val categories = listOf("ALL", "Wisdom", "Science", "Focus", "Visual", "General")
+                                        val categories = listOf("ALL", "Story", "Poem", "Humor", "Wisdom", "Science", "Focus", "Visual", "General")
                                         items(categories) { category ->
                                             val isSelected = selectedCategory == category
                                             Box(
@@ -1098,11 +1098,14 @@ fun PracticeListScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        listOf("General", "Focus", "Wisdom").forEach { cat ->
+                        listOf("General", "Focus", "Wisdom", "Story", "Poem", "Humor").forEach { cat ->
                             val selected = customCategory == cat
                             val catIcon = when(cat) {
                                 "Focus" -> Icons.Default.CenterFocusStrong
                                 "Wisdom" -> Icons.Default.Lightbulb
+                                "Story" -> Icons.Default.AutoStories
+                                "Poem" -> Icons.Default.Brush
+                                "Humor" -> Icons.Default.SentimentVerySatisfied
                                 else -> Icons.Default.Category
                             }
                             Surface(
@@ -1173,7 +1176,7 @@ fun PracticeListScreen(
                     enabled = customContent.trim().isNotEmpty(),
                     modifier = Modifier.testTag("submit_custom_btn")
                 ) {
-                    Text("Add Phase", fontWeight = FontWeight.Bold)
+                    Text("Add Phrase", fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {

@@ -1,6 +1,9 @@
 package com.example.data
 
+import android.content.Context
 import android.util.Log
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -8,7 +11,14 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class MemoryRepository(private val dao: PracticeDao) {
+class MemoryRepository(
+    private val dao: PracticeDao,
+    private val appContext: Context
+) {
+
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     val allPracticeItems: Flow<List<PracticeItem>> = dao.getAllPracticeItems()
     val allLogs: Flow<List<PracticeLog>> = dao.getAllPracticeLogs()
@@ -18,13 +28,14 @@ class MemoryRepository(private val dao: PracticeDao) {
     fun getItemsByType(type: String): Flow<List<PracticeItem>> = dao.getPracticeItemsByType(type)
     fun getRecentLogs(limit: Int): Flow<List<PracticeLog>> = dao.getRecentPracticeLogs(limit)
 
-    suspend fun insertCustomItem(content: String, type: String, difficulty: String, category: String) {
+    suspend fun insertCustomItem(content: String, type: String, difficulty: String, category: String, language: String) {
         val item = PracticeItem(
             type = type,
             content = content,
             difficulty = difficulty,
             category = category,
-            isCustom = true
+            isCustom = true,
+            language = language
         )
         dao.insertPracticeItem(item)
     }
@@ -33,24 +44,30 @@ class MemoryRepository(private val dao: PracticeDao) {
 
     suspend fun getUserProfileOnce(): UserProfile? = dao.getUserProfileOnce()
 
-    private fun generate365Exercises(): List<PracticeItem> {
+    // Curated, fully unique offline syllabus: 120 words + 120 sentences + 120 paragraphs.
+    // Each type splits into 40 EASY / 40 MEDIUM / 40 HARD, and each difficulty maps cleanly
+    // to 10 chapters of 4 exercises. No repeats and no filler — a genuine year of daily recall.
+    private fun generateCoreExercises(): List<PracticeItem> {
         val items = mutableListOf<PracticeItem>()
         val categories = listOf("Science", "Focus", "Wisdom", "Visual", "General")
-        
-        // 1. WORDS (120 items)
+
+        // 1. WORDS (120 unique items)
         val wordPool = listOf(
-            "Neuroscience", "Hippocampus", "Synapse", "Dendrite", "Myelin", "Neuron", "Neuroplasticity", "Cerebellum", "Cortex", "Amygdala",
-            "Retention", "Retrieval", "Mnemonic", "Acronym", "Cognition", "Loci", "Association", "Chunking", "Consolidation", "Encoding",
-            "Concentration", "Focus", "Perception", "Sensation", "Attention", "Vigilance", "Awareness", "Mindfulness", "Meditation", "Resilience",
-            "Reflection", "Contemplation", "Observation", "Visualization", "Imagination", "Creativity", "Innovation", "Inspiration", "Intuition", "Insight",
-            "Intellect", "Sagacity", "Philosophy", "Logic", "Reasoning", "Analysis", "Deduction", "Induction", "Hypothesis", "Thermodynamics",
-            "Quantum", "Mechanism", "Evolution", "Biosphere", "Astronomy", "Galaxy", "Nebula", "Cosmos", "Telescope", "Microscope",
-            "Syllable", "Metaphor", "Analogy", "Symphony", "Harmony", "Rhythm", "Melody", "Cadence", "Resonance", "Acoustics",
-            "Vocal", "Articulation", "Elocution", "Oratory", "Eloquence", "Flourish", "Precision", "Clarity", "Brevity", "Gravity",
-            "Serenity", "Tranquility", "Solitude", "Equanimity", "Patience", "Discipline", "Diligence", "Persistence", "Endurance", "Fortitude",
-            "Adventure", "Discovery", "Exploration", "Curiosity", "Wonder", "Enigma", "Paradox", "Labyrinth", "Oasis", "Sanctuary",
-            "Legacy", "Heritage", "Chronicle", "History", "Epoch", "Millennium", "Horizon", "Zenith", "Apex", "Summit",
-            "Blueprint", "Architecture", "Foundation", "Structure", "Symmetry", "Pattern", "Geodesic", "Fractal", "Infinity", "Eternity"
+            // EASY (40) — short, everyday words of mind and growth
+            "Focus", "Memory", "Brain", "Recall", "Learn", "Think", "Calm", "Sleep", "Dream", "Idea",
+            "Logic", "Sense", "Habit", "Goal", "Skill", "Study", "Notes", "Quiet", "Energy", "Effort",
+            "Growth", "Vision", "Wonder", "Wisdom", "Insight", "Clarity", "Balance", "Rhythm", "Pattern", "Signal",
+            "Senses", "Mindful", "Curious", "Patience", "Courage", "Kindness", "Gratitude", "Discipline", "Awareness", "Confidence",
+            // MEDIUM (40) — richer cognitive vocabulary
+            "Cognition", "Attention", "Retention", "Retrieval", "Reflection", "Perception", "Reasoning", "Intuition", "Imagination", "Creativity",
+            "Motivation", "Concentration", "Observation", "Association", "Visualization", "Comprehension", "Resilience", "Persistence", "Endurance", "Adaptability",
+            "Mnemonic", "Acronym", "Chunking", "Encoding", "Rehearsal", "Mindfulness", "Meditation", "Serenity", "Equanimity", "Contemplation",
+            "Neuron", "Synapse", "Dendrite", "Cortex", "Cerebellum", "Hippocampus", "Neurotransmitter", "Plasticity", "Cognitive", "Analytical",
+            // HARD (40) — advanced neuroscience and scholarship
+            "Neuroplasticity", "Metacognition", "Consolidation", "Potentiation", "Synaptogenesis", "Neurogenesis", "Myelination", "Connectivity", "Differentiation", "Reconsolidation",
+            "Proprioception", "Interoception", "Phonological", "Visuospatial", "Semantic", "Episodic", "Procedural", "Declarative", "Prospective", "Retrospective",
+            "Entorhinal", "Prefrontal", "Amygdala", "Thalamus", "Hypothalamus", "Neocortex", "Acetylcholine", "Dopaminergic", "Glutamatergic", "Electrophysiology",
+            "Psychophysics", "Chronobiology", "Interleaving", "Elaboration", "Recapitulation", "Heuristic", "Schema", "Cognizance", "Sagacity", "Erudition"
         )
         for (i in 0 until 120) {
             val word = wordPool[i % wordPool.size]
@@ -71,98 +88,129 @@ class MemoryRepository(private val dao: PracticeDao) {
 
         // 2. SENTENCES (120 items)
         val sentencePool = listOf(
-            "Focus on the present moment.",
-            "Reading books sharpens your memory.",
-            "Healthy sleep repairs brain cells.",
-            "Practice makes a person perfect.",
-            "A quiet mind is a strong mind.",
-            "Write down your thoughts every day.",
-            "Always keep learning something new.",
-            "Drink plenty of water to stay alert.",
-            "A warm smile builds instant trust.",
-            "Consistency is the key to mastery.",
-            "Laughter reduces unwanted stress hormones.",
+            // EASY (40) — short, simple, encouraging
+            "Focus on one task at a time.",
+            "A calm mind learns faster.",
+            "Practice a little every single day.",
+            "Good sleep strengthens your memory.",
+            "Read slowly and picture each word.",
+            "Write your ideas down by hand.",
             "Take a deep breath and relax.",
-            "Engage your senses to remember better.",
-            "A walk in nature clears the mind.",
-            "Listen carefully before you speak copy.",
-            "Read aloud to boost verbal pathways.",
-            "Curiosity is the engine of wisdom.",
-            "Visualizing characters helps retain details.",
-            "Be patient with your mental progress.",
-            "Your mind is highly adaptive.",
-            "Puzzles challenge different brain networks.",
-            "Good food supplies key brain fuel.",
-            "Break tasks down into smaller steps.",
-            "Stay organized for higher focus times.",
-            "A positive outlook aids general learning.",
-            "Meditation grows key cortical grey matter.",
-            "Take simple notes during deep lectures.",
-            "Speak clearly with a strong voice.",
-            "Track your goals and daily habits.",
-            "Resting is as vital as training.",
-            
-            "Active recall is the most effective way to retain new information.",
-            "A healthy mind resides in a healthy body through daily exercise.",
-            "Your brain is like a muscle; the more you train it, the stronger it grows.",
-            "The art of memory is represented by the art of absolute attention.",
-            "Neuroplasticity allows the mature brain to reorganize its synaptic connections.",
-            "Consuming foods rich in omega-three fatty acids supports key cellular integrity.",
-            "To remember a physical name, link it with a vivid visual caricature.",
-            "We retain ninety percent of what we teach to another person.",
-            "Deep breathing exercises enhance oxygen delivery to brain structures.",
-            "Working memory acts as an active physical blackboard for incoming ideas.",
-            "Mnemonics convert arbitrary names into logical visual associations.",
-            "Sleep is the golden chain that ties our health and bodies together.",
-            "The best way to predict the future is to active create and design it.",
-            "Wisdom is not a byproduct of schooling but of lifelong training.",
-            "Do not multitask; single-tasking yields double the mental performance.",
-            "Familiarity is not the same as genuine internal conceptual comprehension.",
-            "The prefrontal cortex regulates decision making and emotional balance.",
-            "A structured study schedule prevents cognitive overload and memory fatigue.",
-            "Challenging puzzles slow down the rate of normal cognitive decline.",
-            "Your vocabulary is a direct window into your mental library.",
-            "A clear purpose provides the emotional drive needed for retention.",
-            "Reviewing material before bed triggers active neural consolidation.",
-            "Optimizing your study environment removes unnecessary subconscious noise.",
-            "The cognitive map in our brain is constructed by place cell neurons.",
-            "Critical thinking requires questioning the obvious with elegant logic.",
-            "True concentration is the total exclusion of all other thoughts.",
-            "The human voice can convey deep layers of emotional resonance.",
-            "Structured mnemonic journeys can store entire books in order.",
-            "An enriched environment fosters the birth of new healthy neurons.",
-            "Continuous feedback is essential for deliberate skill development.",
-            
-            "The hippocampus plays a fundamental role in consolidating short-term memory into long-term retention.",
-            "Cognitive flexibility refers to our mental ability to switch between thinking about different concepts.",
-            "Mnemonic techniques, such as the Method of Loci, have been utilized since ancient classical times.",
-            "The cerebral cortex is highly organized into functional layers that process sensory information dynamically.",
-            "Synaptic pruning is a natural biological process occurring to optimize active neural network efficiency.",
-            "Metacognition involves actively monitors and regulating one's own internal cognitive strategies.",
-            "Selective auditory attention allows us to focus on a single voice amid a noisy cocktail party.",
-            "Episodic memory stores personally experienced events associated with specific times and places.",
-            "Anatomical changes in brain structure can be measured following long-term mindfulness practice.",
-            "The amygdala modulates memory strength based on emotional significance and survival salience.",
-            "Distributed practice distributes learning over time rather than cramming into a single session.",
-            "Dual-coding theory suggests holding information in both verbal and visual forms boosts retention.",
-            "Executive functioning relies on complex networks linking the prefrontal cortex with subcortical targets.",
-            "Anterograde amnesia prevents the formation of new semantic memories while leaving old ones intact.",
-            "The default mode network is active when the brain is in a state of wakeful rest and daydreaming.",
-            "Semantic encoding associates new incoming concepts with pre-existing framework structures in the brain.",
-            "Long-term potentiation is the persistent strengthening of active synapses based on recent patterns.",
-            "The brain filters hundreds of sensory stimulations per second before they enter conscious awareness.",
-            "Phonological loops temporarily hold verbal data while visual sketchpads maintain spatial structures.",
-            "Declarative memory is split into semantic facts and episodic personal historical records.",
-            "Working memory capacity is a highly reliable predictor of success in complex cognitive tasks.",
-            "Nootropics and natural adaptogens support optimal neurotransmitter production under high stress.",
-            "Cognitive dissonance arises when new incoming facts conflict with deep long-held internal beliefs.",
-            "Interleaving different topics during study cycles enhances long-term retrieval and problem solving.",
-            "Prospective memory enables us to remember to perform intended actions in the distant future.",
-            "Visual sensory memory has a high capacity but decays rapidly within milliseconds of stimulation.",
-            "Mirror neurons fire both when performing an action and when observing someone else do it.",
-            "Chunking complex alphanumeric strings reduces cognitive load on our limited storage registers.",
-            "Aphasia is a language disorder resulting from damage to brain portions responsible for speech.",
-            "The spatial mapping cells in our entorhinal cortex function like an internal coordinates grid."
+            "Curiosity makes learning feel easy.",
+            "Drink water to stay sharp.",
+            "Repeat new facts out loud.",
+            "Small steps lead to big progress.",
+            "Rest is a real part of learning.",
+            "A quiet room helps you focus.",
+            "Believe in your own growth.",
+            "Review your notes before sleep.",
+            "Patience builds a strong mind.",
+            "Move your body to clear your head.",
+            "Ask questions to learn more.",
+            "Teach someone to remember better.",
+            "Break large tasks into small ones.",
+            "Your brain loves a good story.",
+            "Smile and your stress will fade.",
+            "Listen first, then speak clearly.",
+            "A short walk refreshes the mind.",
+            "Stay curious about the world.",
+            "Notice the small details around you.",
+            "One clear goal guides your day.",
+            "Kind words build real trust.",
+            "Healthy food fuels a sharp brain.",
+            "Turn off the noise and concentrate.",
+            "Celebrate every small win today.",
+            "Sunlight lifts your mood and focus.",
+            "Keep your desk clean and tidy.",
+            "A grateful heart sleeps well.",
+            "Try again, a little bit better.",
+            "Slow breathing calms a busy mind.",
+            "Learn one new word each day.",
+            "Picture the idea in your mind.",
+            "Effort matters more than talent.",
+            "Begin now, and start small.",
+            // MEDIUM (40) — practical learning science, moderate length
+            "Active recall is the fastest way to remember new information.",
+            "Your brain grows stronger each time you challenge it.",
+            "Linking new ideas to old ones makes them easier to recall.",
+            "A vivid mental image is far easier to remember than a plain fact.",
+            "Reviewing material in short sessions beats one long cram.",
+            "Deep breathing brings more oxygen to your working brain.",
+            "We remember most of what we explain to another person.",
+            "A clear purpose gives you the energy to keep learning.",
+            "Single tasking produces far better results than multitasking.",
+            "The mind remembers the unusual and forgets the ordinary.",
+            "Spacing your study sessions slows down forgetting.",
+            "Writing by hand leaves a stronger trace in memory.",
+            "A short nap can refresh tired mental focus.",
+            "Curiosity turns difficult study into an enjoyable game.",
+            "Calm attention is the doorway to lasting memory.",
+            "Strong habits remove the need for daily willpower.",
+            "Reading aloud strengthens the pathways for clear speech.",
+            "A walk in nature quietly restores your focus.",
+            "Mistakes are simply signals pointing toward growth.",
+            "Reflection at night helps the brain store the day.",
+            "Puzzles gently exercise many different brain networks.",
+            "Good posture supports steady breathing and clear thinking.",
+            "Music without lyrics can sharpen your concentration.",
+            "Confidence grows each time you finish a hard task.",
+            "A balanced diet keeps your mind steady and alert.",
+            "Boredom often hides a chance for deeper focus.",
+            "Naming your feelings helps calm a restless mind.",
+            "The first few minutes set the tone for any session.",
+            "Repetition turns a new skill into second nature.",
+            "Gratitude gently shifts the mind toward calm and clarity.",
+            "The hippocampus helps turn experiences into lasting memories.",
+            "Neurons that fire together gradually wire together.",
+            "Mild stress sharpens focus, while heavy stress dulls it.",
+            "The brain filters most signals before you ever notice them.",
+            "Sleep quietly replays and stores the skills you practiced.",
+            "Imagination and memory share many of the same pathways.",
+            "Attention is a limited resource, so spend it wisely.",
+            "Emotion makes a memory far more vivid and durable.",
+            "Your environment shapes your focus more than you think.",
+            "Steady effort compounds into remarkable long-term results.",
+            // HARD (40) — dense, precise neuroscience and learning theory
+            "The hippocampus consolidates fragile short-term traces into stable long-term memories during deep sleep.",
+            "Cognitive flexibility is the mental ability to shift smoothly between different concepts and perspectives.",
+            "The method of loci stores ordered information by placing vivid images along a familiar mental route.",
+            "Synaptic pruning removes weak or unused connections so that frequently used pathways become more efficient.",
+            "Metacognition is the practice of observing and adjusting your own thinking strategies as you learn.",
+            "Selective attention lets you follow a single voice within a crowded and noisy room.",
+            "Episodic memory preserves personal events bound to specific times, places, and emotions.",
+            "Long-term potentiation strengthens a synapse when two neurons are repeatedly activated together.",
+            "The amygdala tags experiences with emotional weight, making intense events especially memorable.",
+            "Distributed practice spreads learning across many sessions instead of compressing it into one.",
+            "Dual coding pairs words with images so that two independent cues can later trigger recall.",
+            "The prefrontal cortex coordinates planning, focus, and the restraint of impulsive reactions.",
+            "Anterograde amnesia blocks the formation of new memories while leaving older ones intact.",
+            "The default mode network becomes active whenever the mind drifts into rest and reflection.",
+            "Semantic encoding connects new ideas to the broad framework of knowledge you already hold.",
+            "Working memory capacity reliably predicts performance on complex reasoning and problem solving.",
+            "Interleaving different topics within a session improves long-term retention and transfer.",
+            "Prospective memory allows you to remember to carry out an intended action at a future moment.",
+            "Mirror neurons fire both when you perform an action and when you watch another perform it.",
+            "Chunking groups scattered details into meaningful units that ease the load on memory.",
+            "Grid cells in the entorhinal cortex form an internal coordinate system for spatial navigation.",
+            "The phonological loop briefly rehearses verbal information to keep it available for use.",
+            "Cognitive reserve, built through lifelong learning, helps the brain resist age-related decline.",
+            "Reconsolidation reopens a recalled memory, allowing it to be updated before it stabilizes again.",
+            "Neurogenesis continues in the adult hippocampus, supporting both new learning and mood regulation.",
+            "The visuospatial sketchpad holds and manipulates images of shapes, locations, and movement.",
+            "Deliberate practice targets specific weaknesses with focused effort and immediate feedback.",
+            "Sleep spindles during light sleep appear to protect newly formed memories from interference.",
+            "The forgetting curve shows that memory fades rapidly unless it is deliberately reviewed.",
+            "Elaborative interrogation deepens learning by asking why a stated fact is actually true.",
+            "Spaced repetition schedules each review just before a memory is likely to fade.",
+            "Procedural memory stores well-practiced skills that operate with little conscious effort.",
+            "The thalamus relays nearly all sensory signals on their way to the cortex.",
+            "Acetylcholine supports attention and the encoding of new memories in the cortex.",
+            "Chronic stress floods the brain with cortisol, which gradually impairs the hippocampus.",
+            "Cognitive load theory warns that overloading attention prevents durable learning.",
+            "The testing effect shows that retrieving information strengthens it more than rereading.",
+            "Mental contrasting pairs a vivid goal with a clear view of the obstacles ahead.",
+            "Bilingual experience appears to strengthen the brain networks that manage attention.",
+            "Reflective journaling consolidates the day and reveals patterns in your own thinking."
         )
         for (i in 0 until 120) {
             val sentence = sentencePool[i % sentencePool.size]
@@ -181,74 +229,235 @@ class MemoryRepository(private val dao: PracticeDao) {
             items.add(PracticeItem(type = "SENTENCE", content = sentence, difficulty = diff, category = category, isCustom = false, chapter = chapter))
         }
 
-        // 3. PARAGRAPHS (125 items)
+        // 3. PARAGRAPHS (120 unique items)
         val paragraphPool = listOf(
-            "To keep your memory sharp, simple lifestyle modifications make a huge difference. Regular physical exercise boosts oxygen flow to your brain. Getting eight hours of deep sleep allows your hippocampus to organize and consolidate everything you learned.",
-            "Healthy eating fuels cognitive function. Consuming foods rich in omega-three fatty acids, like walnuts, flax seeds, and salmon, provides the building blocks for brain cells. Consuming fresh green leafy vegetables protects your nervous system from early fatigue.",
-            "Taking regular short breaks during studies prevents mental fatigue. The Pomodoro technique advises working intensely for twenty-five minutes followed by a five-minute rest. This helps the prefrontal cortex recharge and maintain focus.",
-            "Mnemonic systems allow you to attach meaningless facts to solid mental hooks. By linking new phone numbers or dates with visual stories, you change abstract symbols into memorable experiences. This relies on the brain's massive visual processing power.",
-            "A healthy social life keeps brain networks active and keeps stress levels in check. Having deep conversations forces you to retrieve vocabulary terms rapidly and process other perspectives. People with strong social circles show slower cognitive decline as they age.",
-            "Drinking water throughout the day is critical for intellectual sharp performance. Even mild dehydration can decrease attention span, disrupt working memory speed, and cause mild headaches. Keep a filled bottle next to your desk to stay fully hydrated.",
-            "Your breathing style directly regulates your brain's level of alert focus. Shallow chest breaths cause low oxygenation and elevate cortisol. Slow, controlled belly breaths activate the vagus nerve, immediately slowing heart rate and sharpening concentration.",
-            "Writing things by hand is vastly superior to typing on digital keypads. Handwriting engages intricate motor pathways, forcing your brain to synthesize the information as you compose each letter. This tactile feedback leaves a stronger physical trace in memory.",
-            "Keeping a daily journal improves clarity of thought and emotional balance. Writing down your experiences helps you consolidate those memories, making them easier to recall in the future. It is a simple tool to observe your personal growth over time.",
-            "Music has a profound effect on memory and learning. Listening to calm classical pieces or ambient tracks can help block distracting noises and create a peaceful mental training environment. It stimulates dopamine release, raising your potential for study.",
-            "Science shows that practicing active retrieval is vastly superior to passive reading. When you look at information and immediately force yourself to recall it without looking, you strengthen neural pathways. With each effort, your brain hardens these connections.",
-            "Focus is the entryway to memory. In our hyper-distracted modern era, multitasking acts as a direct inhibitor to learning. If you try to compile a report while reviewing emails and texting, your prefrontal cortex becomes overloaded, ensuring no deep memories are formed.",
-            "The Method of Loci, also known as the Memory Palace, is one of the oldest and most successful recall techniques. It involves mapping visual representations of facts along a familiar physical path. When you need to retrieve them, you simply walk through that mental route.",
-            "Stress is a silent destroyer of hippocampal brain function. When you are chronically stressed, your adrenal glands flood your blood with cortisol. High cortisol levels hinder synaptic plasticity, disrupt cell communication, and can even shrink physical storage centers.",
-            "Developing a growth mindset is essential for peak cognitive training. If you believe your intelligence is fixed, you will avoid challenging tasks that lead to neural growth. Embracing difficult memory practice as a chance to grow build stronger connections over time.",
-            "Quality sleep is divided into light, deep, and REM phases, each serving a unique cognitive purpose. Deep sleep clears metabolic waste from brain cells, while REM sleep is when the hippocampus replays and integrates newly acquired skills and complex memories.",
-            "Dual coding theory explains that we process information through distinct verbal and non-verbal channels. Combining words with related drawings or diagrams creates dual traces in memory. If you forget the verbal explanation, the visual image can still trigger recall.",
-            "Spaced repetition is a powerful technique that exploits the psychological spacing effect. By spacing out your review sessions over increasing intervals, you interrupt the forgetting curve. This forces the brain to actively reconstruct the memory, solidifying it.",
-            "The prefrontal cortex is the seat of executive function, managing focus, planning, and impulse control. Eating antioxidants and keeping a steady sleep schedule prevents this delicate brain hub from fatiguing, keeping your mental sharp and disciplined.",
-            "Our minds are naturally drawn to the unusual and emotional. Mnemonic systems turn dry data into funny, weird, or sensory-rich scenarios to exploit this bias. A talking apple or a glowing key is infinitely easier to recall than a list of plain, abstract figures.",
-            "The process of neuroplasticity refers to the brain's remarkable ability to reorganize itself by forming new neural connections throughout life. This mechanism allows the neurons to adjust response to new situations, environmental changes, or cognitive training. By challenging ourselves with novel practices, we stimulate synaptic transmission.",
-            "Psychologists define working memory as a cognitive system with a limited capacity that can hold information temporarily. It is critical for reasoning, decision-making, and behavior. Unlike traditional passive memory, working memory operates as an active mental workspace, processing and manipulating information on the fly, which degrades in efficiency under stress.",
-            "The human hippocampal complex acts as an essential gateway for declarative memories. While long-term storage is ultimately consolidated in the neocortex, the hippocampus compiles and indexes these memories temporarily. Damage to this area disrupts our ability to form new episodic records while leaving procedural muscle memories unaffected.",
-            "Long-term potentiation, or LTP, is a persistent strengthening of synapse connections based on recent patterns of activity. These are widely considered one of the primary cellular mechanisms that underly learning and memory. When presynaptic and postsynaptic neurons fire repeatedly together, the connection grows robustly.",
-            "Cognitive reserve refers to the brain's resilience to neuropathological damage. Building a robust cognitive reserve through lifelong mental stimulation, challenging education, and language learning assists in maintaining function. It enables the brain to recruit alternative neural networks to bypass damaged pathways.",
-            "The entorhinal cortex contains specialized neurons known as grid cells, which fire in a highly structured triangular coordinate framework. These cells serve as an internal positioning system, providing spatial context to incoming episodic experiences. They communicate directly with place cells inside the hippocampus to orient memory.",
-            "The default mode network consists of interacting brain regions that show highly correlated activity when an individual is not focused on the external world. When you daydream, reflect on your past, or think about your future, this network lights up. Chronic stress can cause this network to interfere with goal-directed focus.",
-            "Anterograde amnesia is a selective loss of the ability to create new memories after the event that caused the amnesia, leading to a partial or complete inability to recall the recent past. Despite this profound damage, patients can often still learn new motor actions, demonstrating the independence of procedural systems.",
-            "Working memory operates under the executive supervision of the central executive, which delegates tasks to the phonological loop and the visuospatial sketchpad. This temporary holding loop is susceptible to cognitive overload. When sensory inputs overwhelm the workspace, background inputs are discarded to protect processing.",
-            "The synaptic pruning hypothesis proposes that the brain actively eliminates redundant or weak connections during developmental stages to streamline active pathways. This process shape-shifts neural networks to adapt to frequent tasks. It represents a vital physical adaptation that keeps our thinking fluid and efficient."
+            // EASY (40) — friendly, practical habits for a sharp mind
+            "Your memory works best when your body is rested. A full night of sleep gives your brain time to sort and store what you learned. Aim for a steady bedtime so each day starts fresh.",
+            "Focus is a skill you can train like a muscle. Start with short, distraction-free sessions and slowly make them longer. Over time, deep attention will feel natural.",
+            "Drinking enough water keeps your mind clear and alert. Even mild thirst can slow your thinking and weaken focus. Keep a bottle nearby and sip throughout the day.",
+            "A short walk can reset a tired brain. Gentle movement sends fresh oxygen to your mind and lifts your mood. After a walk, study often feels easier.",
+            "Writing notes by hand helps ideas stick. As you shape each letter, your brain processes the meaning more deeply. Review those notes later to lock the learning in.",
+            "Reading aloud uses both your eyes and your ears. This double path makes new words easier to remember. Try it whenever a sentence feels hard to recall.",
+            "Curiosity makes learning fun and lasting. When you truly want to know something, your brain pays closer attention. Ask simple questions and chase the answers.",
+            "Breaking a big goal into small steps keeps you moving. Each small win builds confidence and energy for the next. Progress feels lighter when the path is clear.",
+            "A calm space helps your mind settle. Clear your desk, lower the noise, and keep only what you need. A tidy space invites tidy thinking.",
+            "Teaching a friend is a powerful way to learn. Explaining an idea forces you to organize it clearly. If you can teach it simply, you truly understand it.",
+            "Healthy food gives your brain steady fuel. Fruits, nuts, and vegetables support clear thinking and stable energy. What you eat shapes how well you focus.",
+            "Deep, slow breathing calms a busy mind. A few quiet breaths lower stress and steady your heartbeat. Use this simple tool before any hard task.",
+            "Small daily practice beats rare long sessions. A little effort each day keeps your skills warm and growing. Consistency is the quiet secret of mastery.",
+            "Gratitude gently shifts your mood toward calm. Naming a few good things each night helps you sleep well. A peaceful mind remembers more.",
+            "Mistakes are signs that you are learning. Each error shows you exactly where to improve next. Treat them as helpful guides, not failures.",
+            "Morning sunlight helps set your body clock. Natural light lifts your mood and sharpens your focus. Step outside for a few minutes early in the day.",
+            "One task at a time gives your best results. Switching between jobs scatters your attention and slows you down. Finish one thing before you start another.",
+            "A good story makes facts easy to remember. Your brain holds images and meaning far better than plain lists. Turn dry details into a small story.",
+            "Review just before sleep to help memory grow. As you rest, the brain quietly replays the day. A short evening review pays off by morning.",
+            "Patience is part of every skill. New abilities take time to settle and feel natural. Keep going gently, and growth will come.",
+            "A clear goal gives your day direction. When you know your target, choices become simpler. Write your goal where you can see it.",
+            "Music without words can help you concentrate. Soft, steady sound blocks distractions and creates calm. Find a track that helps you settle in.",
+            "Kindness builds trust and a steady heart. Gentle words ease tension in yourself and others. A calm heart supports a clear mind.",
+            "Stretch and move after long sitting. Light movement loosens your body and wakes your brain. A quick stretch can restore your focus.",
+            "Notice small details to sharpen your senses. Looking closely trains your mind to observe well. The more you notice, the more you remember.",
+            "Set a simple routine to save your energy. Good habits run on their own and free your mind for harder work. Routines turn effort into ease.",
+            "Rest your eyes during long study. Look at something far away for a few seconds now and then. Short breaks keep your focus from fading.",
+            "Believe that your mind can grow. People who expect to improve try harder and learn more. Your effort shapes your ability.",
+            "Keep a small notebook for new ideas. Writing a thought down clears space in your mind. You can return to it whenever you wish.",
+            "Laughter eases stress and lightens the mind. A good laugh relaxes your body and renews your focus. Make room for joy in your day.",
+            "Plan tomorrow before you sleep tonight. A short list calms the mind and prevents worry. You will wake up ready to begin.",
+            "Practice in the same spot to build a habit. A regular place tells your brain it is time to focus. Soon, sitting down will switch you on.",
+            "Speak slowly and clearly to be understood. Calm speech gives your listener time to follow. Clear words also help you think clearly.",
+            "Limit bright screens before bed for better sleep. Late-night light confuses your body clock. Dim the lights and let your mind unwind.",
+            "Cheer your small wins out loud. Noticing progress keeps your motivation strong. Every step forward deserves a quiet smile.",
+            "Ask for help when a task feels stuck. A fresh view often reveals a simple path. Learning together is faster than struggling alone.",
+            "Keep your goals realistic and kind. Gentle, steady targets are easier to reach. Success builds on success.",
+            "A grateful pause can reset a hard day. Take one breath and name something good. Calm returns when you slow down.",
+            "Try a new route or food now and then. Small novelty keeps your brain curious and awake. Variety quietly strengthens the mind.",
+            "End each session by noting one thing you learned. This simple habit turns effort into lasting memory. Tiny reflections add up over time.",
+            // MEDIUM (40) — applied learning science
+            "Active recall means testing yourself instead of simply rereading. When you struggle to retrieve an answer, your brain strengthens the path to that memory. Each effort to remember makes the next recall easier.",
+            "The spacing effect shows that learning sticks better when reviews are spread out. By revisiting material over days rather than hours, you interrupt the natural forgetting curve. The brain treats each return as important and stores it more firmly.",
+            "Sleep is when much of learning is completed. During deep sleep the brain clears waste, and during dream sleep it replays new skills. A protected night of rest is one of the best study tools you have.",
+            "Multitasking feels productive but quietly drains your focus. Each switch between tasks forces your brain to reload context and lose momentum. Choosing one task at a time protects both speed and accuracy.",
+            "The memory palace links facts to places you already know well. By imagining each item along a familiar path, you turn abstract lists into a guided tour. Walking the route in your mind brings the items back in order.",
+            "Stress in small doses can sharpen attention and drive. When stress becomes constant, however, cortisol begins to wear down memory. Learning to relax on purpose keeps your mind in its best range.",
+            "Dual coding combines words with pictures to deepen memory. If the verbal cue fades, the visual image can still bring the idea back. Pairing a diagram with a definition gives you two ways to remember.",
+            "A growth mindset treats ability as something you build, not something fixed. Believing you can improve makes you more willing to face hard practice. That willingness, over time, is what actually produces growth.",
+            "Chunking groups small pieces of information into larger, meaningful units. A long string of numbers becomes easy when split into familiar groups. Your limited working memory handles a few chunks far better than many fragments.",
+            "Reflection turns raw experience into durable learning. Spending a few minutes reviewing what worked helps the brain organize and store it. Without reflection, lessons fade as quickly as they arrive.",
+            "Deep work depends on protecting long blocks of focus. Notifications and interruptions shatter concentration and reset your progress. Guarding even one uninterrupted hour can transform your output.",
+            "The testing effect reveals that retrieval beats rereading. Every quiz, even a failed one, strengthens the underlying memory. Trying to recall is itself a powerful act of learning.",
+            "Interleaving mixes related topics within a single study session. Although it feels harder than blocking one subject, it improves lasting retention. The brain learns to tell ideas apart and apply them flexibly.",
+            "Exercise benefits the mind as much as the body. Movement increases blood flow and releases chemicals that support new connections. A regular walk or workout can lift both mood and memory.",
+            "Attention is a limited spotlight, not a floodlight. Whatever you focus on grows clearer while everything else dims. Directing that spotlight on purpose is the heart of effective study.",
+            "Emotion acts like a highlighter for memory. Events tied to strong feeling are recalled far more vividly than neutral ones. Adding meaning or curiosity to material makes it naturally easier to remember.",
+            "A consistent routine conserves your mental energy. When habits handle the small decisions, your willpower is free for harder challenges. Structure quietly multiplies what you can achieve.",
+            "Visualization rehearses success before it happens. Imagining each step in detail prepares the same brain regions that real action uses. Athletes and performers rely on this mental practice for good reason.",
+            "Note-taking works best when you summarize in your own words. Copying text passively leaves little trace, but rephrasing forces understanding. The act of translating ideas is where real learning occurs.",
+            "Boredom often appears at the edge of deeper focus. Instead of reaching for distraction, sit with the dull moment a little longer. Concentration frequently waits just past that first wave of restlessness.",
+            "The brain craves novelty and pays attention to change. Studying in slightly different ways keeps the mind alert and engaged. Small variations can refresh material that has started to feel stale.",
+            "Hydration has a direct effect on mental performance. Even mild dehydration can slow reaction time and weaken short-term memory. Keeping water within reach is a simple way to protect your focus.",
+            "Self-explanation deepens understanding by filling in hidden steps. Asking yourself why each step follows the last reveals gaps in your knowledge. Closing those gaps builds a stronger, more flexible memory.",
+            "Goals work best when they are specific and measurable. A vague wish gives the mind nothing to aim at, but a clear target guides action. Defining success in concrete terms makes progress visible.",
+            "The first and last items in a list are easiest to recall. This pattern, known as the serial position effect, shapes how we remember sequences. Placing key material at the start or end can take advantage of it.",
+            "Mindful breathing anchors a wandering mind in the present. Following the breath for a minute lowers stress and restores clarity. This brief practice can reset your focus before any demanding task.",
+            "Feedback is the fuel of deliberate practice. Knowing quickly whether you were right lets you correct course while it still matters. Practice without feedback often repeats the same mistakes.",
+            "Curiosity primes the brain to absorb information. When you genuinely want an answer, the reward system makes learning feel rewarding. Turning a topic into a question can switch on that drive.",
+            "Overlearning means practicing a skill past the point of first success. This extra repetition makes the skill more automatic and resistant to stress. Under pressure, well-practiced skills hold steady.",
+            "Environment shapes behavior more than willpower does. Keeping distractions out of sight makes focus the easy default. Designing your space well removes many battles before they start.",
+            "A brief daytime nap can refresh learning capacity. Twenty minutes of rest clears mental fatigue without leaving you groggy. Used wisely, a short nap restores attention for the afternoon.",
+            "Writing a worry down can quiet an anxious mind. Putting the thought on paper moves it out of your working memory. With the worry parked, attention returns to the task at hand.",
+            "Comparing yourself to your past self fuels steady growth. Measuring progress against others often breeds discouragement instead. Your own earlier work is the fairest and most useful benchmark.",
+            "Reading widely strengthens the network of ideas in your mind. New facts attach more easily when they meet related knowledge. A broad foundation makes future learning faster and richer.",
+            "The brain consolidates skills best with rest between sessions. Pushing nonstop yields diminishing returns as fatigue sets in. Short breaks let the mind absorb what hard practice planted.",
+            "Habits form through cue, routine, and reward. Recognizing the cue that triggers a behavior gives you power to reshape it. Replace the routine while keeping the reward, and change becomes easier.",
+            "Confidence grows from a record of completed challenges. Each finished task becomes evidence that you can handle the next. Collecting small victories builds durable self-belief.",
+            "Slow, deliberate reading improves comprehension and recall. Racing through a page leaves only a shallow impression. Pausing to picture and question the text plants it more firmly.",
+            "A clear morning intention shapes the entire day. Naming your single most important task focuses your energy. When priorities are set early, distractions lose their pull.",
+            "Gratitude practice gradually rewires attention toward the positive. Regularly noticing what is going well lowers stress and steadies mood. A calmer mind, in turn, learns and remembers with greater ease.",
+            // HARD (40) — rigorous neuroscience and the science of learning
+            "The hippocampus serves as a temporary index for new declarative memories before they are gradually consolidated into the neocortex. While it binds the scattered elements of an experience together, long-term storage is distributed across cortical networks. Damage to this region disrupts the formation of new episodic memories while sparing well-practiced procedural skills.",
+            "Long-term potentiation is widely regarded as a core cellular mechanism of learning. When a presynaptic neuron repeatedly and reliably helps fire a postsynaptic neuron, the connection between them strengthens. This durable change in synaptic efficiency allows patterns of activity to leave a lasting physical trace.",
+            "Neuroplasticity describes the brain's capacity to reorganize its connections in response to experience. New skills and repeated practice can reshape both the strength of synapses and the maps that represent the body. This adaptability persists throughout life, which is why deliberate training continues to change the adult brain.",
+            "Working memory operates under a central executive that allocates attention between competing demands. The phonological loop rehearses verbal material while the visuospatial sketchpad maintains images and locations. Because this system has a strict capacity limit, overloading it causes information to be dropped before it can be used.",
+            "The forgetting curve, first charted by Ebbinghaus, shows that memory decays rapidly without reinforcement. Spaced repetition counteracts this decay by scheduling each review near the point of likely forgetting. By repeatedly reconstructing the memory at widening intervals, the curve is flattened and retention deepens.",
+            "Metacognition is the capacity to monitor and regulate one's own cognitive processes. Skilled learners constantly assess whether their current strategy is working and adjust it when it is not. This self-aware control over learning often separates expert performers from novices who rely on effort alone.",
+            "The amygdala modulates how strongly an experience is encoded according to its emotional significance. By signaling the hippocampus during moments of arousal, it ensures that survival-relevant events are remembered vividly. This is why deeply meaningful moments are recalled with unusual clarity and detail.",
+            "Sleep contributes to memory through distinct stages that serve complementary functions. Slow-wave sleep supports the consolidation of factual, declarative knowledge, while rapid eye movement sleep favors procedural and emotional integration. Depriving the brain of either stage measurably weakens the learning that preceded it.",
+            "Synaptic pruning refines neural circuits by eliminating weak or redundant connections during development and beyond. This selective removal sharpens the pathways that are used frequently and discards those that are not. The result is a more efficient network tuned to the demands the brain actually encounters.",
+            "Cognitive load theory distinguishes the intrinsic difficulty of material from the extraneous load imposed by poor presentation. Because working memory is sharply limited, unnecessary complexity crowds out the capacity needed for genuine understanding. Well-designed instruction reduces extraneous load so that effort can be spent on meaningful learning.",
+            "The entorhinal cortex houses grid cells that fire in a regular triangular lattice as the body moves through space. Together with place cells in the hippocampus, they form an internal coordinate system for navigation and memory. This spatial scaffolding may also help organize non-spatial information into structured, retrievable maps.",
+            "Reconsolidation reveals that recalling a memory can render it temporarily unstable and open to revision. When an old memory is reactivated, it must be restabilized, and during that window it can be strengthened or altered. This mechanism explains how memories subtly change each time they are revisited.",
+            "The prefrontal cortex orchestrates executive functions such as planning, working memory, and inhibitory control. By suppressing irrelevant impulses, it allows goal-directed behavior to override automatic reactions. Its slow maturation through adolescence parallels the gradual development of self-regulation and judgment.",
+            "Dual-coding theory proposes that information processed both verbally and visually is encoded through two independent channels. Because either channel can later cue retrieval, this redundancy makes the memory more robust. Combining a clear explanation with a meaningful image therefore yields stronger recall than words alone.",
+            "The testing effect demonstrates that the act of retrieval is itself a potent learning event. Each successful recall strengthens the memory trace more than an equivalent period of passive review. Even unsuccessful attempts, when followed by feedback, prepare the mind to encode the correct answer.",
+            "Neurogenesis continues in the adult dentate gyrus, where new neurons are integrated into existing hippocampal circuits. These young cells appear to support pattern separation, helping the brain distinguish similar experiences. Exercise and enriched environments increase this birth of neurons, while chronic stress suppresses it.",
+            "Selective attention filters the flood of sensory input so that limited processing resources reach what matters. The cocktail party effect shows how we can track one voice among many while still detecting our own name elsewhere. This balance between focus and vigilance reflects a finely tuned attentional system.",
+            "Interleaving practice forces the learner to repeatedly retrieve and discriminate between related skills. Although it feels less fluent than massed practice, it builds the flexibility to apply knowledge in varied contexts. The added difficulty is desirable because it strengthens durable, transferable learning.",
+            "Acetylcholine plays a central role in attention and in the encoding of new cortical memories. By increasing the signal-to-noise ratio in sensory regions, it helps the brain prioritize relevant input. Disruption of cholinergic systems is closely linked to the memory deficits seen in certain disorders.",
+            "The default mode network becomes active during rest, mind-wandering, and reflection on the self. Rather than being idle, this network supports autobiographical memory and the simulation of future events. Its balance with task-focused networks shapes whether attention turns inward or outward.",
+            "Procedural memory underlies skills that become automatic through extensive practice, such as typing or playing an instrument. It depends heavily on the basal ganglia and cerebellum rather than the hippocampus. Because it operates largely outside awareness, these skills can survive even when declarative memory fails.",
+            "Cognitive reserve describes the brain's resilience against injury and age-related change. Built through education, complex work, and lifelong mental engagement, it allows alternative networks to compensate for damage. Individuals with greater reserve often maintain function despite significant underlying pathology.",
+            "Elaborative encoding strengthens memory by connecting new material to a rich web of existing knowledge. The more meaningful associations a fact acquires, the more retrieval routes lead back to it. This is why understanding something deeply makes it far easier to recall than rote memorization.",
+            "Chronic activation of the stress response floods the brain with glucocorticoids that impair hippocampal function. Sustained cortisol exposure can shrink dendrites and interfere with the formation of new memories. Managing stress is therefore not only emotional self-care but a direct investment in cognition.",
+            "The serial position effect produces superior recall for items at the beginning and end of a list. Primacy reflects extra rehearsal of early items, while recency reflects their lingering presence in working memory. The weaker middle region reveals the limits of both consolidation and short-term storage.",
+            "Deliberate practice is distinguished by focused effort on specific weaknesses guided by immediate feedback. Rather than simply repeating what is comfortable, it targets the edge of current ability. This demanding, feedback-rich approach is what transforms ordinary practice into genuine expertise.",
+            "Pattern separation and pattern completion are complementary operations performed by the hippocampus. Separation keeps similar experiences distinct, preventing interference between overlapping memories. Completion allows a partial cue to reconstruct an entire memory, which is the basis of associative recall.",
+            "The brain encodes time as well as content, allowing memories to be placed in sequence. Specialized cells fire at particular moments within an experience, creating a temporal scaffold. This sense of when events occurred is essential to the structure of episodic memory.",
+            "Myelination wraps axons in an insulating sheath that dramatically increases the speed of neural signaling. As skills are practiced, activity-dependent myelination fine-tunes the timing of communication between regions. This often-overlooked form of plasticity contributes to the smooth automaticity of well-learned abilities.",
+            "Semantic memory stores general facts and concepts independent of the moment they were acquired. Over time, repeated episodic experiences are distilled into this stable, schematic knowledge. The gradual shift from episodic detail to semantic gist reflects the brain's drive toward efficient generalization.",
+            "Desirable difficulties are conditions that slow learning in the moment but strengthen it in the long run. Spacing, interleaving, and retrieval all feel harder than passive review yet yield deeper retention. Confusing immediate fluency with durable learning is one of the most common study mistakes.",
+            "The brain's reward system, driven largely by dopamine, signals the gap between expectation and outcome. Surprising rewards generate strong prediction errors that reinforce the preceding behavior. This mechanism links motivation tightly to learning, shaping which actions are repeated and remembered.",
+            "Mental imagery activates many of the same visual and motor regions engaged during actual perception and movement. Because the brain partly treats imagined rehearsal like real experience, visualization can refine genuine skill. This overlap explains why detailed mental practice measurably improves performance.",
+            "The phonological loop maintains verbal information through silent, internal rehearsal that refreshes a fading trace. Its limited duration is why long numbers slip away unless they are repeated or grouped. Muttering an unrelated word reliably disrupts this rehearsal and demonstrates how fragile the loop is.",
+            "Habits are encoded as action sequences in the basal ganglia that run with minimal conscious oversight. Once a cue reliably triggers a routine, the behavior becomes efficient but also resistant to change. Reshaping a habit usually means redesigning its cue and reward rather than relying on willpower.",
+            "Attention and memory are deeply intertwined, since unattended information is rarely encoded at all. What feels like forgetting is often a failure to have noticed in the first place. Directing focused attention during learning is therefore a prerequisite for later recall.",
+            "The cerebellum, long associated with movement, also contributes to the timing and coordination of cognition. It helps fine-tune predictions and smooth the execution of both physical and mental sequences. Its role illustrates how regions once thought narrow turn out to support broad functions.",
+            "Spaced retrieval combines two of the most powerful principles in the science of learning. By testing memory at expanding intervals, it harnesses both the spacing effect and the testing effect together. This pairing produces some of the most durable retention that research has documented.",
+            "Emotional regulation depends on a dynamic balance between the prefrontal cortex and the limbic system. When regulation succeeds, the cortex dampens reactive signals from the amygdala and restores deliberate control. Strengthening this balance improves not only mood but the clarity of thought under pressure.",
+            "The consolidation of memory unfolds across multiple timescales, from minutes to years. Rapid synaptic consolidation stabilizes a trace shortly after learning, while systems consolidation slowly reorganizes it across the cortex. This extended process is why a good night of sleep and later review both strengthen what was learned."
         )
-        for (i in 0 until 125) {
-            val baseText = paragraphPool[i % paragraphPool.size]
+        for (i in 0 until 120) {
+            val paragraph = paragraphPool[i % paragraphPool.size]
             val diff = when {
-                i < 41 -> "EASY"
-                i < 82 -> "MEDIUM"
+                i < 40 -> "EASY"
+                i < 80 -> "MEDIUM"
                 else -> "HARD"
             }
             val difficultyOffset = when (diff) {
                 "EASY" -> 0
-                "MEDIUM" -> 41
-                else -> 82
+                "MEDIUM" -> 40
+                else -> 80
             }
             val category = categories[i % categories.size]
             val chapter = ((i - difficultyOffset) / 4) + 1
-            
-            val repetitionCount = i / paragraphPool.size
-            val textWithHeader = if (repetitionCount > 0) {
-                "[Focus Cycle $repetitionCount] $baseText"
-            } else {
-                baseText
-            }
-            items.add(PracticeItem(type = "PARAGRAPH", content = textWithHeader, difficulty = diff, category = category, isCustom = false, chapter = chapter))
+            items.add(PracticeItem(type = "PARAGRAPH", content = paragraph, difficulty = diff, category = category, isCustom = false, chapter = chapter))
         }
         return items
+    }
+
+    // ----- Asset-bundled, multi-language content library -------------------------------------
+    // The English core ships in Kotlin (proven & always available); every other language — plus
+    // the fun Story/Poem/Humor categories — is loaded from assets/content/<code>.json. Adding a
+    // language is therefore a pure content drop, no code change required.
+
+    private val DEFAULT_ENGLISH = LanguageOption("en", "English", "English", "en-US")
+
+    private fun readAsset(path: String): String? = try {
+        appContext.assets.open(path).bufferedReader(Charsets.UTF_8).use { it.readText() }
+    } catch (e: Exception) {
+        Log.w("MemoryRepository", "Asset not found or unreadable: $path", e)
+        null
+    }
+
+    /** Languages declared in assets/content/manifest.json. Always includes English as a baseline. */
+    fun getAvailableLanguages(): List<LanguageOption> {
+        val result = linkedMapOf(DEFAULT_ENGLISH.code to DEFAULT_ENGLISH)
+        try {
+            val json = readAsset("content/manifest.json")
+            if (json != null) {
+                val manifest = moshi.adapter(ContentManifest::class.java).fromJson(json)
+                manifest?.languages?.forEach { meta ->
+                    result[meta.code] = LanguageOption(
+                        code = meta.code,
+                        name = meta.name,
+                        nativeName = meta.nativeName.ifBlank { meta.name },
+                        localeTag = meta.localeTag?.ifBlank { null } ?: meta.code
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("MemoryRepository", "Failed to parse content manifest", e)
+        }
+        return result.values.toList()
+    }
+
+    /** Reads every per-language JSON file and flattens it into PracticeItems tagged by language. */
+    private fun loadJsonContentItems(languages: List<LanguageOption>): List<PracticeItem> {
+        val adapter = moshi.adapter(LanguageContent::class.java)
+        val items = mutableListOf<PracticeItem>()
+        languages.forEach { lang ->
+            val json = readAsset("content/${lang.code}.json") ?: return@forEach
+            try {
+                val parsed = adapter.fromJson(json) ?: return@forEach
+                parsed.entries.forEach { e ->
+                    if (e.content.isNotBlank()) {
+                        items.add(
+                            PracticeItem(
+                                type = e.type.uppercase(Locale.US),
+                                content = e.content.trim(),
+                                difficulty = e.difficulty.uppercase(Locale.US),
+                                category = e.category,
+                                isCustom = false,
+                                chapter = e.chapter.coerceIn(1, 10),
+                                language = lang.code
+                            )
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("MemoryRepository", "Failed to parse content/${lang.code}.json", e)
+            }
+        }
+        return items
+    }
+
+    /** Full built-in library = English Kotlin core + everything declared in the asset JSON files. */
+    private fun buildFullLibrary(): List<PracticeItem> {
+        val core = generateCoreExercises() // English baseline, language = "en"
+        val json = loadJsonContentItems(getAvailableLanguages())
+        return core + json
     }
 
     // Check database state and prepopulate if empty
     suspend fun checkAndPrepopulate() {
         withContext(Dispatchers.IO) {
             try {
-                // Prepopulate items if database is empty or has outdated / incomplete syllabus count
-                if (dao.getPracticeItemsCount() < 300) {
+                // Re-seed the built-in syllabus whenever the on-device content set does not
+                // match the current curated library. This refreshes existing installs to the
+                // latest exercises WITHOUT touching the user's custom items, logs, XP or streak.
+                val coreItems = buildFullLibrary()
+                if (dao.getNonCustomItemsCount() != coreItems.size) {
                     dao.deleteNonCustomItems()
-                    val defaultItems = generate365Exercises()
-                    dao.insertPracticeItems(defaultItems)
+                    dao.insertPracticeItems(coreItems)
                 }
 
                 // Initial Profile if not exists

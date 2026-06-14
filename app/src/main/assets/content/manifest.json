@@ -1,0 +1,6 @@
+{
+  "languages": [
+    { "code": "en", "name": "English", "nativeName": "English", "localeTag": "en-US" },
+    { "code": "hi", "name": "Hindi", "nativeName": "हिन्दी", "localeTag": "hi-IN" }
+  ]
+}

@@ -52,6 +52,8 @@ fun SettingsScreen(
     val themeTypography by viewModel.themeTypography.collectAsState()
     val fontScale by viewModel.fontScale.collectAsState()
     val reminderTimes by viewModel.reminderTimes.collectAsState()
+    val availableLanguages by viewModel.availableLanguages.collectAsState()
+    val selectedLanguage by viewModel.selectedLanguage.collectAsState()
 
     var pickerHour by remember { mutableStateOf(8) }
     var pickerMinute by remember { mutableStateOf(0) }
@@ -115,6 +117,104 @@ fun SettingsScreen(
                     enabled = inputUsername.trim().isNotEmpty()
                 ) {
                     Text("Save Personal Info", fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+
+        // 🌐 Content Language Selector — switches the entire offline library to the chosen language
+        Card(
+            modifier = Modifier.fillMaxWidth().testTag("language_settings_card"),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            shape = RoundedCornerShape(16.dp),
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Language,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Text(
+                        text = "Content Language",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Black,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Text(
+                    text = "Choose the language for every word, sentence, story, poem and joke. Voice recall adapts automatically.",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    availableLanguages.forEach { lang ->
+                        val selected = selectedLanguage == lang.code
+                        Surface(
+                            onClick = { viewModel.setLanguage(lang.code) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("language_option_${lang.code}"),
+                            shape = RoundedCornerShape(12.dp),
+                            color = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f),
+                            border = androidx.compose.foundation.BorderStroke(
+                                1.2.dp,
+                                if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = lang.nativeName,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                                        color = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                    )
+                                    if (!lang.nativeName.equals(lang.name, ignoreCase = true)) {
+                                        Text(
+                                            text = lang.name,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                                        )
+                                    }
+                                }
+                                if (selected) {
+                                    Icon(
+                                        imageVector = Icons.Default.Check,
+                                        contentDescription = "Selected",
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                } else {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(18.dp)
+                                            .border(1.5.dp, MaterialTheme.colorScheme.outlineVariant, CircleShape)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (availableLanguages.size <= 1) {
+                    Text(
+                        text = "More languages can be added by dropping a content file into the app. See the in-repo authoring guide.",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f)
+                    )
                 }
             }
         }

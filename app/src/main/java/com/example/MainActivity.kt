@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val userProfile by viewModel.userProfile.collectAsState()
-            val allItems by viewModel.allItems.collectAsState()
+            val allItems by viewModel.visibleItems.collectAsState()
             val allLogs by viewModel.allLogs.collectAsState()
             val leaderboard by viewModel.leaderboard.collectAsState()
             val challenges by viewModel.challenges.collectAsState()

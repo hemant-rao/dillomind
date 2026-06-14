@@ -1,0 +1,3070 @@
+{
+  "entries": [
+    {
+      "type": "WORD",
+      "content": "ध्यान",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "स्मृति",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "मस्तिष्क",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "याद",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "सीखना",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "सोच",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "शांति",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "नींद",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "सपना",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "विचार",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "तर्क",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "बोध",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "आदत",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "लक्ष्य",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "कौशल",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "अध्ययन",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "टिप्पणी",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "मौन",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "ऊर्जा",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "प्रयास",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "विकास",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "दृष्टि",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "विस्मय",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "बुद्धि",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "अंतर्दृष्टि",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "स्पष्टता",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "संतुलन",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "लय",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "पैटर्न",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "संकेत",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "इंद्रियाँ",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "सजगता",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "जिज्ञासा",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "धैर्य",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "साहस",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "दया",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "कृतज्ञता",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "अनुशासन",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "जागरूकता",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "आत्मविश्वास",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "संज्ञान",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "अवधान",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "धारणा",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "पुनःप्राप्ति",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "चिंतन",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "प्रत्यक्षण",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "विवेचन",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "अंतर्ज्ञान",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "कल्पना",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "सृजनशीलता",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "अभिप्रेरणा",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "एकाग्रता",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "अवलोकन",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "साहचर्य",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "दृश्यीकरण",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "अवबोधन",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "लचीलापन",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "दृढ़ता",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "सहनशक्ति",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "अनुकूलनशीलता",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "स्मरण-युक्ति",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "संक्षेपाक्षर",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "खंडन",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "कूटलेखन",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "पुनरावृत्ति",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "सचेतनता",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "ध्यानसाधना",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "प्रशांति",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "समता",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "मनन",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "तंत्रिका",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "सिनैप्स",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "द्रुमिका",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "प्रांतस्था",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "अनुमस्तिष्क",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "हिप्पोकैम्पस",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "न्यूरोट्रांसमीटर",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "सुघट्यता",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "संज्ञानात्मक",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "विश्लेषणात्मक",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "तंत्रिका-सुघट्यता",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "अधिसंज्ञान",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "समेकन",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "दीर्घकालिक-प्रबलन",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "सिनैप्सजनन",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "तंत्रिकाजनन",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "मायलिनन",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "संयोजकता",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "विभेदन",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "पुनःसमेकन",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "स्वसंवेदन",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "अंतःसंवेदन",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "ध्वन्यात्मक",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "दृश्य-स्थानिक",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "अर्थगत",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "घटनात्मक",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "WORD",
+      "content": "प्रक्रियात्मक",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "घोषणात्मक",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "भावी-स्मृति",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "भूतकालिक",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "WORD",
+      "content": "एंटोराइनल",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "प्रीफ्रंटल",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "एमिग्डाला",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "थैलेमस",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "WORD",
+      "content": "हाइपोथैलेमस",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "नवप्रांतस्था",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "एसिटाइलकोलीन",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "डोपामिनर्जिक",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "WORD",
+      "content": "ग्लूटामेटर्जिक",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "विद्युतकायिकी",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "मनोभौतिकी",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "जैवकालविज्ञान",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "WORD",
+      "content": "अंतर्वेशन",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "विस्तारण",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "पुनःसंक्षेपण",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "अनुमानपरक",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "योजना-संरचना",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "अवगति",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "प्रज्ञा",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "WORD",
+      "content": "पाण्डित्य",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक समय में एक ही काम करो।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "शांत मन तेज़ी से सीखता है।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हर दिन थोड़ा-थोड़ा अभ्यास करो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अच्छी नींद याददाश्त मज़बूत करती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "धीरे पढ़ो और हर शब्द को मन में देखो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अपने विचार हाथ से लिखो।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "गहरी साँस लो और शांत रहो।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जिज्ञासा सीखना आसान बनाती है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दिमाग़ तेज़ रखने के लिए पानी पियो।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "नई बातें ज़ोर से दोहराओ।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "छोटे कदम बड़ी सफलता बनाते हैं।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "आराम भी सीखने का असली हिस्सा है।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "शांत कमरा ध्यान लगाने में मदद करता है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अपने विकास पर भरोसा रखो।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "सोने से पहले अपने नोट्स दोहराओ।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "धैर्य एक मज़बूत मन बनाता है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "शरीर हिलाओ, दिमाग़ साफ़ हो जाएगा।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ज़्यादा सीखने के लिए सवाल पूछो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "किसी को सिखाओ, बेहतर याद रहेगा।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "बड़े काम को छोटे टुकड़ों में बाँटो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दिमाग़ को एक अच्छी कहानी पसंद है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मुस्कुराओ, तुम्हारा तनाव कम हो जाएगा।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "पहले ध्यान से सुनो, फिर साफ़ बोलो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक छोटी सैर मन को ताज़ा करती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दुनिया के बारे में जिज्ञासु बने रहो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "आस-पास की छोटी बातें ध्यान से देखो।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक साफ़ लक्ष्य पूरे दिन को राह देता है।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "प्यारे शब्द सच्चा भरोसा बनाते हैं।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अच्छा भोजन एक तेज़ दिमाग़ को ईंधन देता है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "शोर बंद करो और ध्यान केंद्रित करो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "आज की हर छोटी जीत को मनाओ।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "धूप तुम्हारे मूड और ध्यान को बढ़ाती है।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अपनी मेज़ साफ़ और व्यवस्थित रखो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक कृतज्ञ मन चैन से सोता है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "फिर कोशिश करो, बस थोड़ा बेहतर।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "धीमी साँस व्यस्त मन को शांत करती है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हर दिन एक नया शब्द सीखो।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "विचार को मन में चित्र बनाकर देखो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "प्रतिभा से ज़्यादा मेहनत मायने रखती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अभी शुरू करो, छोटे से शुरू करो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "सक्रिय स्मरण नई जानकारी याद रखने का सबसे तेज़ तरीका है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हर बार चुनौती देने पर तुम्हारा दिमाग़ और मज़बूत होता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "नई बातों को पुरानी बातों से जोड़ने पर वे आसानी से याद रहती हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक जीवंत मानसिक चित्र सादे तथ्य से कहीं आसानी से याद रहता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "छोटे-छोटे सत्रों में दोहराना एक लंबे रटने से बेहतर है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "गहरी साँस काम करते दिमाग़ तक ज़्यादा ऑक्सीजन पहुँचाती है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जो हम किसी और को समझाते हैं, वह सबसे अधिक याद रहता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक स्पष्ट उद्देश्य सीखते रहने की ऊर्जा देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक-एक काम करना कई काम साथ करने से बेहतर नतीजे देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मन असामान्य को याद रखता है और सामान्य को भूल जाता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अध्ययन सत्रों में अंतराल रखने से भूलना धीमा पड़ता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हाथ से लिखना स्मृति में एक गहरी छाप छोड़ता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक छोटी झपकी थके हुए मानसिक ध्यान को ताज़ा कर देती है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जिज्ञासा कठिन पढ़ाई को एक मज़ेदार खेल बना देती है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "शांत ध्यान स्थायी स्मृति का प्रवेशद्वार है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मज़बूत आदतें रोज़ की इच्छाशक्ति की ज़रूरत मिटा देती हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ज़ोर से पढ़ना साफ़ बोलने के रास्तों को मज़बूत करता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "प्रकृति में टहलना चुपचाप तुम्हारा ध्यान लौटा देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ग़लतियाँ बस विकास की ओर इशारा करने वाले संकेत हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "रात का चिंतन दिमाग़ को दिन भर की बातें संजोने में मदद करता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "पहेलियाँ धीरे-धीरे कई अलग तंत्रिका-जालों का व्यायाम करती हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अच्छी मुद्रा स्थिर साँस और साफ़ सोच को सहारा देती है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "बिना बोल वाला संगीत तुम्हारी एकाग्रता को तेज़ कर सकता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हर कठिन काम पूरा करने पर आत्मविश्वास बढ़ता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "संतुलित आहार मन को स्थिर और सतर्क रखता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ऊब अक्सर गहरे ध्यान का एक मौका छुपाए रहती है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अपनी भावनाओं को नाम देना एक बेचैन मन को शांत करता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "किसी भी सत्र के पहले कुछ मिनट उसका रंग तय करते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दोहराव एक नए कौशल को सहज स्वभाव बना देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "कृतज्ञता मन को धीरे-से शांति और स्पष्टता की ओर मोड़ देती है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हिप्पोकैम्पस अनुभवों को स्थायी स्मृति में बदलने में मदद करता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "साथ सक्रिय होने वाले न्यूरॉन धीरे-धीरे आपस में जुड़ जाते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हल्का तनाव ध्यान तेज़ करता है, पर भारी तनाव उसे मंद कर देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दिमाग़ अधिकांश संकेतों को तुम्हारे जानने से पहले ही छाँट देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "नींद चुपचाप अभ्यास किए कौशलों को दोहराकर संजो लेती है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "कल्पना और स्मृति कई एक जैसे रास्ते साझा करती हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ध्यान एक सीमित संसाधन है, इसलिए इसे समझदारी से ख़र्च करो।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "भावना किसी स्मृति को कहीं अधिक जीवंत और टिकाऊ बना देती है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "तुम्हारा माहौल तुम्हारे ध्यान को तुम्हारी सोच से ज़्यादा गढ़ता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "लगातार प्रयास समय के साथ शानदार दीर्घकालिक नतीजों में बदल जाता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हिप्पोकैम्पस गहरी नींद में नाज़ुक अल्पकालिक छाप को स्थायी दीर्घकालिक स्मृति में समेकित करता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "संज्ञानात्मक लचीलापन विभिन्न अवधारणाओं और दृष्टिकोणों के बीच सहज रूप से बदलने की क्षमता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "लोकाई-विधि क्रमबद्ध जानकारी को एक परिचित मानसिक मार्ग पर जीवंत चित्र रखकर संजोती है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "सिनैप्टिक छँटाई कमज़ोर संबंध हटाकर बार-बार प्रयुक्त रास्तों को अधिक कुशल बनाती है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अधिसंज्ञान सीखते समय अपनी ही सोच की रणनीतियों को देखने और सुधारने का अभ्यास है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "चयनात्मक ध्यान भीड़भरे और शोरगुल वाले कमरे में एक ही आवाज़ का पीछा करने देता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "घटनात्मक स्मृति व्यक्तिगत घटनाओं को विशिष्ट समय, स्थान और भावनाओं से बाँधकर सहेजती है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दीर्घकालिक प्रबलन तब सिनैप्स को मज़बूत करता है जब दो न्यूरॉन बार-बार साथ सक्रिय होते हैं।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एमिग्डाला अनुभवों पर भावनात्मक भार लगाती है, जिससे तीव्र घटनाएँ ख़ास तौर पर यादगार बनती हैं।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "वितरित अभ्यास सीखने को एक सत्र में समेटने के बजाय कई सत्रों में फैला देता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "द्वैत-कूटलेखन शब्दों को चित्रों से जोड़ता है ताकि बाद में दो स्वतंत्र संकेत स्मरण जगा सकें।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "प्रीफ्रंटल प्रांतस्था योजना, ध्यान और आवेगी प्रतिक्रियाओं के संयम का समन्वय करती है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अग्रगामी विस्मृति नई स्मृति का बनना रोकती है जबकि पुरानी स्मृति को अछूता छोड़ देती है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "डिफ़ॉल्ट-मोड तंत्रिका-जाल तब सक्रिय होता है जब मन विश्राम और चिंतन में भटकता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अर्थगत कूटलेखन नई बातों को उस विशाल ज्ञान-ढाँचे से जोड़ता है जो तुम पहले से रखते हो।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "कार्यशील स्मृति की क्षमता जटिल विवेचन और समस्या-समाधान के प्रदर्शन का भरोसेमंद संकेत देती है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक सत्र में विभिन्न विषयों का अंतर्वेशन दीर्घकालिक धारणा और हस्तांतरण को बेहतर करता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "भावी-स्मृति तुम्हें किसी इच्छित कार्य को भविष्य के किसी क्षण पर करना याद रखने देती है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दर्पण-न्यूरॉन तब भी सक्रिय होते हैं जब तुम कोई क्रिया करते हो और जब दूसरे को करते देखते हो।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "खंडन बिखरे विवरणों को सार्थक इकाइयों में समूहित करके स्मृति का भार कम करता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एंटोराइनल प्रांतस्था की ग्रिड-कोशिकाएँ स्थानिक नौवहन के लिए एक आंतरिक निर्देशांक-तंत्र बनाती हैं।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "ध्वन्यात्मक-पाश मौखिक जानकारी को थोड़ी देर दोहराकर उसे उपयोग के लिए उपलब्ध रखता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "आजीवन सीखने से बना संज्ञानात्मक भंडार दिमाग़ को उम्र-संबंधी गिरावट से लड़ने में मदद करता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "पुनःसमेकन एक स्मरण की गई स्मृति को फिर खोलता है, जिससे वह स्थिर होने से पहले बदली जा सके।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "तंत्रिकाजनन वयस्क हिप्पोकैम्पस में जारी रहता है, जो नई सीख और भाव-नियमन दोनों को सहारा देता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दृश्य-स्थानिक पटल आकृतियों, स्थानों और गति के चित्रों को धारण और परिचालित करता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "सुविचारित अभ्यास केंद्रित प्रयास और तुरंत प्रतिक्रिया से विशिष्ट कमज़ोरियों को निशाना बनाता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हल्की नींद के दौरान आने वाली नींद-तकलियाँ नई बनी स्मृतियों को व्यवधान से बचाती प्रतीत होती हैं।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "SENTENCE",
+      "content": "विस्मृति-वक्र दिखाता है कि जान-बूझकर दोहराए बिना स्मृति तेज़ी से क्षीण हो जाती है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "विस्तारित-प्रश्नन यह पूछकर सीखना गहरा करता है कि कोई कथित तथ्य आख़िर सच क्यों है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अंतराल-दोहराव हर पुनरावलोकन को ठीक उसी क्षण से पहले रखता है जब स्मृति क्षीण होने को हो।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "प्रक्रियात्मक स्मृति भली-भाँति अभ्यास किए कौशलों को संजोती है जो कम सचेत प्रयास से चलते हैं।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "SENTENCE",
+      "content": "थैलेमस लगभग सभी संवेदी संकेतों को प्रांतस्था तक उनके रास्ते में रिले करता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एसिटाइलकोलीन प्रांतस्था में ध्यान और नई स्मृतियों के कूटलेखन को सहारा देता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "दीर्घकालिक तनाव दिमाग़ को कॉर्टिसोल से भर देता है, जो धीरे-धीरे हिप्पोकैम्पस को क्षति पहुँचाता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "संज्ञानात्मक-भार सिद्धांत चेताता है कि ध्यान पर अधिक बोझ टिकाऊ सीख को रोक देता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "SENTENCE",
+      "content": "परीक्षण-प्रभाव दिखाता है कि जानकारी को पुनःप्राप्त करना उसे दोबारा पढ़ने से अधिक मज़बूत करता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मानसिक-विरोधाभास एक जीवंत लक्ष्य को आगे आने वाली बाधाओं के स्पष्ट दृश्य से जोड़ता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "द्विभाषी अनुभव ध्यान संभालने वाले तंत्रिका-जालों को मज़बूत करता प्रतीत होता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "SENTENCE",
+      "content": "चिंतनशील डायरी-लेखन दिन को समेकित करता है और तुम्हारी अपनी सोच के पैटर्न उजागर करता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "तुम्हारी याददाश्त तब सबसे अच्छा काम करती है जब शरीर आराम में हो। पूरी रात की नींद दिमाग़ को सीखी बातें छाँटने और संजोने का समय देती है। हर दिन एक तय समय पर सोओ ताकि सुबह ताज़ा रहो।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ध्यान एक कौशल है जिसे मांसपेशी की तरह सधाया जा सकता है। छोटे, बिना रुकावट वाले सत्रों से शुरू करो और धीरे-धीरे उन्हें लंबा करो। समय के साथ गहरा ध्यान सहज लगने लगेगा।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "पर्याप्त पानी पीना मन को साफ़ और सतर्क रखता है। हल्की प्यास भी सोच को धीमा और ध्यान को कमज़ोर कर सकती है। पास में एक बोतल रखो और दिन भर थोड़ा-थोड़ा पीते रहो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक छोटी सैर थके दिमाग़ को फिर से तरोताज़ा कर देती है। हल्की हलचल मन तक ताज़ी ऑक्सीजन भेजती है और मूड उठाती है। सैर के बाद पढ़ाई अक्सर आसान लगती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हाथ से नोट्स लिखने पर बातें मन में टिक जाती हैं। हर अक्षर बनाते समय दिमाग़ उसके अर्थ को गहराई से समझता है। बाद में वे नोट्स दोहराकर सीख पक्की कर लो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ज़ोर से पढ़ना तुम्हारी आँखों और कानों दोनों का उपयोग करता है। यह दोहरा रास्ता नए शब्दों को याद रखना आसान बनाता है। जब कोई वाक्य याद करना कठिन लगे, तब यह आज़माओ।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "जिज्ञासा सीखने को मज़ेदार और टिकाऊ बनाती है। जब तुम सचमुच कुछ जानना चाहते हो, तो दिमाग़ ज़्यादा ध्यान देता है। सरल सवाल पूछो और उनके जवाब खोजो।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "बड़े लक्ष्य को छोटे कदमों में बाँटना तुम्हें आगे बढ़ाता रहता है। हर छोटी जीत अगली के लिए आत्मविश्वास और ऊर्जा देती है। रास्ता साफ़ हो तो प्रगति हल्की लगती है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक शांत जगह मन को टिकने में मदद करती है। मेज़ साफ़ करो, शोर कम करो और केवल ज़रूरी चीज़ें रखो। व्यवस्थित जगह व्यवस्थित सोच को बुलाती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "किसी मित्र को सिखाना सीखने का एक शक्तिशाली तरीका है। किसी विचार को समझाने के लिए तुम्हें उसे साफ़ क्रम में रखना पड़ता है। अगर सरलता से सिखा सको, तो समझ सचमुच गहरी है।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अच्छा भोजन दिमाग़ को स्थिर ईंधन देता है। फल, मेवे और सब्ज़ियाँ साफ़ सोच और स्थिर ऊर्जा को सहारा देती हैं। तुम जो खाते हो वही तय करता है कि ध्यान कितना टिकेगा।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "गहरी, धीमी साँस एक व्यस्त मन को शांत करती है। कुछ शांत साँसें तनाव घटाती हैं और दिल की धड़कन स्थिर करती हैं। किसी भी कठिन काम से पहले यह सरल औज़ार आज़माओ।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "रोज़ का छोटा अभ्यास कभी-कभार के लंबे सत्रों से बेहतर है। हर दिन थोड़ी मेहनत तुम्हारे कौशल को गर्म और बढ़ता रखती है। निरंतरता ही महारत का चुपचाप छुपा रहस्य है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कृतज्ञता मूड को धीरे-से शांति की ओर मोड़ देती है। हर रात कुछ अच्छी बातें गिनना अच्छी नींद में मदद करता है। एक शांत मन ज़्यादा याद रखता है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ग़लतियाँ इस बात का संकेत हैं कि तुम सीख रहे हो। हर भूल ठीक-ठीक दिखाती है कि आगे कहाँ सुधार करना है। उन्हें असफलता नहीं, एक मददगार राह समझो।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सुबह की धूप तुम्हारी शरीर-घड़ी को सही समय पर लाती है। प्राकृतिक रोशनी मूड उठाती है और ध्यान तेज़ करती है। दिन की शुरुआत में कुछ मिनट बाहर निकलो।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक समय में एक काम तुम्हारे सबसे अच्छे नतीजे देता है। कामों के बीच बार-बार बदलना ध्यान बिखेरता और गति धीमी करता है। एक चीज़ ख़त्म करो, फिर दूसरी शुरू करो।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक अच्छी कहानी तथ्यों को याद रखना आसान बना देती है। दिमाग़ चित्रों और अर्थ को सादी सूचियों से कहीं बेहतर पकड़ता है। नीरस विवरण को एक छोटी कहानी में बदल दो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सोने से ठीक पहले दोहराना स्मृति को बढ़ने में मदद करता है। आराम करते समय दिमाग़ चुपचाप दिन भर की बातें दोहराता है। एक छोटी शाम की समीक्षा सुबह तक रंग लाती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "धैर्य हर कौशल का हिस्सा है। नई क्षमताओं को टिकने और सहज लगने में समय लगता है। धीरे-धीरे चलते रहो, विकास ज़रूर आएगा।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक साफ़ लक्ष्य तुम्हारे दिन को दिशा देता है। जब अपना निशाना पता हो, तो चुनाव आसान हो जाते हैं। अपना लक्ष्य वहाँ लिखो जहाँ वह दिखता रहे।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "बिना बोल वाला संगीत एकाग्रता में मदद कर सकता है। नरम, स्थिर ध्वनि भटकाव रोकती है और शांति बनाती है। ऐसी धुन चुनो जो तुम्हें टिकने में मदद करे।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दया भरोसा और एक स्थिर हृदय बनाती है। कोमल शब्द अपने और दूसरों के तनाव को कम करते हैं। एक शांत हृदय एक साफ़ मन को सहारा देता है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "देर तक बैठने के बाद थोड़ा खिंचाव करो और हिलो-डुलो। हल्की हलचल शरीर को ढीला करती और दिमाग़ को जगाती है। एक झटपट खिंचाव तुम्हारा ध्यान लौटा सकता है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "छोटी बातों पर ग़ौर करना तुम्हारी इंद्रियों को तेज़ करता है। ध्यान से देखना मन को अच्छी तरह देखना सिखाता है। जितना ज़्यादा देखोगे, उतना ज़्यादा याद रखोगे।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक सरल दिनचर्या तुम्हारी ऊर्जा बचाती है। अच्छी आदतें अपने-आप चलती हैं और मन को कठिन काम के लिए मुक्त करती हैं। दिनचर्या मेहनत को आसानी में बदल देती है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "लंबी पढ़ाई के दौरान अपनी आँखों को आराम दो। बीच-बीच में कुछ सेकंड किसी दूर की चीज़ को देखो। छोटे विराम तुम्हारे ध्यान को फीका पड़ने से रोकते हैं।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "यह विश्वास रखो कि तुम्हारा मन बढ़ सकता है। जो लोग सुधरने की उम्मीद रखते हैं वे ज़्यादा कोशिश करते और ज़्यादा सीखते हैं। तुम्हारी मेहनत तुम्हारी क्षमता को गढ़ती है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "नए विचारों के लिए एक छोटी डायरी रखो। किसी सोच को लिख देना मन में जगह खाली कर देता है। जब चाहो तब उस पर लौट सकते हो।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हँसी तनाव घटाती और मन को हल्का करती है। एक अच्छी हँसी शरीर को ढीला करती और ध्यान को नया कर देती है। अपने दिन में ख़ुशी के लिए जगह बनाओ।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "आज रात सोने से पहले कल की योजना बना लो। एक छोटी सूची मन को शांत करती और चिंता रोकती है। तुम तैयार होकर जागोगे।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "आदत बनाने के लिए एक ही जगह अभ्यास करो। एक नियमित जगह दिमाग़ को बताती है कि अब ध्यान का समय है। जल्द ही बैठते ही तुम चालू हो जाओगे।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "समझे जाने के लिए धीरे और साफ़ बोलो। शांत बोली सुनने वाले को साथ चलने का समय देती है। साफ़ शब्द तुम्हें भी साफ़ सोचने में मदद करते हैं।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "बेहतर नींद के लिए सोने से पहले तेज़ स्क्रीन कम करो। देर रात की रोशनी तुम्हारी शरीर-घड़ी को उलझा देती है। रोशनी मद्धम करो और मन को ढीला होने दो।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अपनी छोटी जीतों को ज़ोर से सराहो। प्रगति पर ग़ौर करना तुम्हारी प्रेरणा मज़बूत रखता है। आगे बढ़ता हर कदम एक शांत मुस्कान का हक़दार है।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "जब कोई काम अटक जाए तो मदद माँगो। एक ताज़ा नज़र अक्सर एक सरल रास्ता दिखा देती है। साथ मिलकर सीखना अकेले जूझने से तेज़ है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अपने लक्ष्यों को व्यावहारिक और दयालु रखो। कोमल, स्थिर निशाने तक पहुँचना आसान होता है। सफलता सफलता पर टिककर बढ़ती है।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक कृतज्ञ ठहराव एक कठिन दिन को फिर से सँवार सकता है। एक साँस लो और किसी अच्छी बात का नाम लो। धीमे होते ही शांति लौट आती है।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कभी-कभी कोई नया रास्ता या नया खाना आज़माओ। थोड़ी नवीनता दिमाग़ को जिज्ञासु और जागृत रखती है। विविधता चुपचाप मन को मज़बूत करती है।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हर सत्र के अंत में एक सीखी हुई बात नोट करो। यह सरल आदत मेहनत को टिकाऊ स्मृति में बदल देती है। नन्ही-नन्ही समीक्षाएँ समय के साथ जुड़ जाती हैं।",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सक्रिय स्मरण का अर्थ है बार-बार पढ़ने के बजाय ख़ुद की परीक्षा लेना। जब तुम किसी उत्तर को याद करने के लिए जूझते हो, तो दिमाग़ उस स्मृति का रास्ता मज़बूत करता है। याद करने का हर प्रयास अगली बार स्मरण को आसान बना देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अंतराल-प्रभाव दिखाता है कि दोहराव फैलाने पर सीख बेहतर टिकती है। घंटों के बजाय कई दिनों में सामग्री लौटने से तुम स्वाभाविक विस्मृति-वक्र को तोड़ देते हो। दिमाग़ हर वापसी को महत्वपूर्ण मानकर उसे अधिक मज़बूती से संजोता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सीखने का बड़ा हिस्सा नींद में पूरा होता है। गहरी नींद में दिमाग़ कचरा साफ़ करता है और स्वप्न-नींद में नए कौशल दोहराता है। एक सुरक्षित रात की नींद तुम्हारे सबसे अच्छे अध्ययन-औज़ारों में से एक है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक साथ कई काम करना उपयोगी लगता है पर चुपचाप तुम्हारा ध्यान घटाता है। हर बदलाव दिमाग़ को संदर्भ फिर से लादने और गति खोने पर मजबूर करता है। एक समय में एक काम चुनना गति और सटीकता दोनों बचाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "स्मृति-महल तथ्यों को उन जगहों से जोड़ता है जिन्हें तुम पहले से अच्छी तरह जानते हो। हर वस्तु को किसी परिचित मार्ग पर कल्पना करके तुम अमूर्त सूचियों को एक निर्देशित सैर बना देते हो। मन में वह मार्ग चलना वस्तुओं को क्रम से वापस ले आता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "थोड़ी मात्रा में तनाव ध्यान और प्रेरणा को तेज़ कर सकता है। पर जब तनाव लगातार बना रहे, तो कॉर्टिसोल स्मृति को घिसने लगता है। जान-बूझकर शांत होना सीखना मन को उसकी सबसे अच्छी सीमा में रखता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "द्वैत-कूटलेखन स्मृति गहरी करने के लिए शब्दों को चित्रों से जोड़ता है। अगर शाब्दिक संकेत फीका पड़ जाए, तब भी दृश्य चित्र विचार वापस ला सकता है। किसी परिभाषा के साथ एक आरेख जोड़ना याद रखने के दो रास्ते देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "विकासशील मानसिकता क्षमता को कुछ बनने योग्य मानती है, न कि स्थिर। यह विश्वास कि तुम सुधर सकते हो, तुम्हें कठिन अभ्यास का सामना करने को तैयार करता है। समय के साथ वही तत्परता असल में विकास पैदा करती है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "खंडन छोटी-छोटी जानकारियों को बड़ी, सार्थक इकाइयों में समूहित करता है। अंकों की एक लंबी कतार परिचित समूहों में बँटते ही आसान हो जाती है। तुम्हारी सीमित कार्यशील स्मृति कई टुकड़ों की तुलना में कुछ खंड कहीं बेहतर संभालती है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "चिंतन कच्चे अनुभव को टिकाऊ सीख में बदल देता है। कुछ मिनट यह देखने में लगाना कि क्या काम आया, दिमाग़ को उसे क्रम में रखने में मदद करता है। चिंतन के बिना सबक उतनी ही तेज़ी से मिट जाते हैं जितनी तेज़ी से आते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "गहरा कार्य ध्यान के लंबे खंडों की रक्षा पर निर्भर करता है। सूचनाएँ और रुकावटें एकाग्रता तोड़कर तुम्हारी प्रगति रीसेट कर देती हैं। एक भी बिना रुकावट वाला घंटा बचाना तुम्हारे काम को बदल सकता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "परीक्षण-प्रभाव बताता है कि पुनःप्राप्ति दोबारा पढ़ने से बेहतर है। हर प्रश्न, चाहे असफल ही क्यों न हो, अंतर्निहित स्मृति को मज़बूत करता है। याद करने की कोशिश ख़ुद सीखने का एक शक्तिशाली कार्य है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अंतर्वेशन एक ही सत्र में संबंधित विषयों को मिला देता है। यह एक ही विषय पर टिके रहने से कठिन लगता है, पर टिकाऊ धारणा सुधारता है। दिमाग़ विचारों को अलग पहचानना और लचीलेपन से लागू करना सीखता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "व्यायाम मन को शरीर जितना ही लाभ देता है। हलचल रक्त-प्रवाह बढ़ाती और ऐसे रसायन छोड़ती है जो नए संबंधों को सहारा देते हैं। एक नियमित सैर या कसरत मूड और स्मृति दोनों को उठा सकती है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ध्यान एक सीमित रोशनी की किरण है, बाढ़ नहीं। जिस पर तुम ध्यान दोगे वह साफ़ होगा और बाक़ी सब धुँधला पड़ेगा। उस किरण को जान-बूझकर मोड़ना ही असरदार अध्ययन का मर्म है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "भावना स्मृति के लिए एक हाइलाइटर की तरह काम करती है। प्रबल भाव से जुड़ी घटनाएँ तटस्थ घटनाओं से कहीं अधिक जीवंत याद रहती हैं। सामग्री में अर्थ या जिज्ञासा जोड़ना उसे स्वाभाविक रूप से याद रखना आसान बनाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक नियमित दिनचर्या तुम्हारी मानसिक ऊर्जा बचाती है। जब आदतें छोटे फैसले संभाल लें, तो इच्छाशक्ति कठिन चुनौतियों के लिए मुक्त रहती है। ढाँचा चुपचाप तुम्हारी उपलब्धि को कई गुना कर देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दृश्यीकरण सफलता को घटित होने से पहले ही दोहरा लेता है। हर कदम को विस्तार से कल्पना करना उन्हीं दिमाग़ी हिस्सों को तैयार करता है जो असली क्रिया उपयोग करती है। खिलाड़ी और कलाकार इसी मानसिक अभ्यास पर भरोसा करते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "नोट लेना तब सबसे अच्छा काम करता है जब तुम अपने शब्दों में सार लिखो। पाठ की निष्क्रिय नक़ल छाप कम छोड़ती है, पर अपने शब्दों में ढालना समझ पर ज़ोर डालता है। विचारों का अनुवाद ही वह जगह है जहाँ असली सीख होती है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ऊब अक्सर गहरे ध्यान के किनारे पर प्रकट होती है। भटकाव की ओर बढ़ने के बजाय उस नीरस पल के साथ थोड़ा और रुको। एकाग्रता अक्सर बेचैनी की पहली लहर के ठीक आगे इंतज़ार करती है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दिमाग़ नवीनता चाहता है और बदलाव पर ध्यान देता है। थोड़े अलग तरीक़ों से पढ़ना मन को सतर्क और जुड़ा रखता है। छोटे बदलाव उस सामग्री को ताज़ा कर सकते हैं जो बासी लगने लगी हो।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "जल-संतुलन का मानसिक प्रदर्शन पर सीधा असर पड़ता है। हल्का निर्जलीकरण भी प्रतिक्रिया-समय धीमा और अल्पकालिक स्मृति कमज़ोर कर सकता है। पानी पास रखना ध्यान बचाने का एक सरल उपाय है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "स्व-व्याख्या छुपे हुए कदम भरकर समझ गहरी करती है। ख़ुद से यह पूछना कि हर कदम पिछले से क्यों निकलता है, ज्ञान की खाली जगहें उजागर करता है। उन खाली जगहों को भरना एक मज़बूत, लचीली स्मृति बनाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "लक्ष्य तब सबसे अच्छा काम करते हैं जब वे विशिष्ट और मापने योग्य हों। एक धुँधली इच्छा मन को निशाने के लिए कुछ नहीं देती, पर एक साफ़ निशाना कार्य को राह देता है। सफलता को ठोस शब्दों में परिभाषित करना प्रगति को दृश्य बनाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "किसी सूची की पहली और आख़िरी वस्तुएँ सबसे आसानी से याद रहती हैं। क्रम-स्थिति प्रभाव कहलाने वाला यह पैटर्न तय करता है कि हम अनुक्रमों को कैसे याद रखते हैं। मुख्य सामग्री को शुरू या अंत में रखना इसका लाभ उठा सकता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सचेत साँस एक भटकते मन को वर्तमान में बाँध देती है। एक मिनट साँस का पीछा करना तनाव घटाता और स्पष्टता लौटाता है। यह छोटा अभ्यास किसी भी माँगभरे काम से पहले ध्यान रीसेट कर सकता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "प्रतिक्रिया सुविचारित अभ्यास का ईंधन है। यह जल्दी जानना कि तुम सही थे या नहीं, तुम्हें तभी राह सुधारने देता है जब वह मायने रखती है। बिना प्रतिक्रिया वाला अभ्यास अक्सर वही ग़लतियाँ दोहराता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "जिज्ञासा दिमाग़ को जानकारी सोखने के लिए तैयार कर देती है। जब तुम सचमुच कोई उत्तर चाहते हो, तो इनाम-तंत्र सीखने को सुखद बना देता है। किसी विषय को एक सवाल में बदलना उस प्रेरणा को चालू कर सकता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अति-अभ्यास का अर्थ है किसी कौशल को पहली सफलता के आगे भी अभ्यास करना। यह अतिरिक्त दोहराव कौशल को अधिक स्वचालित और तनाव-प्रतिरोधी बनाता है। दबाव में, ख़ूब अभ्यास किए कौशल स्थिर बने रहते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "माहौल व्यवहार को इच्छाशक्ति से अधिक गढ़ता है। भटकाव को नज़र से दूर रखना ध्यान को आसान विकल्प बना देता है। अपनी जगह अच्छी तरह सजाना कई लड़ाइयाँ शुरू होने से पहले ही ख़त्म कर देता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दिन में एक छोटी झपकी सीखने की क्षमता ताज़ा कर सकती है। बीस मिनट का आराम मानसिक थकान साफ़ करता है बिना सुस्ती छोड़े। समझदारी से ली गई झपकी दोपहर के लिए ध्यान लौटा देती है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "किसी चिंता को लिख देना एक बेचैन मन को शांत कर सकता है। सोच को काग़ज़ पर रखना उसे तुम्हारी कार्यशील स्मृति से बाहर ले जाता है। चिंता एक ओर रखते ही ध्यान काम पर लौट आता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ख़ुद की तुलना अपने बीते रूप से करना स्थिर विकास को बढ़ावा देती है। दूसरों से तुलना अक्सर प्रगति के बजाय निराशा पैदा करती है। तुम्हारा अपना पुराना काम सबसे न्यायसंगत और उपयोगी मापदंड है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "व्यापक पढ़ना मन में विचारों का जाल मज़बूत करता है। नए तथ्य तब आसानी से जुड़ते हैं जब वे संबंधित ज्ञान से मिलते हैं। एक विस्तृत नींव भविष्य की सीख को तेज़ और समृद्ध बनाती है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दिमाग़ कौशल को सत्रों के बीच आराम के साथ सबसे अच्छा समेकित करता है। बिना रुके धकेलते रहना थकान बढ़ने के साथ घटते लाभ देता है। छोटे विराम मन को वह सोखने देते हैं जो कठिन अभ्यास ने बोया।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "आदतें संकेत, दिनचर्या और इनाम से बनती हैं। किसी व्यवहार को जगाने वाले संकेत को पहचानना उसे फिर से ढालने की शक्ति देता है। इनाम बनाए रखते हुए दिनचर्या बदलो, और परिवर्तन आसान हो जाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "आत्मविश्वास पूरे किए गए कामों के रिकॉर्ड से बढ़ता है। हर ख़त्म किया काम इस बात का प्रमाण बनता है कि तुम अगला भी संभाल सकते हो। छोटी जीतें इकट्ठा करना एक टिकाऊ आत्म-विश्वास बनाता है।",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "धीमा, सुविचारित पठन समझ और स्मरण दोनों सुधारता है। किसी पृष्ठ पर दौड़ना केवल एक उथली छाप छोड़ता है। रुककर पाठ को चित्रित और प्रश्नित करना उसे अधिक मज़बूती से रोपता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सुबह का एक साफ़ संकल्प पूरे दिन को आकार देता है। अपना एकमात्र सबसे ज़रूरी काम नाम देना तुम्हारी ऊर्जा केंद्रित करता है। जब प्राथमिकताएँ जल्दी तय हों, तो भटकाव अपना खिंचाव खो देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कृतज्ञता का अभ्यास धीरे-धीरे ध्यान को सकारात्मक की ओर मोड़ देता है। नियमित रूप से अच्छी बातों पर ग़ौर करना तनाव घटाता और मूड स्थिर करता है। बदले में, एक शांत मन अधिक सहजता से सीखता और याद रखता है।",
+      "difficulty": "MEDIUM",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हिप्पोकैम्पस नई घोषणात्मक स्मृतियों के लिए एक अस्थायी अनुक्रमणिका का काम करता है, इससे पहले कि वे धीरे-धीरे नवप्रांतस्था में समेकित हों। यह किसी अनुभव के बिखरे तत्वों को आपस में बाँधता है, जबकि दीर्घकालिक भंडारण प्रांतस्थीय जालों में फैला रहता है। इस क्षेत्र की क्षति नई घटनात्मक स्मृति का बनना रोक देती है पर ख़ूब अभ्यास किए प्रक्रियात्मक कौशल को बचा लेती है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दीर्घकालिक प्रबलन को सीखने का एक मूल कोशिकीय तंत्र माना जाता है। जब एक पूर्व-सिनैप्टिक न्यूरॉन बार-बार और भरोसे से किसी पश्च-सिनैप्टिक न्यूरॉन को सक्रिय करने में मदद करता है, तो उनके बीच का संबंध मज़बूत हो जाता है। सिनैप्टिक दक्षता में यह टिकाऊ बदलाव गतिविधि के पैटर्न को एक स्थायी भौतिक छाप छोड़ने देता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "तंत्रिका-सुघट्यता दिमाग़ की उस क्षमता का वर्णन करती है जिससे वह अनुभव के अनुसार अपने संबंध फिर से संगठित करता है। नए कौशल और बार-बार का अभ्यास सिनैप्स की मज़बूती और शरीर का प्रतिनिधित्व करने वाले मानचित्रों, दोनों को नया रूप दे सकते हैं। यह अनुकूलनशीलता जीवन भर बनी रहती है, इसीलिए सुविचारित प्रशिक्षण वयस्क दिमाग़ को भी बदलता रहता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कार्यशील स्मृति एक केंद्रीय कार्यपालक के अधीन काम करती है जो प्रतिस्पर्धी माँगों के बीच ध्यान बाँटता है। ध्वन्यात्मक-पाश मौखिक सामग्री दोहराता है जबकि दृश्य-स्थानिक पटल चित्र और स्थान बनाए रखता है। चूँकि इस तंत्र की क्षमता-सीमा कठोर है, इस पर अधिक बोझ डालने से जानकारी उपयोग होने से पहले ही गिर जाती है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एबिंगहॉस द्वारा पहली बार रेखांकित विस्मृति-वक्र दिखाता है कि बिना सुदृढ़ीकरण के स्मृति तेज़ी से क्षीण होती है। अंतराल-दोहराव हर पुनरावलोकन को संभावित विस्मृति के बिंदु के पास निर्धारित करके इस क्षय का प्रतिकार करता है। बढ़ते अंतरालों पर स्मृति को बार-बार पुनर्निर्मित करने से वक्र चपटा होता है और धारणा गहरी होती है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अधिसंज्ञान अपनी ही संज्ञानात्मक प्रक्रियाओं की निगरानी और नियमन की क्षमता है। कुशल सीखने वाले लगातार आकलन करते हैं कि उनकी मौजूदा रणनीति काम कर रही है या नहीं और न करने पर उसे बदल देते हैं। सीखने पर यह आत्म-सजग नियंत्रण अक्सर विशेषज्ञों को उन नौसिखियों से अलग करता है जो केवल मेहनत पर निर्भर रहते हैं।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एमिग्डाला किसी अनुभव की भावनात्मक महत्ता के अनुसार यह नियंत्रित करती है कि वह कितनी मज़बूती से कूटबद्ध हो। उत्तेजना के क्षणों में हिप्पोकैम्पस को संकेत देकर यह सुनिश्चित करती है कि जीवित रहने से जुड़ी घटनाएँ जीवंत रूप से याद रहें। इसीलिए गहरे अर्थपूर्ण पल असामान्य स्पष्टता और विस्तार के साथ याद आते हैं।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "नींद विभिन्न चरणों के ज़रिए स्मृति में योगदान देती है जो परस्पर पूरक कार्य करते हैं। मंद-तरंग नींद तथ्यात्मक, घोषणात्मक ज्ञान के समेकन को सहारा देती है, जबकि तीव्र नेत्र-गति नींद प्रक्रियात्मक और भावनात्मक एकीकरण को पसंद करती है। दिमाग़ को इनमें से किसी भी चरण से वंचित करना उससे पहले की सीख को मापने योग्य रूप से कमज़ोर कर देता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सिनैप्टिक छँटाई विकास के दौरान और उसके आगे भी कमज़ोर या अनावश्यक संबंध हटाकर तंत्रिका-परिपथों को परिष्कृत करती है। यह चयनात्मक हटाव बार-बार प्रयुक्त रास्तों को तेज़ करता है और अप्रयुक्त को छोड़ देता है। परिणाम एक अधिक कुशल जाल है जो दिमाग़ की असली माँगों के अनुरूप ढला होता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "संज्ञानात्मक-भार सिद्धांत सामग्री की अंतर्निहित कठिनाई को ख़राब प्रस्तुति से थोपे गए बाहरी भार से अलग करता है। चूँकि कार्यशील स्मृति तीव्र रूप से सीमित है, अनावश्यक जटिलता उस क्षमता को भीड़ देती है जो असली समझ के लिए चाहिए। अच्छी तरह डिज़ाइन किया गया शिक्षण बाहरी भार घटाता है ताकि प्रयास सार्थक सीख पर लग सके।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एंटोराइनल प्रांतस्था में ग्रिड-कोशिकाएँ रहती हैं जो शरीर के अंतरिक्ष में चलने पर एक नियमित त्रिकोणीय जाली में सक्रिय होती हैं। हिप्पोकैम्पस की स्थान-कोशिकाओं के साथ मिलकर वे नौवहन और स्मृति के लिए एक आंतरिक निर्देशांक-तंत्र बनाती हैं। यह स्थानिक ढाँचा गैर-स्थानिक जानकारी को भी संरचित, पुनःप्राप्य मानचित्रों में संगठित करने में मदद कर सकता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "पुनःसमेकन उजागर करता है कि किसी स्मृति का स्मरण उसे थोड़ी देर के लिए अस्थिर और संशोधन-योग्य बना सकता है। जब कोई पुरानी स्मृति फिर सक्रिय होती है, तो उसे फिर स्थिर करना पड़ता है, और उस खिड़की में वह मज़बूत या बदली जा सकती है। यह तंत्र समझाता है कि हर बार दोहराने पर स्मृतियाँ कैसे सूक्ष्म रूप से बदल जाती हैं।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "प्रीफ्रंटल प्रांतस्था योजना, कार्यशील स्मृति और निरोधी नियंत्रण जैसे कार्यपालक कार्यों का संचालन करती है। अप्रासंगिक आवेगों को दबाकर यह लक्ष्य-निर्देशित व्यवहार को स्वचालित प्रतिक्रियाओं पर हावी होने देती है। किशोरावस्था में इसका धीमा परिपक्व होना आत्म-नियमन और विवेक के क्रमिक विकास के समानांतर चलता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "द्वैत-कूटलेखन सिद्धांत प्रस्ताव करता है कि शाब्दिक और दृश्य, दोनों रूपों में संसाधित जानकारी दो स्वतंत्र चैनलों से कूटबद्ध होती है। चूँकि कोई भी चैनल बाद में पुनःप्राप्ति जगा सकता है, यह अतिरेक स्मृति को अधिक मज़बूत बनाता है। इसलिए एक स्पष्ट व्याख्या को एक सार्थक चित्र से जोड़ना अकेले शब्दों से बेहतर स्मरण देता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "परीक्षण-प्रभाव दर्शाता है कि पुनःप्राप्ति की क्रिया स्वयं एक प्रबल सीखने की घटना है। हर सफल स्मरण स्मृति-छाप को उतने ही समय के निष्क्रिय पुनरावलोकन से अधिक मज़बूत करता है। असफल प्रयास भी, यदि उनके बाद प्रतिक्रिया मिले, तो मन को सही उत्तर कूटबद्ध करने के लिए तैयार कर देते हैं।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "तंत्रिकाजनन वयस्क डेंटेट गाइरस में जारी रहता है, जहाँ नए न्यूरॉन मौजूदा हिप्पोकैम्पल परिपथों में समाहित होते हैं। ये युवा कोशिकाएँ पैटर्न-पृथक्करण को सहारा देती प्रतीत होती हैं, जिससे दिमाग़ मिलते-जुलते अनुभवों में अंतर कर पाता है। व्यायाम और समृद्ध वातावरण न्यूरॉनों के इस जन्म को बढ़ाते हैं, जबकि दीर्घकालिक तनाव इसे दबा देता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "चयनात्मक ध्यान संवेदी निवेश की बाढ़ को छानता है ताकि सीमित संसाधन उसी तक पहुँचें जो महत्वपूर्ण है। काॅकटेल-पार्टी प्रभाव दिखाता है कि हम कई आवाज़ों के बीच एक का पीछा कर सकते हैं और फिर भी कहीं और अपना नाम पकड़ लेते हैं। ध्यान और सतर्कता के बीच यह संतुलन एक बारीकी से सधे ध्यान-तंत्र को दर्शाता है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अंतर्वेशन-अभ्यास सीखने वाले को संबंधित कौशलों के बीच बार-बार पुनःप्राप्ति और विभेद करने पर मजबूर करता है। यद्यपि यह संकेंद्रित अभ्यास से कम सहज लगता है, यह ज्ञान को विविध संदर्भों में लागू करने का लचीलापन बनाता है। यह बढ़ी हुई कठिनाई वांछनीय है क्योंकि यह टिकाऊ, हस्तांतरणीय सीख को मज़बूत करती है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एसिटाइलकोलीन ध्यान और नई प्रांतस्थीय स्मृतियों के कूटलेखन में केंद्रीय भूमिका निभाता है। संवेदी क्षेत्रों में संकेत-से-शोर अनुपात बढ़ाकर यह दिमाग़ को प्रासंगिक निवेश को प्राथमिकता देने में मदद करता है। कोलिनर्जिक तंत्रों का विघटन कुछ विकारों में दिखती स्मृति-कमियों से गहराई से जुड़ा है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "डिफ़ॉल्ट-मोड तंत्रिका-जाल विश्राम, मन-भटकाव और स्वयं पर चिंतन के दौरान सक्रिय होता है। निष्क्रिय होने के बजाय यह जाल आत्मकथात्मक स्मृति और भविष्य की घटनाओं के अनुकरण को सहारा देता है। कार्य-केंद्रित जालों के साथ इसका संतुलन तय करता है कि ध्यान भीतर मुड़ता है या बाहर।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "प्रक्रियात्मक स्मृति उन कौशलों को आधार देती है जो व्यापक अभ्यास से स्वचालित हो जाते हैं, जैसे टाइप करना या वाद्य बजाना। यह हिप्पोकैम्पस के बजाय बेसल गैंग्लिया और अनुमस्तिष्क पर अधिक निर्भर करती है। चूँकि यह काफ़ी हद तक चेतना के बाहर चलती है, ये कौशल तब भी बचे रहते हैं जब घोषणात्मक स्मृति विफल हो जाए।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "संज्ञानात्मक भंडार दिमाग़ की चोट और उम्र-संबंधी बदलाव के प्रति लचीलेपन का वर्णन करता है। शिक्षा, जटिल कार्य और जीवन भर की मानसिक व्यस्तता से बना यह भंडार वैकल्पिक जालों को क्षति की भरपाई करने देता है। अधिक भंडार वाले लोग अक्सर गंभीर अंतर्निहित विकृति के बावजूद कार्य बनाए रखते हैं।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "विस्तारित कूटलेखन नई सामग्री को मौजूदा ज्ञान के समृद्ध जाल से जोड़कर स्मृति मज़बूत करता है। किसी तथ्य को जितने अधिक सार्थक साहचर्य मिलते हैं, उतने ही अधिक पुनःप्राप्ति-मार्ग उस तक वापस ले जाते हैं। इसीलिए किसी बात को गहराई से समझना उसे रटने की तुलना में कहीं आसानी से याद रखने योग्य बना देता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "तनाव-प्रतिक्रिया का दीर्घकालिक सक्रियण दिमाग़ को ग्लूकोकॉर्टिकॉइड से भर देता है जो हिप्पोकैम्पल कार्य को बिगाड़ते हैं। लगातार कॉर्टिसोल का संपर्क द्रुमिकाओं को सिकोड़ सकता है और नई स्मृतियों के बनने में बाधा डाल सकता है। इसलिए तनाव संभालना केवल भावनात्मक आत्म-देखभाल नहीं, बल्कि संज्ञान में एक सीधा निवेश है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "क्रम-स्थिति प्रभाव किसी सूची के आरंभ और अंत की वस्तुओं के लिए बेहतर स्मरण पैदा करता है। प्रारंभिकता आरंभिक वस्तुओं के अतिरिक्त दोहराव को दर्शाती है, जबकि नवीनता कार्यशील स्मृति में उनकी ठहरी उपस्थिति को। कमज़ोर मध्य-क्षेत्र समेकन और अल्पकालिक भंडारण दोनों की सीमाएँ उजागर करता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सुविचारित अभ्यास तत्काल प्रतिक्रिया द्वारा निर्देशित विशिष्ट कमज़ोरियों पर केंद्रित प्रयास से पहचाना जाता है। जो सहज है उसे केवल दोहराने के बजाय यह मौजूदा क्षमता के किनारे को निशाना बनाता है। यह माँगभरा, प्रतिक्रिया-समृद्ध तरीक़ा ही साधारण अभ्यास को असली विशेषज्ञता में बदलता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "पैटर्न-पृथक्करण और पैटर्न-पूर्ति हिप्पोकैम्पस द्वारा किए जाने वाले परस्पर पूरक संचालन हैं। पृथक्करण मिलते-जुलते अनुभवों को अलग रखता है, जिससे अतिव्यापी स्मृतियों के बीच व्यवधान रुकता है। पूर्ति एक आंशिक संकेत को पूरी स्मृति पुनर्निर्मित करने देती है, जो साहचर्यपूर्ण स्मरण का आधार है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दिमाग़ सामग्री के साथ-साथ समय को भी कूटबद्ध करता है, जिससे स्मृतियाँ क्रम में रखी जा सकें। विशेष कोशिकाएँ किसी अनुभव के भीतर ख़ास क्षणों पर सक्रिय होती हैं और एक कालिक ढाँचा रचती हैं। घटनाएँ कब घटीं, इसका यह बोध घटनात्मक स्मृति की संरचना के लिए अनिवार्य है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मायलिनन अक्षतंतुओं को एक रोधी आवरण में लपेटता है जो तंत्रिका-संकेतन की गति नाटकीय रूप से बढ़ा देता है। जैसे-जैसे कौशल अभ्यास होते हैं, गतिविधि-निर्भर मायलिनन क्षेत्रों के बीच संचार के समय को बारीकी से ढालता है। सुघट्यता का यह अक्सर अनदेखा रूप ख़ूब सीखी क्षमताओं की सहज स्वचालितता में योगदान देता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अर्थगत स्मृति सामान्य तथ्यों और अवधारणाओं को उस क्षण से स्वतंत्र रूप से संजोती है जब वे अर्जित हुए। समय के साथ बार-बार के घटनात्मक अनुभव इस स्थिर, योजनाबद्ध ज्ञान में आसुत हो जाते हैं। घटनात्मक विवरण से अर्थगत सार की ओर यह क्रमिक बदलाव दिमाग़ की कुशल सामान्यीकरण की प्रवृत्ति दर्शाता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "वांछनीय कठिनाइयाँ ऐसी स्थितियाँ हैं जो पल भर में सीख धीमा करती हैं पर दीर्घावधि में उसे मज़बूत करती हैं। अंतराल, अंतर्वेशन और पुनःप्राप्ति सभी निष्क्रिय पुनरावलोकन से कठिन लगते हैं फिर भी गहरी धारणा देते हैं। तात्कालिक सहजता को टिकाऊ सीख समझ लेना सबसे आम अध्ययन-ग़लतियों में से एक है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दिमाग़ का इनाम-तंत्र, जो मुख्यतः डोपामीन से चलता है, अपेक्षा और परिणाम के बीच का अंतर संकेतित करता है। आश्चर्यजनक इनाम प्रबल पूर्वानुमान-त्रुटियाँ पैदा करते हैं जो पूर्ववर्ती व्यवहार को सुदृढ़ करती हैं। यह तंत्र प्रेरणा को सीखने से कसकर जोड़ता है और तय करता है कि कौन-से कार्य दोहराए और याद रखे जाएँ।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मानसिक प्रतिबिंब वास्तविक प्रत्यक्षण और गति में लगे कई वही दृश्य और प्रेरक क्षेत्र सक्रिय कर देता है। चूँकि दिमाग़ कल्पित अभ्यास को आंशिक रूप से असली अनुभव जैसा मानता है, दृश्यीकरण असली कौशल को निखार सकता है। यह अतिव्यापन समझाता है कि विस्तृत मानसिक अभ्यास प्रदर्शन को मापने योग्य रूप से क्यों सुधारता है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ध्वन्यात्मक-पाश मौखिक जानकारी को मौन, आंतरिक दोहराव से बनाए रखता है जो एक फीकी पड़ती छाप को ताज़ा करता है। इसकी सीमित अवधि ही कारण है कि लंबे अंक दोहराए या समूहित किए बिना फिसल जाते हैं। कोई असंबद्ध शब्द बुदबुदाना इस दोहराव को भरोसे से बाधित करता है और दिखाता है कि यह पाश कितना नाज़ुक है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "आदतें बेसल गैंग्लिया में क्रिया-अनुक्रमों के रूप में कूटबद्ध होती हैं जो न्यूनतम सचेत निगरानी से चलते हैं। एक बार जब कोई संकेत भरोसे से किसी दिनचर्या को जगा दे, तो व्यवहार कुशल पर परिवर्तन-प्रतिरोधी भी हो जाता है। किसी आदत को फिर ढालना आमतौर पर इच्छाशक्ति पर निर्भर रहने के बजाय उसके संकेत और इनाम को नया डिज़ाइन देना होता है।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ध्यान और स्मृति गहराई से जुड़े हैं, क्योंकि बिना ध्यान दी गई जानकारी शायद ही कभी कूटबद्ध होती है। जिसे विस्मृति लगती है वह अक्सर पहली बार में ग़ौर ही न करने की विफलता होती है। इसलिए सीखते समय केंद्रित ध्यान देना बाद के स्मरण की पूर्व-शर्त है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अनुमस्तिष्क, लंबे समय तक गति से जुड़ा रहा, संज्ञान के समय-निर्धारण और समन्वय में भी योगदान देता है। यह पूर्वानुमानों को बारीकी से ढालने और शारीरिक व मानसिक, दोनों अनुक्रमों के निष्पादन को सहज करने में मदद करता है। इसकी भूमिका दिखाती है कि कभी सीमित समझे गए क्षेत्र किस तरह व्यापक कार्यों को सहारा देते हैं।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "अंतराल-पुनःप्राप्ति सीखने के विज्ञान के दो सबसे शक्तिशाली सिद्धांतों को जोड़ती है। बढ़ते अंतरालों पर स्मृति की परीक्षा लेकर यह अंतराल-प्रभाव और परीक्षण-प्रभाव दोनों को एक साथ काम में लाती है। यह जोड़ी अनुसंधान में दर्ज सबसे टिकाऊ धारणा में से कुछ पैदा करती है।",
+      "difficulty": "HARD",
+      "category": "Wisdom",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "भाव-नियमन प्रीफ्रंटल प्रांतस्था और लिम्बिक तंत्र के बीच एक गतिशील संतुलन पर निर्भर करता है। जब नियमन सफल होता है, तो प्रांतस्था एमिग्डाला के प्रतिक्रियाशील संकेत मंद करती और सुविचारित नियंत्रण बहाल करती है। इस संतुलन को मज़बूत करना न केवल मूड बल्कि दबाव में सोच की स्पष्टता भी सुधारता है।",
+      "difficulty": "HARD",
+      "category": "Visual",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "स्मृति का समेकन कई समय-मानों में, मिनटों से लेकर वर्षों तक, उद्घाटित होता है। तीव्र सिनैप्टिक समेकन सीखने के तुरंत बाद किसी छाप को स्थिर करता है, जबकि तंत्र-समेकन धीरे-धीरे उसे प्रांतस्था में पुनर्संगठित करता है। यह विस्तारित प्रक्रिया ही कारण है कि अच्छी रात की नींद और बाद का पुनरावलोकन, दोनों सीखी बात को मज़बूत करते हैं।",
+      "difficulty": "HARD",
+      "category": "General",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक नन्ही गिलहरी हर दिन एक बलूत संजोती थी, यह सोचकर कि किसी दिन काम आएगा। सर्दी आई तो उसके छोटे-छोटे संचय ने पूरे जंगल को भूख से बचा लिया। छोटी, नियमित बचत बड़ी ज़रूरत के समय सबसे बड़ी मदद बन जाती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मैंने याददाश्त सुधारने वाली किताब ख़रीदी, पर भूल गया कि उसे रखा कहाँ है।",
+      "difficulty": "EASY",
+      "category": "Humor",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कछुआ जानता था कि वह तेज़ नहीं है, इसलिए उसने एक नियम बनाया: हर सुबह बस एक कदम आगे बढ़ना। ख़रगोश अपनी तेज़ी पर इतराता रहा और बीच रास्ते सो गया। जब चहेता आराम चुन बैठा, तब धीमे पर अटल चलने वाले ने दौड़ जीत ली।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "धीरे चलो पर रुकना मत, हर कदम में एक सीख है। आज की छोटी मेहनत, चुपके से सहेजी, कल बड़ी राह बनेगी। मन को साधो, साँस को थामो, डगर अपने-आप खुलेगी।",
+      "difficulty": "MEDIUM",
+      "category": "Poem",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मैंने तय किया कि आज से सब कुछ याद रखूँगा और इसके लिए एक भरोसेमंद सूची बनाई। फिर पूरी शाम यही याद करने में बीत गई कि वह बेहद ज़रूरी सूची आख़िर रखी कहाँ थी। अंत में मैंने एक नई सूची बनाई, बस पहली सूची को ढूँढने के लिए।",
+      "difficulty": "HARD",
+      "category": "Humor",
+      "chapter": 9
+    },
+    {
+      "type": "WORD",
+      "content": "मन",
+      "difficulty": "EASY",
+      "category": "General",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "सीख",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "लगन",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "धीरज",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "रंग",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 3
+    },
+    {
+      "type": "WORD",
+      "content": "अभ्यास",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "संकल्प",
+      "difficulty": "MEDIUM",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "विवेक",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "दृश्य",
+      "difficulty": "MEDIUM",
+      "category": "Visual",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "चेतना",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "WORD",
+      "content": "तल्लीनता",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 2
+    },
+    {
+      "type": "WORD",
+      "content": "संस्मरण",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "रोज़ थोड़ा अभ्यास करो।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "अच्छी नींद याददाश्त को मज़बूत करती है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "हर शब्द को मन में चित्र की तरह देखो।",
+      "difficulty": "EASY",
+      "category": "Visual",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "रोज़ एक नया शब्द सीखो।",
+      "difficulty": "EASY",
+      "category": "Wisdom",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "नई बात को ज़ोर से दोहराने पर वह आसानी से याद रहती है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जो हम दूसरों को समझाते हैं, वही हमें सबसे अच्छे से याद रहता है।",
+      "difficulty": "MEDIUM",
+      "category": "Wisdom",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जो सीखा उसे सोने से पहले एक बार दोहराओ।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एकाग्र ध्यान ही स्थायी स्मृति का द्वार है।",
+      "difficulty": "HARD",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "बार-बार स्वयं को परखने का अभ्यास स्मृति की जड़ें गहरी करता है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "ध्यान एक मांसपेशी की तरह है जिसे अभ्यास से बढ़ाया जा सकता है। छोटे, बिना रुकावट वाले समय से शुरू करो और धीरे-धीरे उसे लंबा करो। समय के साथ गहरा ध्यान सहज लगने लगेगा।",
+      "difficulty": "EASY",
+      "category": "Focus",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हाथ से लिखने पर विचार मन में गहरे बैठते हैं। हर अक्षर बनाते समय मस्तिष्क उसका अर्थ अधिक ध्यान से समझता है। बाद में उन नोट्स को दोहराने से सीख पक्की हो जाती है।",
+      "difficulty": "EASY",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "सक्रिय स्मरण का अर्थ है केवल दोबारा पढ़ने के बजाय स्वयं की परीक्षा लेना। जब आप उत्तर याद करने के लिए प्रयास करते हैं, तो मस्तिष्क उस स्मृति का रास्ता मज़बूत कर देता है। हर प्रयास अगली बार याद करना और आसान बना देता है।",
+      "difficulty": "MEDIUM",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हिप्पोकैम्पस गहरी नींद के दौरान नाज़ुक अल्पकालिक स्मृतियों को स्थायी स्मृतियों में बदलता है। यह बिखरे हुए अनुभवों के टुकड़ों को आपस में जोड़ता है, जबकि दीर्घकालिक भंडारण मस्तिष्क की कई परतों में फैला रहता है। इसीलिए अच्छी नींद सीखने का सबसे शक्तिशाली साधन है।",
+      "difficulty": "HARD",
+      "category": "Science",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक प्यासा कौआ घड़े में थोड़ा पानी देख कर रुक गया, पर चोंच नहीं पहुँची। उसने एक-एक कंकड़ डाला और पानी ऊपर आ गया। धैर्य और समझदारी ताक़त से बड़ी होती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक चींटी पूरी गर्मी अनाज जमा करती रही और टिड्डा गाता रहा। जब सर्दी आई, टिड्डा भूखा था और चींटी के पास भोजन था। रोज़ की छोटी मेहनत बाद में बड़ी सुरक्षा बन जाती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक शेर ने कभी एक नन्हे चूहे को छोड़ दिया था। बाद में शेर जाल में फँस गया, और उसी छोटे चूहे ने रस्सियाँ कुतर कर उसे आज़ाद कर दिया। कोई भी भलाई, चाहे कितनी छोटी हो, बेकार नहीं जाती।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक लड़के ने मज़े के लिए दो बार 'भेड़िया आया' चिल्लाया और गाँव वाले दौड़े आए। तीसरी बार सच में भेड़िया आया, पर किसी ने उस पर विश्वास नहीं किया। झूठे पर सच बोलने पर भी भरोसा नहीं होता।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "कछुआ और खरगोश की दौड़ हुई। खरगोश जीत के भरोसे सो गया, और धीमा कछुआ चलता रहा और पहले पहुँच गया। लगातार मेहनत लापरवाह प्रतिभा से जीत जाती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक किसान का बेटा एक लकड़ी आसानी से तोड़ देता था, पर बँधे हुए पूरे गट्ठर को नहीं तोड़ सका। पिता मुस्कुराए और बोले, साथ रहोगे तो अटूट हो। एकता साधारण लोगों को भी बड़ी ताक़त देती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक भूखी लोमड़ी ऊँचे लटके अंगूरों तक बार-बार उछली पर पहुँच न सकी। आख़िर में यह कहकर चली गई कि अंगूर ज़रूर खट्टे होंगे। जो हमें नहीं मिलता, उसे बुरा कहना आसान है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक कुत्ता हड्डी लेकर पुल पार कर रहा था कि उसे पानी में अपनी परछाईं दिखी। दूसरे कुत्ते की बड़ी हड्डी समझकर वह भौंका और अपनी हड्डी पानी में गिरा बैठा। ज़्यादा के लालच में अक्सर अपना भी खो जाता है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक किसान के पास हंस था जो रोज़ एक सोने का अंडा देता था। सारा सोना एक साथ पाने के लालच में उसने हंस को चीर डाला और कुछ न मिला, रोज़ का ख़ज़ाना भी गया। धैर्य लालच से ज़्यादा देता है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "हवा और सूरज में बहस हुई कि कौन ताक़तवर है, तो उन्होंने एक राहगीर का कोट उतरवाने की ठानी। हवा ज़ोर से चली पर आदमी ने कोट और कसकर पकड़ लिया, फिर नरम धूप ने उसे गरमाया और उसने कोट ख़ुद उतार दिया। जहाँ ज़ोर हारता है, वहाँ नरमी जीतती है।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक बुद्धिमान यात्री ने एक दुखी राजा से किसी एक सुखी आदमी की कमीज़ ढूँढने को कहा। पूरे राज्य में खोजने पर इकलौता सुखी आदमी ऐसा निकला जिसके पास कमीज़ ही नहीं थी। ख़ुशी चीज़ों में नहीं रखी होती।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक मूर्तिकार से पूछा गया कि उसने इतना जीवंत हाथी कैसे गढ़ा। उसने कहा कि उसने बस वह सारा पत्थर हटा दिया जो हाथी नहीं था। महारत अक्सर जोड़ने में नहीं, घटाने की कला में होती है।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक ग्वालिन दूध बेचने जाते हुए सपने देखती रही कि पैसों से क्या-क्या ख़रीदेगी और गर्व से सिर हिलाया। मटका छलका, दूध बिखरा, और उसके सारे सपने धूल में बह गए। मिलने से पहले लाभ मत गिनो।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक गाँव का चूहा शहर में अपने भाई के यहाँ गया और भरपूर भोजन देख चकित रह गया, तभी बिल्ली ने उन्हें जान बचाकर भगा दिया। वह घर लौट आया और डर के पकवानों से शांति की सूखी रोटी को बेहतर माना। बेचैन ऐशो-आराम से शांत जीवन अच्छा है।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "घमंडी बरगद हर हवा में झुकते पतले सरकंडे का मज़ाक उड़ाता था। जब आँधी आई तो सरकंडा झुककर बच गया और अकड़ा बरगद जड़ से उखड़ गया। जो समझदारी से झुकते हैं, वे न झुकने वालों से ज़्यादा टिकते हैं।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "लोमड़ी ने सारस को चपटी थाली में सूप परोसा ताकि वह खा न सके, और अपनी चतुराई पर हँसी। सारस ने बदले में लंबी सुराही में भोजन दिया और लोमड़ी भूखी लौटी। जैसा छल दोगे, वैसा ही लौटकर मिलेगा।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक कौवा चोंच में पनीर दबाए बैठा था कि चालाक लोमड़ी ने उसकी सुरीली आवाज़ की तारीफ़ कर गीत सुनाने को कहा। ज्यों ही उसने गाने को चोंच खोली, पनीर गिरा और लोमड़ी उठा ले गई। अपने स्वार्थ के लिए चापलूसी करने वालों से सावधान रहो।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "चूहों ने सभा कर तय किया कि बिल्ली के गले में घंटी बाँध दें ताकि आहट पहले मिल जाए। योजना बढ़िया लगी, पर एक बूढ़े चूहे ने पूछा कि घंटी बाँधने की हिम्मत आख़िर कौन करेगा। जो कहना आसान है, वह करना कठिन होता है।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मिट्टी का घड़ा और पीतल का घड़ा नदी में साथ-साथ बहे। पीतल ने सुरक्षा के लिए पास रहने को कहा, पर मिट्टी का घड़ा जानता था कि एक टक्कर उसे तोड़ देगी, सो दूरी बनाए रखी। ताक़तवर पड़ोसी से दूरी भली, जो अनजाने में भी नुक़सान कर दे।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "रेगिस्तान पार करते दो दोस्तों में झगड़ा हुआ, और एक ने रेत पर लिखा कि उसके दोस्त ने उसे थप्पड़ मारा। बाद में डूबने से बचने पर उसने वह मदद पत्थर पर खोद दी। चोट रेत पर लिखो, और भलाई पत्थर पर।",
+      "difficulty": "MEDIUM",
+      "category": "Story",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक शिष्य ने गुरु से जल्दी सिखाने की विनती की और दुगनी मेहनत का वादा किया। गुरु बोले, तब तो दुगना समय लगेगा, क्योंकि जल्दबाज़ी की हाँडी उबल कर बह जाती है। असली हुनर अपनी शांत गति से पकता है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक बूढ़े माली ने वह पेड़ लगाया जिसकी छाँव में वह कभी न बैठ पाता। एक राहगीर ने इस बेकार मेहनत पर हँसी उड़ाई, पर माली बोला कि फल उनके लिए हैं जो अभी जन्मे ही नहीं। हमें वह दुनिया मिली है जिसे धैर्यवान अजनबियों ने रोपा था।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक चतुर ख़रगोश शेर का भोजन बनने देर से पहुँचा और पास के कुएँ में रहने वाले दूसरे शेर की बात की। कुएँ पर ले जाने पर घमंडी शेर ने अपनी ही परछाईं को दुश्मन समझा और लड़ने कूद पड़ा, फिर निकल न सका। बुद्धि उस ताक़त को हरा देती है जिसे घमंड ने अंधा कर दिया हो।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक मगर ने मीठे फलों के लिए बंदर से दोस्ती की, फिर उसका दिल पाने को नदी पार ले जाने की चाल चली। बीच धारा में ख़तरा भाँपकर बंदर बोला कि उसका दिल तो पेड़ पर ही रह गया, उसे लाना होगा, और यूँ बचकर भाग निकला। शांत मन ही विश्वासघात से सबसे बड़ी ढाल है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 4
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक सियार रंगरेज़ के हौद में गिरकर अजीब नीला हो गया, तो बाक़ी जानवरों ने इस अनजान जीव को राजा बना लिया। वह पकड़े जाने के डर में राज करता रहा, पर एक रात अपनों के साथ हुआँ-हुआँ करते ही पहचान लिया गया। उधार की पहचान अपनी ही असलियत से नहीं बच पाती।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 5
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "दो हंस एक कछुए को लकड़ी पर मुँह से पकड़वाकर हवा में ले चले और कहा कि कुछ न बोलना। नीचे लोगों को अचंभा करते सुन कछुए ने जवाब देने को मुँह खोला और गिर पड़ा। सही समय पर चुप रहना भी एक समझदारी है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 6
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "तीन ठगों ने एक साधु की बकरी पाने को बारी-बारी रास्ते में उसे कुत्ता कहा, यहाँ तक कि उसने मान लिया और बकरी छोड़ दी। वे बकरी आपस में बाँट ले गए और वह काल्पनिक दाग़ धोता रहा। एक झूठ जब कई लोग दोहराएँ तो अकेले की समझ पर भारी पड़ जाता है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 7
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक व्यापारी ने मित्र के पास लोहे का तराज़ू रखा, जिसने बाद में कहा कि उसे चूहे खा गए। बदले में व्यापारी ने मित्र के बेटे को छिपा कर कहा कि उसे बाज़ उठा ले गया, तब मित्र ने सच कबूला और तराज़ू लौटा। चतुर जवाब चतुर झूठ का पर्दा खोल देता है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 8
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "जाल में पूँछ गँवाने वाली लोमड़ी बाक़ी सबको पूँछ बेकार बताकर काटने को उकसाने लगी। एक समझदार लोमड़ी ने पूछा कि यह सलाह उनके भले के लिए है या अपनी कमी छिपाने के लिए। ऐसी सलाह पर भरोसा मत करो जो देने वाले के ही काम आती हो।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 9
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "एक सेवक दो घड़ों में पानी लाता था, एक साबुत और एक चटका, और चटका घड़ा अपने रिसते पानी पर दुखी रहता। मालिक ने उसे राह किनारे खिले फूल दिखाए, जो रोज़ उसी रिसन से सिंचते थे। जिसे हम अपनी कमज़ोरी कहते हैं, वह चुपचाप कुछ सुंदर पाल रही होती है।",
+      "difficulty": "HARD",
+      "category": "Story",
+      "chapter": 10
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "थोड़ा-थोड़ा हर रोज़ पढ़ो, मन के दीप को धीरे जलाओ। जो आज सीखा वह कल काम आएगा, याद का खज़ाना यूँ ही बढ़ाओ।",
+      "difficulty": "EASY",
+      "category": "Poem",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "बूँद-बूँद से घड़ा भरे, धीरे-धीरे राह चले। जो नन्हा-सा बीज लगे, कल वो पेड़ बड़ा बने।",
+      "difficulty": "EASY",
+      "category": "Poem",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मीठे बोल कुछ नहीं लेते, पर मन का हर डर हर लेते। बाँटो इन्हें जहाँ भी जाओ, फूल प्रेम के यूँ उगाओ।",
+      "difficulty": "EASY",
+      "category": "Poem",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "नदी पत्थर को ताक़त से नहीं काटती, हर दिन बहकर, बार-बार आकर काटती। धीरज ही है वह चुपचाप शक्ति, जो पर्वत को भी रास्ता बना देती।",
+      "difficulty": "MEDIUM",
+      "category": "Poem",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "बीज वसंत की जल्दी न करे, पंछी अपना गाना न भूले। मौसम पर, मिट्टी पर रख भरोसा, धीरज की मेहनत ही फल देती।",
+      "difficulty": "MEDIUM",
+      "category": "Poem",
+      "chapter": 2
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मैंने मन में एक शांत कमरा बनाया, जहाँ विचार उठें और धीरे खिलें। न शोर, न जल्दी, न बेचैन हलचल, बस सीखने को भीतर आने की जगह।",
+      "difficulty": "HARD",
+      "category": "Poem",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मैंने याददाश्त पर एक चुटकुला सोचा था, पर दिमाग़ उसका अंत भूल गया।",
+      "difficulty": "EASY",
+      "category": "Humor",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मेरी याददाश्त बहुत अच्छी है, बस थोड़ी छोटी और थोड़ी भुलक्कड़ है।",
+      "difficulty": "EASY",
+      "category": "Humor",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "मेरी चाबियाँ आख़िर मिल गईं; वे पूरे समय मेरे ही हाथ में चुपचाप छुट्टी मना रही थीं।",
+      "difficulty": "EASY",
+      "category": "Humor",
+      "chapter": 3
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मैंने याददाश्त सुधारने के लिए एक सूची बनाई। पहला काम था सूची बनाना। एक काम पूरा हो गया और मैं बहुत प्रसन्न महसूस कर रहा हूँ।",
+      "difficulty": "MEDIUM",
+      "category": "Humor",
+      "chapter": 1
+    },
+    {
+      "type": "PARAGRAPH",
+      "content": "मैंने पूरी ज़िंदगी व्यवस्थित करने को एक डायरी ख़रीदी और तुरंत बहुत काबिल महसूस किया। तीन हफ़्ते बाद वह ख़ाली डायरी पलंग के नीचे की धूल को बख़ूबी व्यवस्थित करती हुई मिली।",
+      "difficulty": "MEDIUM",
+      "category": "Humor",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक प्यासे कौवे को तली में थोड़े पानी वाला एक घड़ा मिला।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 1
+    },
+    {
+      "type": "SENTENCE",
+      "content": "वह वहां तक नहीं पहुंच सका, इसलिए उसने एक-एक करके कंकड़ डाले जब तक कि पानी ऊपर नहीं आ गया।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 2
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक चींटी ने पूरी गर्मी में खाना इकट्ठा करने का काम किया जबकि एक टिड्डा गाता रहा।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 3
+    },
+    {
+      "type": "SENTENCE",
+      "content": "जब सर्दी आई, तो टिड्डा भूखा था और चींटी का पेट भरा हुआ था।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 4
+    },
+    {
+      "type": "SENTENCE",
+      "content": "एक लड़के ने मज़े के लिए दो बार 'भेड़िया आया' चिल्लाया, और गाँव वाले मदद के लिए दौड़े।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 5
+    },
+    {
+      "type": "SENTENCE",
+      "content": "तीसरी बार सच में एक भेड़िया आया, लेकिन किसी ने उस पर विश्वास नहीं किया।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 6
+    },
+    {
+      "type": "SENTENCE",
+      "content": "कछुए और खरगोश ने दौड़ लगाने की सहमति दी।",
+      "difficulty": "EASY",
+      "category": "Story",
+      "chapter": 7
+    }
+  ]
+}

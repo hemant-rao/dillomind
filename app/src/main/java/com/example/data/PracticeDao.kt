@@ -25,6 +25,9 @@ interface PracticeDao {
     @Query("SELECT COUNT(*) FROM practice_items")
     suspend fun getPracticeItemsCount(): Int
 
+    @Query("SELECT COUNT(*) FROM practice_items WHERE isCustom = 0")
+    suspend fun getNonCustomItemsCount(): Int
+
     @Query("DELETE FROM practice_items WHERE isCustom = 0")
     suspend fun deleteNonCustomItems()
 

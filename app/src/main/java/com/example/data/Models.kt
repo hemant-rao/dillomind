@@ -9,9 +9,12 @@ data class PracticeItem(
     val type: String, // "WORD", "SENTENCE", "PARAGRAPH"
     val content: String,
     val difficulty: String, // "EASY", "MEDIUM", "HARD"
-    val category: String, // "General", "Visual", "Science", "Focus", "Wisdom"
+    val category: String, // "General", "Visual", "Science", "Focus", "Wisdom", "Story", "Poem", "Humor"
     val isCustom: Boolean = false,
-    val chapter: Int = 1
+    val chapter: Int = 1,
+    // BCP-47-ish language code this item belongs to ("en", "hi", "es", "fr", "ur", ...).
+    // Custom items inherit the user's active language so they show up alongside the rest.
+    val language: String = "en"
 )
 
 @Entity(tableName = "practice_logs")

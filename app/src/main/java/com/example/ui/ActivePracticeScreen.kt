@@ -1,12 +1,23 @@
 package com.example.ui
 
-import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
+import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,6 +35,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -49,6 +62,49 @@ data class ConfettiParticle(
     val rotationSpeed: Float
 )
 
+/**
+ * Animated voice waveform shown while the recognizer is listening.
+ * Bars sway continuously (so it never looks frozen) and their height scales
+ * with [level] — the live, normalised mic loudness (0f..1f).
+ */
+@Composable
+private fun ListeningWaveform(
+    level: Float,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    val infinite = rememberInfiniteTransition(label = "waveform")
+    val phase by infinite.animateFloat(
+        initialValue = 0f,
+        targetValue = (2f * Math.PI).toFloat(),
+        animationSpec = infiniteRepeatable(
+            animation = tween(950, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "wavePhase"
+    )
+    // Smooth the loudness so bars rise/fall fluidly instead of jumping.
+    val animatedLevel by animateFloatAsState(targetValue = level, label = "waveLevel")
+
+    val bars = 7
+    Canvas(modifier = modifier) {
+        val slot = size.width / bars
+        val barWidth = slot * 0.5f
+        val maxH = size.height
+        for (i in 0 until bars) {
+            val wobble = ((Math.sin((phase + i * 0.7f).toDouble()).toFloat()) + 1f) / 2f // 0f..1f
+            val h = ((0.18f + (0.22f + 0.8f * animatedLevel) * wobble) * maxH).coerceIn(4f, maxH)
+            val x = i * slot + (slot - barWidth) / 2f
+            drawRoundRect(
+                color = color,
+                topLeft = Offset(x, (maxH - h) / 2f),
+                size = Size(barWidth, h),
+                cornerRadius = CornerRadius(barWidth / 2f, barWidth / 2f)
+            )
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActivePracticeScreen(
@@ -64,6 +120,8 @@ fun ActivePracticeScreen(
     val wasRestored by viewModel.wasRestored.collectAsState()
 
     var textHidden by remember(item.id) { mutableStateOf(false) }
+    // Live mic loudness (0f..1f) sampled from the recognizer's RMS — drives the waveform.
+    var rmsLevel by remember { mutableStateOf(0f) }
     val startTimeMs = remember(item.id) { System.currentTimeMillis() }
     val scrollState = rememberScrollState()
 
@@ -121,58 +179,19 @@ fun ActivePracticeScreen(
         }
     }
 
-    // Activity launcher for Android native Speech Recognizer
-    val speechRecognizerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        viewModel.updateRecordingState(false)
-        
-        // Haptic feedback stop pattern
-        try {
-            hapticFeedback.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
-            val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                val vibratorManager = context.getSystemService(android.content.Context.VIBRATOR_MANAGER_SERVICE) as? android.os.VibratorManager
-                vibratorManager?.defaultVibrator
-            } else {
-                @Suppress("DEPRECATION")
-                context.getSystemService(android.content.Context.VIBRATOR_SERVICE) as? android.os.Vibrator
-            }
-            vibrator?.let {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    it.vibrate(android.os.VibrationEffect.createOneShot(120, android.os.VibrationEffect.DEFAULT_AMPLITUDE))
-                } else {
-                    @Suppress("DEPRECATION")
-                    it.vibrate(120)
-                }
-            }
-        } catch (e: Exception) {}
-
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data
-            val wordsList = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            val recognizedText = wordsList?.firstOrNull() ?: ""
-            if (recognizedText.isNotEmpty()) {
-                viewModel.setSpokenText(recognizedText)
-            } else {
-                Toast.makeText(context, "Voice recognition empty. Try typing below!", Toast.LENGTH_SHORT).show()
-            }
+    // Reusable haptic helpers (no popup dialog involved)
+    val vibrator = remember {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            val vibratorManager = context.getSystemService(android.content.Context.VIBRATOR_MANAGER_SERVICE) as? android.os.VibratorManager
+            vibratorManager?.defaultVibrator
         } else {
-            Toast.makeText(context, "Voice input canceled. You can write your response too!", Toast.LENGTH_SHORT).show()
+            @Suppress("DEPRECATION")
+            context.getSystemService(android.content.Context.VIBRATOR_SERVICE) as? android.os.Vibrator
         }
     }
-
-    // Launch speech trigger intent
-    val startSpeechToText = {
-        // Haptic feedback start pattern (double pulse)
+    val vibrateStart = {
         try {
             hapticFeedback.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
-            val vibrator = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                val vibratorManager = context.getSystemService(android.content.Context.VIBRATOR_MANAGER_SERVICE) as? android.os.VibratorManager
-                vibratorManager?.defaultVibrator
-            } else {
-                @Suppress("DEPRECATION")
-                context.getSystemService(android.content.Context.VIBRATOR_SERVICE) as? android.os.Vibrator
-            }
             vibrator?.let {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                     val timings = longArrayOf(0, 50, 50, 50)
@@ -184,18 +203,103 @@ fun ActivePracticeScreen(
                 }
             }
         } catch (e: Exception) {}
+    }
+    val vibrateStop = {
+        try {
+            hapticFeedback.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+            vibrator?.let {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    it.vibrate(android.os.VibrationEffect.createOneShot(120, android.os.VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    @Suppress("DEPRECATION")
+                    it.vibrate(120)
+                }
+            }
+        } catch (e: Exception) {}
+    }
 
+    // Background SpeechRecognizer — listens silently, NO Google popup overlay.
+    // Recognized text flows straight into the editor (live, via partial results).
+    val speechRecognizer = remember {
+        if (SpeechRecognizer.isRecognitionAvailable(context)) {
+            SpeechRecognizer.createSpeechRecognizer(context)
+        } else null
+    }
+    DisposableEffect(speechRecognizer) {
+        speechRecognizer?.setRecognitionListener(object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {}
+            override fun onBeginningOfSpeech() {}
+            override fun onRmsChanged(rmsdB: Float) {
+                // rmsdB is roughly -2..10 dB; normalise to 0f..1f for the waveform.
+                rmsLevel = ((rmsdB + 2f) / 12f).coerceIn(0f, 1f)
+            }
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            override fun onEndOfSpeech() { rmsLevel = 0f }
+            override fun onEvent(eventType: Int, params: Bundle?) {}
+
+            override fun onPartialResults(partialResults: Bundle?) {
+                val text = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty()
+                if (text.isNotEmpty()) viewModel.setSpokenText(text)
+            }
+
+            override fun onResults(results: Bundle?) {
+                viewModel.updateRecordingState(false)
+                rmsLevel = 0f
+                vibrateStop()
+                val text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty()
+                if (text.isNotEmpty()) viewModel.setSpokenText(text)
+            }
+
+            override fun onError(error: Int) {
+                viewModel.updateRecordingState(false)
+                rmsLevel = 0f
+                vibrateStop()
+                val msg = when (error) {
+                    SpeechRecognizer.ERROR_NO_MATCH,
+                    SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "Didn't catch that. Try again or type below!"
+                    SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "Microphone permission is required for voice typing."
+                    SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> "Still listening… give it a moment."
+                    else -> "Voice input error. You can type your response below!"
+                }
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            }
+        })
+        onDispose { speechRecognizer?.destroy() }
+    }
+
+    // Toggle background listening. First tap starts, tapping again stops — no dialog appears.
+    val startSpeechToText = start@{
+        val recognizer = speechRecognizer
+        if (recognizer == null) {
+            Toast.makeText(context, "Speech recognition not available on this device. Please type below!", Toast.LENGTH_LONG).show()
+            return@start
+        }
+        if (isRecording) {
+            recognizer.stopListening()
+            viewModel.updateRecordingState(false)
+            rmsLevel = 0f
+            vibrateStop()
+            return@start
+        }
+
+        vibrateStart()
+        // Recognize speech in the language the exercise is written in, so Hindi/Spanish/etc.
+        // recall is transcribed correctly instead of being forced through the device default.
+        val recognitionLocale = Locale.forLanguageTag(viewModel.localeTagForLanguage(item.language))
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-            putExtra(RecognizerIntent.EXTRA_PROMPT, "Read the text out loud now...")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, recognitionLocale.toLanguageTag())
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, recognitionLocale.language)
+            putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
+            putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, context.packageName)
         }
         try {
             viewModel.updateRecordingState(true)
-            speechRecognizerLauncher.launch(intent)
+            recognizer.startListening(intent)
         } catch (e: Exception) {
             viewModel.updateRecordingState(false)
-            Toast.makeText(context, "Google voice typing not supported. Use manual input box below!", Toast.LENGTH_LONG).show()
+            vibrateStop()
+            Toast.makeText(context, "Couldn't start voice input. Use the text box below!", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -388,7 +492,7 @@ fun ActivePracticeScreen(
                                     color = MaterialTheme.colorScheme.primary
                                 )
                                 Text(
-                                    text = "Recite the text from your short-term memory memory bank!",
+                                    text = "Recite the text from your short-term memory bank!",
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                                     textAlign = TextAlign.Center
@@ -460,6 +564,40 @@ fun ActivePracticeScreen(
                             .testTag("record_mic_btn"),
                         contentAlignment = Alignment.Center
                     ) {
+                        // Live "listening" pulse — an expanding ring that fades out, repeating.
+                        if (isRecording) {
+                            val pulse = rememberInfiniteTransition(label = "micPulse")
+                            val pulseScale by pulse.animateFloat(
+                                initialValue = 0.85f,
+                                targetValue = 1.3f,
+                                animationSpec = infiniteRepeatable(
+                                    animation = tween(950, easing = FastOutSlowInEasing),
+                                    repeatMode = RepeatMode.Restart
+                                ),
+                                label = "pulseScale"
+                            )
+                            val pulseAlpha by pulse.animateFloat(
+                                initialValue = 0.5f,
+                                targetValue = 0f,
+                                animationSpec = infiniteRepeatable(
+                                    animation = tween(950, easing = FastOutSlowInEasing),
+                                    repeatMode = RepeatMode.Restart
+                                ),
+                                label = "pulseAlpha"
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .size(136.dp)
+                                    .graphicsLayer {
+                                        scaleX = pulseScale
+                                        scaleY = pulseScale
+                                        alpha = pulseAlpha
+                                    }
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.colorScheme.error)
+                            )
+                        }
+
                         // Inner secondary outer-ring glow
                         Box(
                             modifier = Modifier
@@ -499,6 +637,17 @@ fun ActivePracticeScreen(
                         letterSpacing = 0.5.sp,
                         color = if (isRecording) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
                     )
+
+                    // Live voice waveform — reacts to your real mic volume while listening.
+                    AnimatedVisibility(visible = isRecording) {
+                        ListeningWaveform(
+                            level = rmsLevel,
+                            color = MaterialTheme.colorScheme.error,
+                            modifier = Modifier
+                                .fillMaxWidth(0.62f)
+                                .height(34.dp)
+                        )
+                    }
 
                     // Text representation / Manual Editor
                     OutlinedTextField(
@@ -604,11 +753,31 @@ fun ResultReportCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(
-                text = "Practice Results",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Black
-            )
+            // Dynamic, score-aware celebratory headline — gives the moment real personality.
+            val (headline, subtitle) = when (result.accuracyScore) {
+                in 95..100 -> "Flawless Recall!" to "Your memory is razor sharp today."
+                in 85..94 -> "Excellent Work!" to "That was a strong, confident recall."
+                in 70..84 -> "Well Done!" to "Solid progress — keep your streak alive."
+                in 50..69 -> "Good Effort!" to "Review it once more, then try again."
+                else -> "Keep Going!" to "Every attempt rewires your memory."
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(2.dp)
+            ) {
+                Text(
+                    text = headline,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Black,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center
+                )
+            }
 
             // Circular Meter
             Box(

@@ -12,11 +12,29 @@ import java.util.*
 class MemoryViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AppDatabase.getDatabase(application)
-    private val repository = MemoryRepository(database.practiceDao())
+    private val repository = MemoryRepository(database.practiceDao(), application.applicationContext)
 
     // UI States
     val allItems: StateFlow<List<PracticeItem>> = repository.allPracticeItems
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    // ----- Multi-language content selection ----------------------------------------------------
+    private val _availableLanguages = MutableStateFlow(
+        listOf(LanguageOption("en", "English", "English", "en-US"))
+    )
+    val availableLanguages: StateFlow<List<LanguageOption>> = _availableLanguages.asStateFlow()
+
+    private val _selectedLanguage = MutableStateFlow("en")
+    val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
+
+    /**
+     * Items scoped to the active language. The user's own custom phrases always travel with
+     * them (they were authored in whatever language was active), so they are never filtered out.
+     */
+    val visibleItems: StateFlow<List<PracticeItem>> =
+        combine(allItems, _selectedLanguage) { items, lang ->
+            items.filter { it.language == lang || it.isCustom }
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     val allLogs: StateFlow<List<PracticeLog>> = repository.allLogs
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
@@ -27,7 +45,7 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
     val leaderboard: StateFlow<List<LeaderboardEntry>> = repository.leaderboard
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    val unlockedChapters: StateFlow<Map<String, Int>> = combine(allLogs, allItems) { logs, items ->
+    val unlockedChapters: StateFlow<Map<String, Int>> = combine(allLogs, visibleItems) { logs, items ->
         val passingItemIds = logs.filter { it.accuracyScore >= 70 }.map { it.itemId }.toSet()
         val result = mutableMapOf("EASY" to 1, "MEDIUM" to 1, "HARD" to 1)
         
@@ -157,6 +175,7 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
     init {
         viewModelScope.launch {
             repository.checkAndPrepopulate()
+            loadAvailableLanguages()
             loadDailyChallenges()
             checkAutosavedSession()
 
@@ -259,6 +278,36 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
         _selectedCategory.value = category
     }
 
+    private val langPrefs
+        get() = getApplication<Application>().getSharedPreferences("xello_mind_language", android.content.Context.MODE_PRIVATE)
+
+    private fun loadAvailableLanguages() {
+        val langs = repository.getAvailableLanguages()
+        _availableLanguages.value = langs
+
+        // Restore the saved choice; otherwise match the device language if we ship it, else English.
+        val saved = langPrefs.getString("selected_language", null)
+        val deviceLang = Locale.getDefault().language // e.g. "hi", "es"
+        val resolved = when {
+            saved != null && langs.any { it.code == saved } -> saved
+            langs.any { it.code == deviceLang } -> deviceLang
+            else -> "en"
+        }
+        _selectedLanguage.value = resolved
+    }
+
+    fun setLanguage(code: String) {
+        if (_selectedLanguage.value == code) return
+        _selectedLanguage.value = code
+        langPrefs.edit().putString("selected_language", code).apply()
+        // Reset content filters so the user lands on a clean, fully-unlocked-aware view.
+        _selectedCategory.value = "ALL"
+    }
+
+    /** BCP-47 tag for the active language, used to steer on-device speech recognition. */
+    fun localeTagForLanguage(code: String): String =
+        _availableLanguages.value.firstOrNull { it.code == code }?.localeTag ?: code
+
     fun startPractice(item: PracticeItem) {
         val oldTab = _currentTab.value
         if (oldTab != "active_practice") {
@@ -289,7 +338,7 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
 
     fun addCustomItem(content: String, type: String, difficulty: String, category: String) {
         viewModelScope.launch {
-            repository.insertCustomItem(content, type, difficulty, category)
+            repository.insertCustomItem(content, type, difficulty, category, _selectedLanguage.value)
         }
     }
 
@@ -500,8 +549,9 @@ class MemoryViewModel(application: Application) : AndroidViewModel(application) 
 
     fun startNextExercise() {
         val current = _activeItem.value ?: return
-        val items = allItems.value
-        
+        // Stay within the active language so "next" never jumps to a different language's deck.
+        val items = visibleItems.value
+
         // Filter elements of identical difficulty level (e.g. EASY, MEDIUM, HARD)
         val sameDiffItems = items.filter { it.difficulty == current.difficulty }
         
